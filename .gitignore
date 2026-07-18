@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# IDE
+/.idea/
+
+# Android (вложенный .gitignore в Android/ обрабатывает остальное)
+Android/local.properties
+Android/.gradle
+Android/build
+Android/app/build
+Android/captures
+Android/.externalNativeBuild
+Android/.cxx
+*.iml
