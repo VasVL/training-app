@@ -29,13 +29,21 @@ Android/
 │       ├── gradle-wrapper.jar
 │       └── gradle-wrapper.properties
 ├── app/                   ← Модуль приложения (точка сборки, без бизнес-логики)
+│   ├── AGENTS.md          ← Контекст модуля app
+│   ├── MODULE_STRUCTURE.md ← Структура модуля app
 │   ├── build.gradle.kts
 │   └── src/main/
 │       ├── AndroidManifest.xml
 │       └── res/values/strings.xml
 ├── core/                  ← Общие модули (переиспользуемый код)
+│   ├── AGENTS.md          ← Контекст папки core
+│   ├── MODULE_STRUCTURE.md ← Структура папки core
 │   └── common/            ← Утилиты, расширения, общий код (пока пусто)
+│       ├── AGENTS.md      ← Контекст модуля core/common
+│       └── MODULE_STRUCTURE.md ← Структура модуля core/common
 └── features/              ← Feature-модули (каждая фича — отдельный модуль, пока пусто)
+    ├── AGENTS.md          ← Контекст папки features
+    └── MODULE_STRUCTURE.md ← Структура папки features
 ```
 
 ## Назначение папок
@@ -48,14 +56,17 @@ Android/
 - `MainActivity` (хост для Fragment'ов)
 - НЕ содержит бизнес-логику
 
+Подробнее: [`app/AGENTS.md`](app/AGENTS.md), [`app/MODULE_STRUCTURE.md`](app/MODULE_STRUCTURE.md)
+
 ### `core/`
 Общие модули, переиспользуемые между feature-модулями.
+
+Подробнее: [`core/AGENTS.md`](core/AGENTS.md), [`core/MODULE_STRUCTURE.md`](core/MODULE_STRUCTURE.md)
 
 #### `core/common/`
 Утилиты, расширения Kotlin, базовые классы (например, `Resource<T>`), константы. Не зависит от feature-модулей.
 
-#### `core/navigation/` (планируется)
-Интерфейсы навигации: `Screen` (sealed class с маршрутами), `Navigator` (интерфейс `navigate(screen)`/`back()`). Feature-модули зависят только от этого модуля.
+Подробнее: [`core/common/AGENTS.md`](core/common/AGENTS.md), [`core/common/MODULE_STRUCTURE.md`](core/common/MODULE_STRUCTURE.md)
 
 ### `features/`
 Feature-модули. Каждая фича — отдельный Gradle-модуль. Может содержать подмодули:
@@ -65,6 +76,8 @@ Feature-модули. Каждая фича — отдельный Gradle-мод
 - `common/` — вспомогательный код фичи
 
 `domain`-модуль одной фичи НЕ зависит от `domain`-модуля другой фичи. Зависимости между фичами — только через `contract`-модули.
+
+Подробнее: [`features/AGENTS.md`](features/AGENTS.md), [`features/MODULE_STRUCTURE.md`](features/MODULE_STRUCTURE.md)
 
 ## Правила
 - При добавлении/удалении модуля — обновить этот файл и `settings.gradle.kts`
