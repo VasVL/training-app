@@ -39,6 +39,9 @@ timber = "5.0.1"
 # LeakCanary (memory leak detection, debug only) / LeakCanary (детекция утечек памяти, только debug)
 leakcanary = "2.14"
 
+# Coil (image loading, Kotlin-first, Coroutines) / Coil (загрузка картинок, Kotlin-first, Coroutines)
+coil = "2.7.0"
+
 # Core library desugaring (Java 8 time API on minSdk < 26) / Core library desugaring (Java 8 time API на minSdk < 26)
 desugarJdkLibs = "2.0.4"
 
@@ -90,6 +93,10 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 
 # LeakCanary (memory leak detection, debug only) / LeakCanary (детекция утечек памяти, только debug)
 leakcanary-android = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+
+# Coil (image loading, Kotlin-first, Coroutines) / Coil (загрузка картинок, Kotlin-first, Coroutines)
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Core library desugaring / Core library desugaring (Java 8 time API на minSdk < 26)
 desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarJdkLibs" }
