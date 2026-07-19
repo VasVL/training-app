@@ -12,11 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for the `users` table — basic CRUD + queries / DAO для таблицы `users` — базовые CRUD + запросы
  *
- * `internal` — visible only inside the `core/database` module (accessed via `TrainingDatabase`) /
- * `internal` — виден только внутри модуля `core/database` (доступ через `TrainingDatabase`)
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface UserDao {
+interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(user: UserEntity): Long

@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `exercises` — basic CRUD + queries, including soft-delete / DAO для `exercises` — базовые CRUD + запросы, включая мягкое удаление
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface ExerciseDao {
+interface ExerciseDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(exercise: ExerciseEntity): Long

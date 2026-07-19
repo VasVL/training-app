@@ -13,10 +13,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `workout_logs` — workout log entries / DAO для `workout_logs` — записи дневника тренировок
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface WorkoutLogDao {
+interface WorkoutLogDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(log: WorkoutLogEntity): Long

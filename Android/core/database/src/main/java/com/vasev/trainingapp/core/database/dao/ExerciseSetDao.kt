@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `exercise_sets` — exercise entries within workout templates / DAO для `exercise_sets` — упражнения в шаблонах тренировок
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface ExerciseSetDao {
+interface ExerciseSetDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(set: ExerciseSetEntity): Long

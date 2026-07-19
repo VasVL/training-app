@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `muscle_groups` / DAO для `muscle_groups`
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface MuscleGroupDao {
+interface MuscleGroupDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(group: MuscleGroupEntity): Long

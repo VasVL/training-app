@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `user_maxes` — one-rep-max records of users / DAO для `user_maxes` — записи разовых максимумов пользователей
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface UserMaxDao {
+interface UserMaxDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(userMax: UserMaxEntity): Long

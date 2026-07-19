@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `set_templates` — individual set templates within exercise entries / DAO для `set_templates` — шаблоны подходов
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface SetTemplateDao {
+interface SetTemplateDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(template: SetTemplateEntity): Long

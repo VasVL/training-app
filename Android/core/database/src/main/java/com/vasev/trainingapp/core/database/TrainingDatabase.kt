@@ -89,7 +89,7 @@ import com.vasev.trainingapp.core.database.entity.WorkoutTemplateEntity
     version = 1,
 )
 @TypeConverters(Converters::class)
-internal abstract class TrainingDatabase : RoomDatabase() {
+abstract class TrainingDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
 

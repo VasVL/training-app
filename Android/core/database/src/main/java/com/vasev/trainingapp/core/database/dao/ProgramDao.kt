@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `programs` / DAO для `programs`
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface ProgramDao {
+interface ProgramDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(program: ProgramEntity): Long

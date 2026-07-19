@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `microcycle_days` / DAO для `microcycle_days`
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface MicrocycleDayDao {
+interface MicrocycleDayDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(day: MicrocycleDayEntity): Long

@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `food_items` — food products from the nutrition database / DAO для `food_items` — продукты из базы питания
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface FoodItemDao {
+interface FoodItemDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(item: FoodItemEntity): Long

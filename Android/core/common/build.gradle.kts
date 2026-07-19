@@ -20,3 +20,8 @@ android {
         jvmTarget = "17"
     }
 }
+
+dependencies {
+    // Timber — logging (used by LogExtensions) / Timber — логирование (используется LogExtensions)
+    implementation(libs.timber)
+}

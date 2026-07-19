@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `weight_measurements` — body weight measurements of users / DAO для `weight_measurements` — измерения веса пользователей
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface WeightMeasurementDao {
+interface WeightMeasurementDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(measurement: WeightMeasurementEntity): Long

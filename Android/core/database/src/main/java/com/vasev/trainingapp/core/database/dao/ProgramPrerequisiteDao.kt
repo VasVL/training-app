@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.Flow
 /**
  * DAO for `program_prerequisites` — conditions to start a program / DAO для `program_prerequisites` — условия начала программы
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface ProgramPrerequisiteDao {
+interface ProgramPrerequisiteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(prerequisite: ProgramPrerequisiteEntity): Long

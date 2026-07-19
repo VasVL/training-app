@@ -10,10 +10,11 @@ import com.vasev.trainingapp.core.database.entity.MuscleRelationEntity
 /**
  * DAO for `muscle_relations` — antagonist/synergist links between muscles / DAO для `muscle_relations` — связи антагонистов/синергистов
  *
- * `internal` — visible only inside the `core/database` module / `internal` — виден только внутри модуля `core/database`
+ * `public` — visible to the `app` module so that the Hilt `DatabaseModule` can provide it /
+ * `public` — виден модулю `app`, чтобы Hilt-модуль `DatabaseModule` мог его предоставлять
  */
 @Dao
-internal interface MuscleRelationDao {
+interface MuscleRelationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(relation: MuscleRelationEntity)
