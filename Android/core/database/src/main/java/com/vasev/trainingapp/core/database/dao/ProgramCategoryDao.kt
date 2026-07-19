@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vasev.trainingapp.core.database.entity.ProgramCategoryEntity
-import com.vasev.trainingapp.core.database.entity.ProgramCategory
+import com.vasev.trainingapp.core.database.entity.types.ProgramCategory
 import kotlinx.coroutines.flow.Flow
 
 /**

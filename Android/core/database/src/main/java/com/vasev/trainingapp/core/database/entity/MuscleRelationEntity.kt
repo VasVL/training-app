@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
+import com.vasev.trainingapp.core.database.entity.types.MuscleRelation
 
 /**
  * Relation between two muscles for the anatomy atlas (antagonist or synergist) /

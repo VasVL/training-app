@@ -1,5 +1,7 @@
 package com.vasev.trainingapp.core.referencedata.model
 
+import com.vasev.trainingapp.core.referencedata.model.types.MuscleRelation
+
 /**
  * Domain model of a relation between two muscles (antagonist or synergist) /
  * Domain-модель связи между двумя мышцами (антагонист или синергист)

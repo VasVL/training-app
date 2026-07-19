@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.referencedata.model
+package com.vasev.trainingapp.core.referencedata.model.types
 
 /**
  * Exercise type: dynamic (with movement) or static (isometric hold) / Тип упражнения: динамическое или статическое

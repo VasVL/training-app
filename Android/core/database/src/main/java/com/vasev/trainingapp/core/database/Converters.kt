@@ -1,22 +1,22 @@
 package com.vasev.trainingapp.core.database
 
 import androidx.room.TypeConverter
-import com.vasev.trainingapp.core.database.entity.ExerciseType
-import com.vasev.trainingapp.core.database.entity.Gender
-import com.vasev.trainingapp.core.database.entity.HeightUnit
-import com.vasev.trainingapp.core.database.entity.MeasurementUnit
-import com.vasev.trainingapp.core.database.entity.MicrocycleDayType
-import com.vasev.trainingapp.core.database.entity.MuscleInvolvement
-import com.vasev.trainingapp.core.database.entity.MuscleRelation
-import com.vasev.trainingapp.core.database.entity.PrerequisiteType
-import com.vasev.trainingapp.core.database.entity.ProgramCategory
-import com.vasev.trainingapp.core.database.entity.RepType
-import com.vasev.trainingapp.core.database.entity.SetType
-import com.vasev.trainingapp.core.database.entity.UserRole
-import com.vasev.trainingapp.core.database.entity.WeightType
-import com.vasev.trainingapp.core.database.entity.WeightUnit
-import com.vasev.trainingapp.core.database.entity.WorkoutLogSetStatus
-import com.vasev.trainingapp.core.database.entity.WorkoutLogStatus
+import com.vasev.trainingapp.core.database.entity.types.ExerciseType
+import com.vasev.trainingapp.core.database.entity.types.Gender
+import com.vasev.trainingapp.core.database.entity.types.HeightUnit
+import com.vasev.trainingapp.core.database.entity.types.MeasurementUnit
+import com.vasev.trainingapp.core.database.entity.types.MicrocycleDayType
+import com.vasev.trainingapp.core.database.entity.types.MuscleInvolvement
+import com.vasev.trainingapp.core.database.entity.types.MuscleRelation
+import com.vasev.trainingapp.core.database.entity.types.PrerequisiteType
+import com.vasev.trainingapp.core.database.entity.types.ProgramCategory
+import com.vasev.trainingapp.core.database.entity.types.RepType
+import com.vasev.trainingapp.core.database.entity.types.SetType
+import com.vasev.trainingapp.core.database.entity.types.UserRole
+import com.vasev.trainingapp.core.database.entity.types.WeightType
+import com.vasev.trainingapp.core.database.entity.types.WeightUnit
+import com.vasev.trainingapp.core.database.entity.types.WorkoutLogSetStatus
+import com.vasev.trainingapp.core.database.entity.types.WorkoutLogStatus
 
 /**
  * Room TypeConverters for all enums used in entities / Room TypeConverters для всех enum-ов в Entity

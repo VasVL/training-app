@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.PrerequisiteType
 
 /**
  * Prerequisite to start a program (e.g. required one-rep-max or required reps) /

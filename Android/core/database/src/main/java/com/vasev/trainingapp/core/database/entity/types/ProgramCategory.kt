@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.database.entity
+package com.vasev.trainingapp.core.database.entity.types
 
 /**
  * Built-in program category (stable key, display name comes from strings.xml) /

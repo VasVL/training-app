@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.WorkoutLogStatus
 
 /**
  * A workout log entry (a planned, in-progress, completed or skipped workout) /

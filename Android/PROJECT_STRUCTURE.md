@@ -38,9 +38,16 @@ Android/
 ├── core/                  ← Общие модули (переиспользуемый код)
 │   ├── AGENTS.md          ← Контекст папки core
 │   ├── MODULE_STRUCTURE.md ← Структура папки core
-│   └── common/            ← Утилиты, расширения, общий код (пока пусто)
-│       ├── AGENTS.md      ← Контекст модуля core/common
-│       └── MODULE_STRUCTURE.md ← Структура модуля core/common
+│   ├── common/            ← Утилиты, расширения, общий код (пока пусто)
+│   │   ├── AGENTS.md      ← Контекст модуля core/common
+│   │   └── MODULE_STRUCTURE.md ← Структура модуля core/common
+│   ├── database/          ← Локальная БД (Room): все Entity, DAO, TrainingDatabase, Converters
+│   │   ├── AGENTS.md      ← Контекст модуля core/database
+│   │   └── MODULE_STRUCTURE.md ← Структура модуля core/database
+│   ├── navigation/        ← Порты навигации (Screen, Navigator) — пока пусто
+│   └── reference-data/    ← Domain-модели и порты репозиториев справочных данных
+│       ├── AGENTS.md      ← Контекст модуля core/reference-data
+│       └── MODULE_STRUCTURE.md ← Структура модуля core/reference-data
 └── features/              ← Feature-модули (каждая фича — отдельный модуль, пока пусто)
     ├── AGENTS.md          ← Контекст папки features
     └── MODULE_STRUCTURE.md ← Структура папки features
@@ -67,6 +74,19 @@ Android/
 Утилиты, расширения Kotlin, базовые классы (например, `Resource<T>`), константы. Не зависит от feature-модулей.
 
 Подробнее: [`core/common/AGENTS.md`](core/common/AGENTS.md), [`core/common/MODULE_STRUCTURE.md`](core/common/MODULE_STRUCTURE.md)
+
+#### `core/database/`
+Локальная БД (Room): все Entity, DAO, `TrainingDatabase`, `Converters`. Адаптер для портов из `core/reference-data` (Ports & Adapters). Зависит от `core/common` и `core/reference-data`.
+
+Подробнее: [`core/database/AGENTS.md`](core/database/AGENTS.md), [`core/database/MODULE_STRUCTURE.md`](core/database/MODULE_STRUCTURE.md)
+
+#### `core/navigation/`
+Порты навигации: `Screen` (sealed class с маршрутами), `Navigator` (интерфейс `navigate`/`back`). Пока пустой. Реализация `Navigator` — в `app`.
+
+#### `core/reference-data/`
+Domain-модели и порты (интерфейсы) репозиториев справочных данных (упражнения, мышцы, группы мышц). Чистый домен без Room-аннотаций. Реализации портов — в `core/database`. Зависит от `core/common`.
+
+Подробнее: [`core/reference-data/AGENTS.md`](core/reference-data/AGENTS.md), [`core/reference-data/MODULE_STRUCTURE.md`](core/reference-data/MODULE_STRUCTURE.md)
 
 ### `features/`
 Feature-модули. Каждая фича — отдельный Gradle-модуль. Может содержать подмодули:

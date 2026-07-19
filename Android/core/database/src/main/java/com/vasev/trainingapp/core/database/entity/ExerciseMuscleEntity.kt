@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
+import com.vasev.trainingapp.core.database.entity.types.MuscleInvolvement
 
 /**
  * Link between an exercise and a muscle with involvement level / Связь упражнения и мышцы с уровнем участия

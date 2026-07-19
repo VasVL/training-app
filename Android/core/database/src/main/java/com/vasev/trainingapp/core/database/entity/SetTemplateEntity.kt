@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.RepType
+import com.vasev.trainingapp.core.database.entity.types.WeightType
 
 /**
  * A single set template within an exercise entry / Шаблон одного подхода внутри упражнения

@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
+import com.vasev.trainingapp.core.database.entity.types.ProgramCategory
 
 /**
  * Built-in category tag of a program (enum-based, stable key) / Вшитая категория программы (на enum, стабильный ключ)

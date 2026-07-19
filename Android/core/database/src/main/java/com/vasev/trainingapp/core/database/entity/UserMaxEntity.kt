@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.MeasurementUnit
 
 /**
  * One-rep-max (or other metric) of a user for a specific exercise / Разовый максимум (или иная метрика) пользователя для конкретного упражнения

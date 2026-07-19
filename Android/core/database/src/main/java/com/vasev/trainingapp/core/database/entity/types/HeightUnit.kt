@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.database.entity
+package com.vasev.trainingapp.core.database.entity.types
 
 /**
  * Height unit (cm or inches) / Единица роста (см или дюймы)

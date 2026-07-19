@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.database.entity
+package com.vasev.trainingapp.core.database.entity.types
 
 /**
  * How the working weight is defined / Как задаётся рабочий вес

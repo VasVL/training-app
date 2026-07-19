@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.WorkoutLogSetStatus
 
 /**
  * A single set in a workout log (planned vs actual values, status) /

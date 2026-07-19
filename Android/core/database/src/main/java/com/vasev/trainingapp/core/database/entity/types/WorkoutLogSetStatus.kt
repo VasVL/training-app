@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.database.entity
+package com.vasev.trainingapp.core.database.entity.types
 
 /**
  * Status of a single set in a workout log / Статус одного подхода в дневнике тренировки

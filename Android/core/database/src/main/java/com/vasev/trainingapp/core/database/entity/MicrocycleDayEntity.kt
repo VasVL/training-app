@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.MicrocycleDayType
 
 /**
  * A day within a microcycle: either a workout day or a rest day / День внутри микроцикла: тренировочный или день отдыха

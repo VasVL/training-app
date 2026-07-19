@@ -1,5 +1,7 @@
 package com.vasev.trainingapp.core.referencedata.model
 
+import com.vasev.trainingapp.core.referencedata.model.types.MuscleInvolvement
+
 /**
  * Domain model of a link between an exercise and a muscle with involvement level /
  * Domain-модель связи упражнения и мышцы с уровнем участия

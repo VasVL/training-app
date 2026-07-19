@@ -4,6 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.Gender
+import com.vasev.trainingapp.core.database.entity.types.HeightUnit
+import com.vasev.trainingapp.core.database.entity.types.UserRole
+import com.vasev.trainingapp.core.database.entity.types.WeightUnit
 
 /**
  * User of the app: owner (trainer) or trainee / Пользователь приложения: владелец (тренер) или подопечный

@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.SetType
 
 /**
  * An exercise entry within a workout log / Запись упражнения в дневнике тренировки

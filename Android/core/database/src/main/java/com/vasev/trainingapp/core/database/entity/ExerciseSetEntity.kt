@@ -5,6 +5,9 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.RepType
+import com.vasev.trainingapp.core.database.entity.types.SetType
+import com.vasev.trainingapp.core.database.entity.types.WeightType
 
 /**
  * An exercise entry within a workout template (with set type and weight/rep configuration) /

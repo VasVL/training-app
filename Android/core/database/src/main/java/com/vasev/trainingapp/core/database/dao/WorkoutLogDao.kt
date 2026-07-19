@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.vasev.trainingapp.core.database.entity.WorkoutLogEntity
-import com.vasev.trainingapp.core.database.entity.WorkoutLogStatus
+import com.vasev.trainingapp.core.database.entity.types.WorkoutLogStatus
 import kotlinx.coroutines.flow.Flow
 
 /**

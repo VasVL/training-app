@@ -1,5 +1,7 @@
 package com.vasev.trainingapp.core.referencedata.model
 
+import com.vasev.trainingapp.core.referencedata.model.types.ExerciseType
+
 /**
  * Domain model of an exercise (e.g. bench press, squat) / Domain-модель упражнения (например, жим лёжа, присед)
  *

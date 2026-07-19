@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.database.entity
+package com.vasev.trainingapp.core.database.entity.types
 
 /**
  * Measurement unit for one-rep-max and other metrics / Единица измерения для разового максимума и других метрик

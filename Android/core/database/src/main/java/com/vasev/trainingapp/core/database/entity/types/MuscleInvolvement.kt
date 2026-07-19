@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.database.entity
+package com.vasev.trainingapp.core.database.entity.types
 
 /**
  * Muscle involvement in an exercise: primary (target) or secondary (synergist) / Участие мышцы в упражнении: основная или вспомогательная

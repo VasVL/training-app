@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.database.entity
+package com.vasev.trainingapp.core.database.entity.types
 
 /**
  * Relation between two muscles for the anatomy atlas / Связь между двумя мышцами для анатомического атласа

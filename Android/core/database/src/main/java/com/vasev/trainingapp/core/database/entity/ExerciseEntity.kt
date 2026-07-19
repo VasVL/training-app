@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vasev.trainingapp.core.database.entity.types.ExerciseType
 
 /**
  * Exercise (e.g. bench press, squat) / Упражнение (например, жим лёжа, присед)

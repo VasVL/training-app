@@ -1,4 +1,4 @@
-package com.vasev.trainingapp.core.referencedata.model
+package com.vasev.trainingapp.core.referencedata.model.types
 
 /**
  * Relation between two muscles for the anatomy atlas / Связь между мышцами для анатомического атласа
