@@ -20,3 +20,11 @@ android {
         jvmTarget = "17"
     }
 }
+
+dependencies {
+    // Coroutines (Flow in repository ports) / Coroutines (Flow в портах репозиториев)
+    implementation(libs.coroutines.core)
+
+    // Internal modules / Внутренние модули
+    implementation(project(":core:common"))
+}

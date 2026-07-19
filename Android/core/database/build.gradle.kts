@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -9,6 +10,12 @@ android {
 
     defaultConfig {
         minSdk = 24
+
+        // Room schema export location / Room — каталог для экспорта схем
+        ksp {
+            arg("room.schemaLocation", "${projectDir}/schemas")
+            arg("room.incremental", "true")
+        }
     }
 
     compileOptions {
@@ -19,4 +26,18 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+}
+
+dependencies {
+    // Room (local DB) / Room (локальная БД)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
+    // Coroutines / Coroutines (для suspend DAO)
+    implementation(libs.coroutines.core)
+
+    // Internal modules / Внутренние модули
+    implementation(project(":core:common"))
+    implementation(project(":core:reference-data"))
 }

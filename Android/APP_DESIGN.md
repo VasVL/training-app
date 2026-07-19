@@ -189,11 +189,13 @@ Android-приложение для занятий силовыми видами
 - `user_maxes` (id, userId, exerciseId, maxValue, unit, measuredAt) — единица: KG/LBS/REPS/SECONDS/METERS/...
 
 **Справочники (core/reference-data):**
-- `muscle_groups`, `muscles`, `exercises` (type: DYNAMIC/STATIC, isBuiltin, createdByUserId), `exercise_muscles` (involvement: PRIMARY/SECONDARY)
+- `muscle_groups`, `muscles` (groupId, name, description, imageUrl), `exercises` (type: DYNAMIC/STATIC, isBuiltin, createdByUserId), `exercise_muscles` (involvement: PRIMARY/SECONDARY)
+- `muscle_relations` (muscleId, relatedMuscleId, relation: ANTAGONIST/SYNERGIST) — связи мышц для анатомического атласа (антагонисты и синергисты)
 
 **Программы:**
 - `programs` (без type enum — категории через теги, isBuiltin, isFavorite, recommendedAdjustmentPercent, canSkipWorkouts)
-- `program_categories` (теги-категории)
+- `program_categories` (вшитые категории-теги, enum ProgramCategory: POWERLIFTING/BODYBUILDING/...)
+- `program_tags` (пользовательские теги-строки)
 - `program_prerequisites` (условия прохождения)
 - `microcycles` (programId nullable — без isStandalone)
 - `microcycle_days` (type: WORKOUT/REST)
@@ -214,6 +216,7 @@ Android-приложение для занятий силовыми видами
 - **Локальный + удалённый ID:** `id` (локальный) + `remoteId` (nullable) во всех синхронизируемых таблицах.
 - **Каскадное удаление:** `users` → ON DELETE CASCADE на user_maxes, workout_logs, weight_measurements, food_logs.
 - **Вшитые данные:** `isBuiltin` на programs, exercises. Вшитые нельзя удалить.
+- **Мягкое удаление упражнений:** `isDeleted` на exercises. Пользовательские упражнения помечаются `isDeleted=true` (скрыты из списка, но остаются в БД — программы/дневник не разрушаются). Вшитые (`isBuiltin=true`) удалить нельзя. Периодическая очистка: упражнение с `isDeleted=true` и без ссылок удаляется из БД (логика в адаптере). UI показывает удалённое упражнение с плашкой "удалено" при прохождении программы.
 - **Шаблоны vs выполнение:** `*_templates` (в программе) и `workout_log_*` (в дневнике).
 - **adjustmentPercent:** в программе — рекомендуемое, в workout_logs — фактическое. Расчёт рабочего веса — от всех таких же тренировок предыдущих микроциклов.
 - **Единицы измерения:** вес пользователя (kg/lbs), рост (cm/inches), максимумы (unit enum). В БД храним в одной системе, отображаем по настройкам.
