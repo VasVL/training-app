@@ -2,6 +2,8 @@
 # Build tools / Build tools (версии инструментов сборки)
 agp = "8.5.0"
 kotlin = "2.0.0"
+# KSP (Kotlin Symbol Processing) — fast annotation processing, replaces KAPT / KSP (Kotlin Symbol Processing) — быстрая обработка аннотаций, заменяет KAPT
+ksp = "2.0.0-1.0.24"
 
 # AndroidX / AndroidX
 coreKtx = "1.13.1"
@@ -110,5 +112,5 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 # Navigation Safe Args plugin / Плагин Navigation Safe Args (генерация типобезопасной навигации)
 navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
-# Kapt plugin (annotation processing for Hilt, Room) / Плагин Kapt (обработка аннотаций для Hilt, Room)
-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+# KSP plugin (Kotlin Symbol Processing — fast annotation processing for Hilt, Room) / Плагин KSP (Kotlin Symbol Processing — быстрая обработка аннотаций для Hilt, Room)
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

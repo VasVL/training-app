@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     // Hilt plugin — processing @HiltAndroidApp, @Inject, @Module annotations / Плагин Hilt — обработка аннотаций DI
     alias(libs.plugins.hilt)
-    // Kapt — annotation processor for Hilt (generates glue code) / Kapt — процессор аннотаций для Hilt (генерирует код-связку)
-    alias(libs.plugins.kapt)
+    // KSP — Kotlin Symbol Processing, fast annotation processor for Hilt (generates glue code) / KSP — Kotlin Symbol Processing, быстрый процессор аннотаций для Hilt (генерирует код-связку)
+    alias(libs.plugins.ksp)
     // Navigation Safe Args plugin — type-safe navigation directions generation / Плагин Navigation Safe Args — генерация типобезопасных направлений навигации
     alias(libs.plugins.navigation.safeargs)
 }
@@ -65,7 +65,7 @@ dependencies {
 
     // Hilt — dependency injection / Hilt — внедрение зависимостей
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Jetpack Navigation — navigation between screens / Jetpack Navigation — навигация между экранами
     implementation(libs.navigation.fragment.ktx)
