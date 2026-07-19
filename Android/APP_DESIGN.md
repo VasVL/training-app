@@ -156,31 +156,30 @@ Android-приложение для занятий силовыми видами
 ### Модули (вариант A — подмодули как Gradle-модули)
 
 **Core (общие, отдельные Gradle-модули):**
-- `core/common` — Resource<T>, утилиты, расширения, константы
+- `core/common` — Resource<T>, логирование, утилиты, расширения, константы
 - `core/navigation` — Screen, Navigator (порты навигации)
-- `core/database` — Room-база, Entity, DAO, адаптеры Repository. Зависит от `core/reference-data` (Ports & Adapters).
-- `core/reference-data` — модели упражнений/мышц/групп, порты Repository
+- `core/database` — Room-база, Entity, DAO, Converters, DatabaseModule (Hilt @Provides для TrainingDatabase и DAO). Общая Room-инфраструктура.
 - `core/network` — Retrofit, OkHttp (вторая фаза)
 
-**Features (с префиксом `feature-`, подмодули contract/domain/ui — Gradle-модули):**
-- `feature-auth` (domain, ui) — пользователи, "О себе"
-- `feature-programs` (contract, domain, ui) — программы, микроциклы, дни
-- `feature-workout` (contract, domain, ui) — текущая тренировка, выполнение
-- `feature-calendar` (domain, ui) — календарь
-- `feature-weight` (domain, ui) — отслеживание веса
-- `feature-nutrition` (domain, ui) — дневник питания (вторая фаза)
-- `feature-settings` (domain, ui) — настройки
-- `feature-exercises` (domain, ui) — список упражнений, поиск, свои
-- `feature-anatomy` (domain, ui) — анатомический атлас
+**Features (с префиксом `feature-`, подмодули contract/domain/data/ui — Gradle-модули):**
+- `feature-auth` (contract, domain, data, ui) — пользователи, "О себе"
+- `feature-programs` (contract, domain, data, ui) — программы, микроциклы, дни
+- `feature-workout` (contract, domain, data, ui) — текущая тренировка, выполнение
+- `feature-calendar` (contract, domain, ui) — календарь
+- `feature-weight` (contract, domain, data, ui) — отслеживание веса
+- `feature-nutrition` (contract, domain, data, ui) — дневник питания
+- `feature-settings` (contract, domain, ui) — настройки
+- `feature-exercises` (contract, domain, data, ui) — список упражнений, поиск, свои
+- `feature-anatomy` (contract, domain, data, ui) — анатомический атлас
 - `feature-help` (contract, domain, ui) — СРЦ, о приложении
 
-**Зависимости подмодулей одного feature:** ui → domain, domain → contract, ui → contract. domain НЕ → ui.
+**Зависимости подмодулей одного feature:** ui → domain, data → domain + core/database, contract → core/navigation. domain НЕ → ui, domain НЕ → data.
 
 ### Изоляция (Ports & Adapters)
 - `domain` фичи не зависит от `domain` другой фичи.
-- Внешние зависимости — порты (интерфейсы), реализации (адаптеры) — через DI (Hilt).
-- `core/database` реализует порты из `core/reference-data` и `domain` фич.
-- Домен работает со своими моделями, адаптер маппит Entity → domain model.
+- Внешние зависимости — порты (интерфейсы репозиториев в `domain/repository`), реализации (адаптеры) — в `data`-подмодуле фичи, через DI (Hilt).
+- `core/database` — общая Room-инфраструктура: `DatabaseModule` (Hilt) предоставляет `TrainingDatabase` и DAO. Реализации репозиториев живут в `data`-подмодулях фичей, инжектируют DAO, маппят Entity ↔ domain model.
+- Домен работает со своими моделями, адаптер (`data`) маппит Entity ↔ domain model.
 
 ### Структура БД (одна Room-база, таблицы по доменам)
 
@@ -188,7 +187,7 @@ Android-приложение для занятий силовыми видами
 - `users` (id, remoteId, role, name, weight, height, gender, age, weightUnit, heightUnit, isDefault, createdAt)
 - `user_maxes` (id, userId, exerciseId, maxValue, unit, measuredAt) — единица: KG/LBS/REPS/SECONDS/METERS/...
 
-**Справочники (core/reference-data):**
+**Справочники:**
 - `muscle_groups`, `muscles` (groupId, name, description, imageUrl), `exercises` (type: DYNAMIC/STATIC, isBuiltin, createdByUserId), `exercise_muscles` (involvement: PRIMARY/SECONDARY)
 - `muscle_relations` (muscleId, relatedMuscleId, relation: ANTAGONIST/SYNERGIST) — связи мышц для анатомического атласа (антагонисты и синергисты)
 

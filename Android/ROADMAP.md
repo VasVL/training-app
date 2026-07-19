@@ -3,23 +3,26 @@
 > Порядок реализации функционала. Обновлять по мере прогресса (отмечать выполненное ✅).
 
 ## Фаза 0. Фундамент
-- [ ] **DI (Hilt)** — `Application` класс (`@HiltAndroidApp`), `MainActivity` (`@AndroidEntryPoint`), Hilt-модуль для `TrainingDatabase` + DAO. Без DI ничего не заработает.
-- [ ] **core/common** — `Resource<T>` (sealed class Loading/Success/Error). Используется везде в Repository.
-- [ ] **Реализация Navigator в `app`** — `NavigatorImpl` (маппинг `Screen` → `NavDirections`), nav_graph.xml. Без этого нет навигации.
-- [ ] **Coil** — подключить в `app` (implementation(libs.coil)). Библиотека загрузки картинок.
+- [x] **DI (Hilt)** — `Application` класс (`@HiltAndroidApp`), `MainActivity` (`@AndroidEntryPoint`), `DatabaseModule` в `core/database` (Hilt `@Provides` для `TrainingDatabase` + DAO). Без DI ничего не заработает.
+- [x] **core/common** — `Resource<T>` (sealed class Loading/Success/Error), `LogExtensions`. Используется везде в Repository.
+- [x] **Реализация Navigator в `app`** — `NavigatorImpl` (маппинг `Screen` → `NavDirections`), `NavigationModule` (Hilt `@Binds`), nav_graph.xml. Без этого нет навигации.
+- [x] **Coil** — подключить в `app` (implementation(libs.coil)). Библиотека загрузки картинок.
+- [x] **Изоляция persistence** — `domain` фичей объявляет порты (интерфейсы репозиториев), `data`-подмодули реализуют их через DAO из `core/database`. `app` не зависит от Room напрямую.
 
 ## Фаза 1. Пользователи (feature-auth)
 Точка входа: без пользователя ничего не работает — все данные привязаны к `userId`.
-- [ ] `domain`: `UserRepository` (порт), `UserMaxRepository` (порт), модели (User, UserMax).
-- [ ] `core/database`: адаптеры `UserRepositoryImpl`, `UserMaxRepositoryImpl` (реализация портов через DAO).
+- [x] `domain`: `UserRepository` (порт), `UserMaxRepository` (порт), модели (User, UserMax), enum-ы (UserRole, Gender, WeightUnit, HeightUnit, MeasurementUnit).
+- [x] `data`: адаптеры `UserRepositoryImpl`, `UserMaxRepositoryImpl` (реализация портов через DAO из `core/database`) + мапперы + Hilt `@Binds`.
 - [ ] `ui`: `UserSelectScreen` (выбор пользователя), `UserEditScreen` (создание/редактирование = "О себе").
-- [ ] Hilt-модуль для Repository.
 - [ ] Навигация: `AuthScreen` в nav_graph.
 - [ ] **Результат:** можно зайти, выбрать/создать пользователя, заполнить "О себе" (имя, вес, рост, разовые максимумы).
 
-## Фаза 2. Справочники (core/reference-data + feature-exercises + feature-anatomy)
-Программы и тренировки ссылаются на упражнения и мышцы. Нужны данные.
-- [ ] `core/database`: адаптеры `ExerciseRepositoryImpl`, `MuscleRepositoryImpl`, `MuscleGroupRepositoryImpl`.
+## Фаза 2. Справочники (feature-exercises + feature-anatomy)
+Программы и тренировки ссылаются на упражнения и мышцы. Нужны данные. Модели справочников живут в `feature-exercises/domain` (Exercise) и `feature-anatomy/domain` (Muscle, MuscleGroup).
+- [x] `feature-exercises/domain`: модель (Exercise) + enum (ExerciseType) + интерфейс (ExerciseRepository).
+- [x] `feature-exercises/data`: `ExerciseRepositoryImpl` + маппер + Hilt `@Binds`.
+- [x] `feature-anatomy/domain`: модели (Muscle, MuscleGroup, ExerciseMuscle, MuscleRelationEntry) + enum-ы (MuscleInvolvement, MuscleRelation) + интерфейсы (MuscleRepository, MuscleGroupRepository, ExerciseMuscleRepository, MuscleRelationRepository).
+- [x] `feature-anatomy/data`: реализации + мапперы + Hilt `@Binds`.
 - [ ] Заполнение БД вшитыми данными (упражнения, мышцы, группы) — JSON-ассеты, импорт при первом запуске.
 - [ ] `feature-exercises/ui`: список упражнений, группы мышц, поиск.
 - [ ] `feature-anatomy/ui`: атлас, детали мышцы.
@@ -27,8 +30,8 @@
 
 ## Фаза 3. Программы (feature-programs) — просмотр
 Основная фича, сначала просмотр (без создания).
-- [ ] `domain`: `ProgramRepository` (порт), модели (Program, Microcycle, Day, ExerciseSet, SetTemplate).
-- [ ] `core/database`: адаптер `ProgramRepositoryImpl`.
+- [x] `domain`: интерфейсы репозиториев (ProgramRepository, MicrocycleRepository, MicrocycleDayRepository, ExerciseSetRepository, SetTemplateRepository, ProgramCategoryRepository, ProgramTagRepository, ProgramPrerequisiteRepository), модели (Program, Microcycle, MicrocycleDay, ExerciseSet, SetTemplate, ProgramCategoryEntry, ProgramTag, ProgramPrerequisite), enum-ы (MicrocycleDayType, SetType, WeightType, RepType, PrerequisiteType, ProgramCategory).
+- [x] `data`: реализации репозиториев + мапперы + Hilt `@Binds`.
 - [ ] Вшитые программы (JSON-ассеты, импорт при первом запуске).
 - [ ] `ui`: `ProgramListScreen` (список + табы + пагинация), `ProgramDetailScreen` (описание + микроциклы ViewPager).
 - [ ] Навигация: `ProgramScreen` в nav_graph.
@@ -36,8 +39,8 @@
 
 ## Фаза 4. Текущая тренировка (feature-workout) — выполнение
 Нужна программа, чтобы выполнять тренировку.
-- [ ] `domain`: `WorkoutLogRepository` (порт), модели (WorkoutLog, WorkoutLogExercise, WorkoutLogSet).
-- [ ] `core/database`: адаптер `WorkoutLogRepositoryImpl`.
+- [x] `domain`: интерфейсы (WorkoutLogRepository, WorkoutLogExerciseRepository, WorkoutLogSetRepository), модели (WorkoutLog, WorkoutLogExercise, WorkoutLogSet), enum-ы (WorkoutLogStatus, WorkoutLogSetStatus, SetType).
+- [x] `data`: реализации репозиториев + мапперы + Hilt `@Binds`.
 - [ ] Логика: "Начать программу" → создаёт `workout_logs` (PLANNED) для всех тренировок программы в календаре.
 - [ ] `ui`: `WorkoutSelectionScreen` (список запланированных), `WorkoutSessionScreen` (выполнение), `ExerciseSessionScreen` (подходы, статусы).
 - [ ] Расчёт рабочего веса (adjustmentPercent, проценты от максимума).
@@ -55,7 +58,8 @@
 - [ ] **Результат:** можно создавать свои программы.
 
 ## Фаза 7. Отслеживание веса (feature-weight)
-- [ ] `domain`: `WeightRepository` (порт), адаптер.
+- [x] `domain`: модель (WeightMeasurement) + интерфейс (WeightRepository).
+- [x] `data`: `WeightRepositoryImpl` + маппер + Hilt `@Binds`.
 - [ ] `ui`: график веса, измерения.
 - [ ] **Результат:** можно вносить вес, смотреть график.
 
@@ -78,9 +82,14 @@
 - [ ] **Breadcrumbs** — последние действия пользователя перед крашем.
 - [ ] **Push-уведомления** — напоминания о тренировке (Firebase Cloud Messaging).
 
+## Фаза 10. Питание (feature-nutrition)
+- [x] `domain`: модели (FoodItem, FoodLog) + интерфейсы (FoodItemRepository, FoodLogRepository).
+- [x] `data`: реализации + мапперы + Hilt `@Binds`.
+- [ ] `ui`: дневник питания, выбор еды.
+- [ ] **Результат:** можно вести дневник питания.
+
 ## Вторая фаза (отложено)
 - [ ] `core/network` + синхронизация с сетью
-- [ ] `feature-nutrition` (дневник питания)
 - [ ] Настраиваемая навигация (5 из N)
 - [ ] Рейтинги/комментарии программ
 - [ ] Диплинки

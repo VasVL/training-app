@@ -10,33 +10,39 @@
 core/
 ├── AGENTS.md              ← Контекст папки core (назначение, архитектурные замечания)
 ├── MODULE_STRUCTURE.md    ← Этот файл
-├── common/                ← Утилиты, расширения, базовые классы (Resource<T>), константы (пока пусто)
+├── common/                ← Утилиты, Resource<T>, логирование
 │   ├── AGENTS.md
 │   ├── build.gradle.kts
-│   └── MODULE_STRUCTURE.md
-├── database/              ← Локальная БД (Room): все Entity, DAO, TrainingDatabase, Converters
+│   ├── MODULE_STRUCTURE.md
+│   └── src/main/java/com/vasev/trainingapp/core/common/
+│       ├── Resource.kt        ← sealed class Resource<T> (Loading/Success/Error)
+│       └── logs/LogExtensions.kt ← Расширения для логирования (Timber)
+├── database/              ← Локальная БД (Room): все Entity, DAO, TrainingDatabase, Converters, DatabaseModule (Hilt)
 │   ├── AGENTS.md
 │   ├── build.gradle.kts
-│   └── MODULE_STRUCTURE.md
-├── navigation/            ← Порты навигации (Screen, Navigator)
-│   ├── build.gradle.kts
-│   └── src/main/java/com/vasev/trainingapp/core/navigation/
-│       ├── Navigator.kt   ← Интерфейс Navigator (navigate/back/popUpTo)
-│       └── Screen.kt      ← Маркерный интерфейс Screen
-└── reference-data/        ← Domain-модели и порты репозиториев справочных данных
-    ├── AGENTS.md
+│   ├── MODULE_STRUCTURE.md
+│   └── src/main/java/com/vasev/trainingapp/core/database/
+│       ├── Converters.kt       ← TypeConverters для всех enum-ов (internal object)
+│       ├── TrainingDatabase.kt ← Единая Room-база (@Database, @TypeConverters, internal)
+│       ├── dao/                ← 22 @Dao-интерфейса
+│       ├── di/
+│       │   └── DatabaseModule.kt ← Hilt-модуль: @Provides TrainingDatabase + все DAO
+│       └── entity/             ← @Entity (таблицы) + enum-ы (entity/types/)
+└── navigation/            ← Порты навигации (Screen, Navigator)
     ├── build.gradle.kts
-    └── MODULE_STRUCTURE.md
+    └── src/main/java/com/vasev/trainingapp/core/navigation/
+        ├── Navigator.kt   ← Интерфейс Navigator (navigate/back/popUpTo)
+        └── Screen.kt      ← Маркерный интерфейс Screen
 ```
 
 ## Назначение модулей
 
 ### `core/common/`
-Утилиты, расширения Kotlin, базовые классы (`Resource<T>`), константы. Не зависит от feature-модулей. Пока пустой.
+Утилиты, расширения Kotlin, базовые классы (`Resource<T>`), логирование (`LogExtensions`). Не зависит от feature-модулей.
 Подробнее: [`core/common/AGENTS.md`](common/AGENTS.md), [`core/common/MODULE_STRUCTURE.md`](common/MODULE_STRUCTURE.md)
 
 ### `core/database/`
-Локальная база данных (Room): 22 Entity, 22 DAO, единая `TrainingDatabase`, `Converters`. Адаптер для портов из `core/reference-data` (Ports & Adapters). Зависит от `core/common` и `core/reference-data`.
+Локальная база данных (Room): 22 Entity, 22 DAO, единая `TrainingDatabase`, `Converters`, `DatabaseModule` (Hilt `@Provides` для `TrainingDatabase` и всех DAO). Общая Room-инфраструктура — не зависит от feature-модулей. Зависит только от `core/common`. DAO доступны feature-модулям через DI (Hilt); реализации репозиториев (адаптеры для портов из `domain` фичей) живут в `data`-подмодулях фичей.
 Подробнее: [`core/database/AGENTS.md`](database/AGENTS.md), [`core/database/MODULE_STRUCTURE.md`](database/MODULE_STRUCTURE.md)
 
 ### `core/navigation/`
@@ -46,11 +52,7 @@ core/
 
 Feature-модули зависят только от `core/navigation` и не знают друг о друге.
 
-### `core/reference-data/`
-Domain-модели и порты (интерфейсы) репозиториев для справочных данных (упражнения, мышцы, группы мышц). Чистый домен без Room-аннотаций. Реализации портов — в `core/database`. Зависит от `core/common`.
-Подробнее: [`core/reference-data/AGENTS.md`](reference-data/AGENTS.md), [`core/reference-data/MODULE_STRUCTURE.md`](reference-data/MODULE_STRUCTURE.md)
-
 ## Правила
 - При добавлении/удалении модуля — обновить этот файл и `settings.gradle.kts`.
 - Модули из `core/` не зависят от feature-модулей.
-- `core/*` модули могут предоставлять адаптеры для портов, объявленных в `domain` feature-модулей (Ports & Adapters).
+- `core/database` предоставляет DAO через Hilt (`DatabaseModule`). Реализации репозиториев (адаптеры для портов из `domain` фичей) живут в `data`-подмодулях фичей (Ports & Adapters / Clean Architecture).

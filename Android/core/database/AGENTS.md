@@ -1,7 +1,7 @@
 # Контекст модуля `core/database`
 
 ## О модуле
-Модуль `core/database` — локальная база данных приложения (Room). Содержит все `@Entity` (таблицы), `@Dao` (доступ к данным), `TrainingDatabase` (единую Room-базу) и `Converters` (TypeConverters для enum-ов). Это **адаптер** для портов, объявленных в [`core/reference-data`](../reference-data/AGENTS.md) (Ports & Adapters): домен работает со своими моделями и интерфейсами-портами, а `core/database` реализует эти порты и маппит `Entity` → domain model.
+Модуль `core/database` — локальная база данных приложения (Room). Содержит все `@Entity` (таблицы), `@Dao` (доступ к данным), `TrainingDatabase` (единую Room-базу), `Converters` (TypeConverters для enum-ов) и `DatabaseModule` (Hilt-модуль с `@Provides` для `TrainingDatabase` и всех DAO). Это общая Room-инфраструктура: DAO доступны feature-модулям через DI (Hilt). Реализации репозиториев (адаптеры для портов, объявленных в `domain` feature-модулей) живут в `data`-подмодулях фичей (Ports & Adapters / Clean Architecture) — там же маппинг `Entity` ↔ domain model.
 
 Полное и актуальное описание внутренней структуры модуля находится в файле **[`MODULE_STRUCTURE.md`](MODULE_STRUCTURE.md)**.
 
@@ -13,14 +13,16 @@
 - **Entity** (`entity/`) — описание таблиц Room (`@Entity`, `@ForeignKey`, `@Index`, `@ColumnInfo`). 22 Entity покрывают домены: пользователи, справочники (упражнения/мышцы), программы, дневник тренировок, вес, питание.
 - **DAO** (`dao/`) — доступ к данным (`@Dao`): `suspend`-функции для разовых операций, `Flow` для реактивных запросов. 22 DAO, по одному на Entity.
 - **Converters** (`Converters.kt`) — `internal object` с `@TypeConverter` для всех enum-ов. Room хранит enum как `name` (String).
+- **DatabaseModule** (`di/DatabaseModule.kt`) — Hilt-модуль (`@Module @InstallIn(SingletonComponent)`): `@Provides @Singleton` для `TrainingDatabase` (через `Room.databaseBuilder`) и `@Provides` для всех 22 DAO. Это убирает хардкод Room из `app` — `app` не зависит от Room напрямую.
 - **schemas/** — экспортированные JSON-схемы Room (по одной на версию). Используются для миграций и проверок схемы в CI.
 
 ## Архитектурные замечания
 
 ### Ports & Adapters
-- `core/database` **реализует порты** из `core/reference-data` (например, `ExerciseRepository`, `MuscleGroupRepository`). Реализации маппят `Entity` → domain model и обратно.
-- Домен (`core/reference-data`, `domain` фич) **не зависит от `core/database`**. Зависимость направлена в сторону адаптера: `core/database` → `core/reference-data`.
-- Реализации портов инжектируются через Hilt по интерфейсу.
+- `core/database` — общая Room-инфраструктура: `TrainingDatabase`, DAO, `Converters`, `DatabaseModule` (Hilt `@Provides` для `TrainingDatabase` и всех DAO). Не содержит репозиториев и мапперов.
+- Реализации репозиториев (адаптеры для портов, объявленных в `domain` feature-модулей) живут в `data`-подмодулях фичей (например, `feature-auth/data/repository/UserRepositoryImpl`). Они инжектируют DAO из `core/database` (через Hilt), маппят `Entity` ↔ domain model и реализуют интерфейсы из `domain/repository`.
+- Домен (`domain` фич) **не зависит от `core/database`**. Зависимость направлена в сторону адаптера: `feature-*/data` → `core/database` + `feature-*/domain`.
+- Реализации репозиториев инжектируются через Hilt по интерфейсу (биндинги в `feature-*/data/di`).
 
 ### Стратегия внешних ключей (FK)
 - **CASCADE** — удаление родителя удаляет дочерние строки. Применяется для "владельческих" связей:

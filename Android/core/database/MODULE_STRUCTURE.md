@@ -3,7 +3,7 @@
 > **Важно:** Этот файл нужно обновлять после изменений в структуре модуля (добавление/удаление Entity/DAO, изменение схемы).
 
 ## Обзор
-Модуль `core/database` — локальная база данных приложения (Room). Единая `TrainingDatabase` содержит 22 таблицы (Entity) и 22 DAO. Модуль — адаптер для портов из [`core/reference-data`](../reference-data/MODULE_STRUCTURE.md) (Ports & Adapters).
+Модуль `core/database` — локальная база данных приложения (Room). Единая `TrainingDatabase` содержит 22 таблицы (Entity) и 22 DAO. Модуль — общая Room-инфраструктура: `DatabaseModule` (Hilt) предоставляет `TrainingDatabase` и все DAO через DI. Реализации репозиториев (адаптеры для портов из `domain` фичей) живут в `data`-подмодулях фичей.
 
 ## Структура
 ```
@@ -19,6 +19,8 @@ core/database/
             ├── Converters.kt       ← TypeConverters для всех enum-ов (internal object)
             ├── TrainingDatabase.kt ← Единая Room-база (@Database, @TypeConverters, internal)
             ├── dao/                 ← 22 @Dao-интерфейса
+            ├── di/
+            │   └── DatabaseModule.kt ← Hilt-модуль: @Provides TrainingDatabase + все 22 DAO
             │   ├── ExerciseDao.kt
             │   ├── ExerciseMuscleDao.kt
             │   ├── ExerciseSetDao.kt
@@ -86,10 +88,13 @@ core/database/
 ## Назначение элементов
 
 ### `build.gradle.kts`
-Конфигурация Gradle-модуля: плагины (Android Library, Kotlin, KSP), зависимости (Room runtime/ktx/compiler через KSP, Coroutines), внутренние модули (`core/common`, `core/reference-data`). KSP-аргументы `room.schemaLocation` и `room.incremental` задают экспорт схем и инкрементальную обработку.
+Конфигурация Gradle-модуля: плагины (Android Library, Kotlin, KSP, Hilt), зависимости (Room runtime/ktx/compiler через KSP, Coroutines, Hilt), внутренний модуль `core/common`. KSP-аргументы `room.schemaLocation` и `room.incremental` задают экспорт схем и инкрементальную обработку.
 
 ### `TrainingDatabase.kt`
 Единая Room-база (`@Database(version = 1, exportSchema = true)`). Перечисляет все 22 Entity и 22 DAO. `@TypeConverters(Converters::class)` регистрирует конвертеры enum-ов. Класс `internal abstract` — доступ только внутри модуля.
+
+### `di/DatabaseModule.kt`
+Hilt-модуль (`@Module @InstallIn(SingletonComponent)`): `@Provides @Singleton` для `TrainingDatabase` (через `Room.databaseBuilder`) и `@Provides` для всех 22 DAO. Это убирает хардкод Room из `app` — `app` не зависит от Room напрямую, а получает DAO (и, через `data`-модули фичей, репозитории) через Hilt.
 
 ### `Converters.kt`
 `internal object` с `@TypeConverter`-функциями для всех enum-ов из `entity/types/`. Room хранит enum как `name` (String).
@@ -106,7 +111,7 @@ core/database/
 - `UserEntity` (`users`) — пользователь: role, name, weight, height, gender, age, weightUnit, heightUnit, isDefault, createdAt, remoteId.
 - `UserMaxEntity` (`user_maxes`) — разовый максимум: userId (CASCADE), exerciseId (RESTRICT), maxValue, unit, measuredAt.
 
-**Справочники (core/reference-data):**
+**Справочники:**
 - `MuscleGroupEntity` (`muscle_groups`) — группа мышц: name, imageUrl, remoteId.
 - `MuscleEntity` (`muscles`) — мышца: groupId (CASCADE), name, description, imageUrl, remoteId.
 - `MuscleRelationEntity` (`muscle_relations`) — связь мышц: muscleId (CASCADE), relatedMuscleId (CASCADE), relation. Составной PK.
