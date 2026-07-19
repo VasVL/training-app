@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.vasev.trainingapp.feature.programs.contract"
+    namespace = "com.vasev.trainingapp.feature.help.domain"
     compileSdk = 34
 
     defaultConfig {
@@ -19,8 +19,4 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-}
-
-dependencies {
-    implementation(project(":core:navigation"))
 }

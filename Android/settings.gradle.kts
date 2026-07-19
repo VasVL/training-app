@@ -31,6 +31,7 @@ include(":core:database")
 include(":core:reference-data")
 
 // Feature: auth / Пользователи / Feature: auth / Пользователи
+include(":features:feature-auth:contract")
 include(":features:feature-auth:domain")
 include(":features:feature-auth:ui")
 
@@ -45,25 +46,31 @@ include(":features:feature-workout:domain")
 include(":features:feature-workout:ui")
 
 // Feature: calendar / Календарь / Feature: calendar / Календарь
+include(":features:feature-calendar:contract")
 include(":features:feature-calendar:domain")
 include(":features:feature-calendar:ui")
 
 // Feature: weight / Отслеживание веса / Feature: weight / Отслеживание веса
+include(":features:feature-weight:contract")
 include(":features:feature-weight:domain")
 include(":features:feature-weight:ui")
 
 // Feature: settings / Настройки / Feature: settings / Настройки
+include(":features:feature-settings:contract")
 include(":features:feature-settings:domain")
 include(":features:feature-settings:ui")
 
 // Feature: exercises / Упражнения / Feature: exercises / Упражнения
+include(":features:feature-exercises:contract")
 include(":features:feature-exercises:domain")
 include(":features:feature-exercises:ui")
 
 // Feature: anatomy / Анатомический атлас / Feature: anatomy / Анатомический атлас
+include(":features:feature-anatomy:contract")
 include(":features:feature-anatomy:domain")
 include(":features:feature-anatomy:ui")
 
-// Feature: info / Информационные экраны (СРЦ, о приложении) / Feature: info / Информационные экраны (СРЦ, о приложении)
-include(":features:feature-info:domain")
-include(":features:feature-info:ui")
+// Feature: help / Справка (СРЦ, о приложении) / Feature: help / Справка (СРЦ, о приложении)
+include(":features:feature-help:contract")
+include(":features:feature-help:domain")
+include(":features:feature-help:ui")

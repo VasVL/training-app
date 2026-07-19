@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.vasev.trainingapp.feature.programs.contract"
+    namespace = "com.vasev.trainingapp.feature.settings.contract"
     compileSdk = 34
 
     defaultConfig {

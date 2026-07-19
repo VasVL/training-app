@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.vasev.trainingapp.feature.info.domain"
+    namespace = "com.vasev.trainingapp.feature.help.ui"
     compileSdk = 34
 
     defaultConfig {
