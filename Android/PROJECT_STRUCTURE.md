@@ -44,13 +44,23 @@ Android/
 │   ├── database/          ← Локальная БД (Room): все Entity, DAO, TrainingDatabase, Converters
 │   │   ├── AGENTS.md      ← Контекст модуля core/database
 │   │   └── MODULE_STRUCTURE.md ← Структура модуля core/database
-│   ├── navigation/        ← Порты навигации (Screen, Navigator) — пока пусто
+│   ├── navigation/        ← Порты навигации: Screen.kt, Navigator.kt
+│   │   └── build.gradle.kts
 │   └── reference-data/    ← Domain-модели и порты репозиториев справочных данных
 │       ├── AGENTS.md      ← Контекст модуля core/reference-data
 │       └── MODULE_STRUCTURE.md ← Структура модуля core/reference-data
-└── features/              ← Feature-модули (каждая фича — отдельный модуль, пока пусто)
+└── features/              ← Feature-модули (каждая фича — отдельный модуль)
     ├── AGENTS.md          ← Контекст папки features
-    └── MODULE_STRUCTURE.md ← Структура папки features
+    ├── MODULE_STRUCTURE.md ← Структура папки features
+    ├── feature-anatomy/      ← Анатомический атлас (contract, domain, ui)
+    ├── feature-auth/         ← Пользователи, "О себе" (contract, domain, ui)
+    ├── feature-calendar/     ← Календарь (contract, domain, ui)
+    ├── feature-exercises/    ← Упражнения (contract, domain, ui)
+    ├── feature-help/         ← Справка: СРЦ, о приложении (contract, domain, ui)
+    ├── feature-programs/     ← Программы (contract, domain, ui)
+    ├── feature-settings/     ← Настройки (contract, domain, ui)
+    ├── feature-weight/       ← Отслеживание веса (contract, domain, ui)
+    └── feature-workout/      ← Текущая тренировка (contract, domain, ui)
 ```
 
 ## Назначение папок
@@ -81,7 +91,7 @@ Android/
 Подробнее: [`core/database/AGENTS.md`](core/database/AGENTS.md), [`core/database/MODULE_STRUCTURE.md`](core/database/MODULE_STRUCTURE.md)
 
 #### `core/navigation/`
-Порты навигации: `Screen` (sealed class с маршрутами), `Navigator` (интерфейс `navigate`/`back`). Пока пустой. Реализация `Navigator` — в `app`.
+Порты навигации: `Screen` (маркерный интерфейс для маршрутов экранов) и `Navigator` (интерфейс с методами `navigate(screen)`/`back()`/`popUpTo(screen, inclusive)`). Feature-модули зависят только от этого модуля и не знают друг о друге. Реализация `Navigator` — в `app` (где доступен `NavController`), инжектируется через Hilt.
 
 #### `core/reference-data/`
 Domain-модели и порты (интерфейсы) репозиториев справочных данных (упражнения, мышцы, группы мышц). Чистый домен без Room-аннотаций. Реализации портов — в `core/database`. Зависит от `core/common`.
@@ -89,11 +99,22 @@ Domain-модели и порты (интерфейсы) репозиторие�
 Подробнее: [`core/reference-data/AGENTS.md`](core/reference-data/AGENTS.md), [`core/reference-data/MODULE_STRUCTURE.md`](core/reference-data/MODULE_STRUCTURE.md)
 
 ### `features/`
-Feature-модули. Каждая фича — отдельный Gradle-модуль. Может содержать подмодули:
-- `contract/` — контракты/интерфейсы фичи (доступны другим модулям)
-- `domain/` — бизнес-логика (UseCase, Repository, модели)
+Feature-модули. Каждая фича — отдельный Gradle-модуль с подмодулями `contract`/`domain`/`ui`:
+- `contract/` — публичные порты фичи (интерфейсы, модели, `Screen`-маршруты), доступны другим модулям
+- `domain/` — бизнес-логика (UseCase, Repository-интерфейсы, модели)
 - `ui/` — UI-слой (Fragment, ViewModel, ViewBinding)
-- `common/` — вспомогательный код фичи
+- `common/` — вспомогательный код фичи (необязательный)
+
+Текущие фичи (у каждой есть `contract`, `domain`, `ui`):
+- `feature-anatomy` — анатомический атлас
+- `feature-auth` — пользователи, "О себе"
+- `feature-calendar` — календарь
+- `feature-exercises` — список упражнений, поиск
+- `feature-help` — справка (СРЦ, о приложении)
+- `feature-programs` — программы, микроциклы, дни
+- `feature-settings` — настройки
+- `feature-weight` — отслеживание веса
+- `feature-workout` — текущая тренировка, выполнение
 
 `domain`-модуль одной фичи НЕ зависит от `domain`-модуля другой фичи. Зависимости между фичами — только через `contract`-модули.
 

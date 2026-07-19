@@ -8,18 +8,50 @@
 ## Структура
 ```
 features/
-├── <feature-name>/           ← Feature-модуль (например, auth, weight, workout, programs)
-│   ├── contract/              ← Публичные порты фичи (интерфейсы, модели) — доступны другим модулям
-│   ├── domain/                ← Бизнес-логика (UseCase, Repository-интерфейсы, domain models)
-│   ├── ui/                    ← UI-слой (Fragment, ViewModel, ViewBinding)
-│   └── common/                ← Вспомогательный код фичи
-└── ...
+├── feature-anatomy/          ← Анатомический атлас
+│   ├── contract/             ← AnatomyScreen (маршруты), порты
+│   ├── domain/               ← Бизнес-логика
+│   └── ui/                   ← UI-слой
+├── feature-auth/             ← Пользователи, "О себе"
+│   ├── contract/             ← AuthScreen (маршруты), порты
+│   ├── domain/
+│   └── ui/
+├── feature-calendar/         ← Календарь
+│   ├── contract/             ← CalendarScreen (маршруты), порты
+│   ├── domain/
+│   └── ui/
+├── feature-exercises/        ← Упражнения
+│   ├── contract/             ← ExerciseScreen (маршруты), порты
+│   ├── domain/
+│   └── ui/
+├── feature-help/             ← Справка (СРЦ, о приложении)
+│   ├── contract/             ← HelpScreen (маршруты), порты
+│   ├── domain/
+│   └── ui/
+├── feature-programs/         ← Программы, микроциклы, дни
+│   ├── contract/             ← ProgramScreen (маршруты), порты
+│   ├── domain/
+│   └── ui/
+├── feature-settings/         ← Настройки
+│   ├── contract/             ← SettingsScreen (маршруты), порты
+│   ├── domain/
+│   └── ui/
+├── feature-weight/           ← Отслеживание веса
+│   ├── contract/             ← WeightScreen (маршруты), порты
+│   ├── domain/
+│   └── ui/
+└── feature-workout/          ← Текущая тренировка, выполнение
+    ├── contract/             ← WorkoutScreen (маршруты), порты
+    ├── domain/
+    └── ui/
 ```
+
+У каждой фичи есть подмодули `contract`, `domain`, `ui`. Подмодуль `common` — необязательный (пока ни у одной фичи его нет).
 
 ## Назначение подмодулей
 
 ### `contract/`
-Публичные порты фичи — интерфейсы и модели, которые фича отдаёт наружу. Другие фичи зависят от `contract`, а не от `domain`. Это реализует инверсию зависимостей (Dependency Inversion).
+Публичные порты фичи — интерфейсы, модели и **Screen-маршруты** (`sealed interface XxxScreen : Screen`), которые фича отдаёт наружу. Другие фичи зависят от `contract`, а не от `domain`. Contract-модуль зависит от `core/navigation` (для `Screen`). Это реализует инверсию зависимостей (Dependency Inversion) и распределённую навигацию.
 
 ### `domain/`
 Бизнес-логика фичи: UseCase, интерфейсы Repository (порты для внешних зависимостей), domain models. Не зависит от `domain` других фич. Внешние зависимости объявляет как интерфейсы (порты), реализации приходят через DI.

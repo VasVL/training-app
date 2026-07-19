@@ -18,8 +18,11 @@ core/
 │   ├── AGENTS.md
 │   ├── build.gradle.kts
 │   └── MODULE_STRUCTURE.md
-├── navigation/            ← Порты навигации (Screen, Navigator) — пока пусто
-│   └── build.gradle.kts
+├── navigation/            ← Порты навигации (Screen, Navigator)
+│   ├── build.gradle.kts
+│   └── src/main/java/com/vasev/trainingapp/core/navigation/
+│       ├── Navigator.kt   ← Интерфейс Navigator (navigate/back/popUpTo)
+│       └── Screen.kt      ← Маркерный интерфейс Screen
 └── reference-data/        ← Domain-модели и порты репозиториев справочных данных
     ├── AGENTS.md
     ├── build.gradle.kts
@@ -37,7 +40,11 @@ core/
 Подробнее: [`core/database/AGENTS.md`](database/AGENTS.md), [`core/database/MODULE_STRUCTURE.md`](database/MODULE_STRUCTURE.md)
 
 ### `core/navigation/`
-Порты навигации: `Screen` (sealed class с маршрутами), `Navigator` (интерфейс `navigate`/`back`). Пока пустой — будет заполнен по мере разработки. Реализация `Navigator` — в `app`.
+Порты навигации:
+- `Screen` — маркерный интерфейс для маршрутов экранов. Каждая фича объявляет свои экраны в своём contract-модуле как `sealed interface XxxScreen : Screen`.
+- `Navigator` — интерфейс с методами `navigate(screen)`, `back()`, `popUpTo(screen, inclusive)`. Реализация — в `app` (где доступен `NavController`), инжектируется через Hilt.
+
+Feature-модули зависят только от `core/navigation` и не знают друг о друге.
 
 ### `core/reference-data/`
 Domain-модели и порты (интерфейсы) репозиториев для справочных данных (упражнения, мышцы, группы мышц). Чистый домен без Room-аннотаций. Реализации портов — в `core/database`. Зависит от `core/common`.
