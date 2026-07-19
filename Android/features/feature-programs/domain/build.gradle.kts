@@ -20,3 +20,8 @@ android {
         jvmTarget = "17"
     }
 }
+
+dependencies {
+    // Coroutines — Flow in repository interfaces / Coroutines — Flow в интерфейсах репозиториев
+    implementation(libs.coroutines.core)
+}

@@ -83,14 +83,6 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
 
-    // Room — needed in app because DatabaseModule references Room.databaseBuilder and
-    // RoomDatabase (the supertype of TrainingDatabase). core:database exposes TrainingDatabase
-    // via `implementation`, so Room types are not transitively visible here. /
-    // Room — нужен в app, потому что DatabaseModule ссылается на Room.databaseBuilder и
-    // RoomDatabase (супертип TrainingDatabase). core:database отдаёт TrainingDatabase через
-    // `implementation`, поэтому типы Room не видны здесь транзитивно.
-    implementation(libs.room.runtime)
-
     // Timber — logging / Timber — логирование
     implementation(libs.timber)
 
@@ -99,11 +91,59 @@ dependencies {
     // core:common — Resource<T> and shared utilities / core:common — Resource<T> и общие утилиты
     implementation(project(":core:common"))
 
-    // core:database — Room TrainingDatabase + DAOs (consumed by DatabaseModule) / core:database — Room TrainingDatabase + DAO (используются DatabaseModule)
+    // core:database — Room TrainingDatabase + DAOs + Hilt DatabaseModule /
+    // core:database — Room TrainingDatabase + DAO + Hilt DatabaseModule
+    // app no longer references Room types directly: DatabaseModule lives in core:database and
+    // provides DAOs via Hilt. Feature `data` modules consume the DAOs and expose repositories. /
+    // app больше не ссылается на типы Room напрямую: DatabaseModule живёт в core:database и
+    // предоставляет DAO через Hilt. `data`-модули фичей потребляют DAO и отдают репозитории.
     implementation(project(":core:database"))
 
     // core:navigation — Navigator port + Screen marker / core:navigation — порт Navigator + маркер Screen
     implementation(project(":core:navigation"))
+
+    // Feature modules (alphabetical) / Модули фичей (по алфавиту)
+    // Each feature contributes: `data` (Hilt @Binds for repositories) + `ui` (screens) +
+    // `contract` (screen routes, via ui transitively). /
+    // Каждая фича даёт: `data` (Hilt @Binds для репозиториев) + `ui` (экраны) +
+    // `contract` (маршруты экранов, транзитивно через ui).
+
+    // feature-anatomy — anatomy atlas / feature-anatomy — анатомический атлас
+    implementation(project(":features:feature-anatomy:data"))
+    implementation(project(":features:feature-anatomy:ui"))
+
+    // feature-auth — users / feature-auth — пользователи
+    implementation(project(":features:feature-auth:data"))
+    implementation(project(":features:feature-auth:ui"))
+
+    // feature-calendar — calendar / feature-calendar — календарь
+    implementation(project(":features:feature-calendar:ui"))
+
+    // feature-exercises — exercises / feature-exercises — упражнения
+    implementation(project(":features:feature-exercises:data"))
+    implementation(project(":features:feature-exercises:ui"))
+
+    // feature-help — help / feature-help — справка
+    implementation(project(":features:feature-help:ui"))
+
+    // feature-nutrition — nutrition / feature-nutrition — питание
+    implementation(project(":features:feature-nutrition:data"))
+    implementation(project(":features:feature-nutrition:ui"))
+
+    // feature-programs — programs / feature-programs — программы
+    implementation(project(":features:feature-programs:data"))
+    implementation(project(":features:feature-programs:ui"))
+
+    // feature-settings — settings / feature-settings — настройки
+    implementation(project(":features:feature-settings:ui"))
+
+    // feature-weight — weight tracking / feature-weight — отслеживание веса
+    implementation(project(":features:feature-weight:data"))
+    implementation(project(":features:feature-weight:ui"))
+
+    // feature-workout — current workout / feature-workout — текущая тренировка
+    implementation(project(":features:feature-workout:data"))
+    implementation(project(":features:feature-workout:ui"))
 
     // ksp (alphabetical) / ksp (по алфавиту)
 

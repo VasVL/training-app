@@ -1,0 +1,54 @@
+package com.vasev.trainingapp.feature.auth.data.repository
+
+import com.vasev.trainingapp.core.database.dao.UserDao
+import com.vasev.trainingapp.feature.auth.data.mapper.AuthMapper
+import com.vasev.trainingapp.feature.auth.domain.entity.User
+import com.vasev.trainingapp.feature.auth.domain.repository.UserRepository
+import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
+/**
+ * Implementation of [UserRepository] backed by the Room [UserDao]. /
+ * Реализация [UserRepository] на основе Room [UserDao].
+ *
+ * `@Inject` — Hilt creates this class and injects [userDao] and [mapper] /
+ * `@Inject` — Hilt создаёт этот класс и внедряет [userDao] и [mapper]
+ */
+class UserRepositoryImpl @Inject constructor(
+    private val mapper: AuthMapper,
+    private val userDao: UserDao,
+) : UserRepository {
+
+    override fun observeAll(): Flow<List<User>> {
+        return userDao.observeAll().map { list -> list.map { mapper.map(it) } }
+    }
+
+    override fun observeById(id: Long): Flow<User?> {
+        return userDao.observeById(id).map { entity -> entity?.let { mapper.map(it) } }
+    }
+
+    override suspend fun getById(id: Long): User? {
+        return userDao.getById(id)?.let { mapper.map(it) }
+    }
+
+    override suspend fun getByRemoteId(remoteId: String): User? {
+        return userDao.getByRemoteId(remoteId)?.let { mapper.map(it) }
+    }
+
+    override suspend fun getDefault(): User? {
+        return userDao.getDefault()?.let { mapper.map(it) }
+    }
+
+    override suspend fun insert(user: User): Long {
+        return userDao.insert(mapper.map(user))
+    }
+
+    override suspend fun update(user: User) {
+        return userDao.update(mapper.map(user))
+    }
+
+    override suspend fun delete(user: User) {
+        return userDao.delete(mapper.map(user))
+    }
+}
