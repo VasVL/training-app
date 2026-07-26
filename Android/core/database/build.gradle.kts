@@ -43,9 +43,6 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
 
-    // Internal modules / Внутренние модули
-    implementation(project(":core:common"))
-
     // ksp (alphabetical) / ksp (по алфавиту)
 
     // Hilt compiler — generates Hilt glue code for DatabaseModule /

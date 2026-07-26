@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Medium corner radius for shared UI elements / Среднее скругление общих UI-элементов -->
+    <dimen name="common_corner_radius_medium">12dp</dimen>
+</resources>

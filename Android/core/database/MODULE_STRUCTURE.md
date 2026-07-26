@@ -88,7 +88,7 @@ core/database/
 ## Назначение элементов
 
 ### `build.gradle.kts`
-Конфигурация Gradle-модуля: плагины (Android Library, Kotlin, KSP, Hilt), зависимости (Room runtime/ktx/compiler через KSP, Coroutines, Hilt), внутренний модуль `core/common`. KSP-аргументы `room.schemaLocation` и `room.incremental` задают экспорт схем и инкрементальную обработку.
+Конфигурация Gradle-модуля: плагины (Android Library, Kotlin, KSP, Hilt), зависимости (Room runtime/ktx/compiler через KSP, Coroutines, Hilt). KSP-аргументы `room.schemaLocation` и `room.incremental` задают экспорт схем и инкрементальную обработку.
 
 ### `TrainingDatabase.kt`
 Единая Room-база (`@Database(version = 1, exportSchema = true)`). Перечисляет все 22 Entity и 22 DAO. `@TypeConverters(Converters::class)` регистрирует конвертеры enum-ов. Класс `internal abstract` — доступ только внутри модуля.

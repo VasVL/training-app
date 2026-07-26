@@ -22,6 +22,6 @@
 ## Архитектурные замечания
 - **Бизнес-логику сюда не класть.** Вся бизнес-логика — в feature-модулях (`features/<name>/domain/`) и `core/`.
 - `app` НЕ зависит от Room напрямую. Hilt-модуль `DatabaseModule` (`@Provides` для `TrainingDatabase` и DAO) живёт в `core/database`. Репозитории биндятся в `data`-подмодулях фичей (`@Binds` интерфейс→реализация).
-- `app` зависит от: `feature-*/data` (Hilt-биндинги репозиториев) + `feature-*/ui` (экраны) + `core/database` (Hilt-модуль БД) + `core/navigation` + `core/common`. Feature-модули НЕ зависят от `app`.
+- `app` зависит от: `feature-*/data` (Hilt-биндинги репозиториев) + `feature-*/ui` (экраны) + `core/database` (Hilt-модуль БД) + `core:navigation` + нужные узкие модули `core:common:*`. Feature-модули НЕ зависят от `app`.
 - `Navigator` — единственное место, где `app` знает о конкретных экранах feature-модулей (через граф навигации).
 - DI: `@HiltAndroidApp` на `Application`, `@AndroidEntryPoint` на `Activity`/`Fragment`. Подробнее про Hilt-аннотации — в [`Android/AGENTS.md`](../AGENTS.md).

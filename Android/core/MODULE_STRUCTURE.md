@@ -10,13 +10,12 @@
 core/
 ├── AGENTS.md              ← Контекст папки core (назначение, архитектурные замечания)
 ├── MODULE_STRUCTURE.md    ← Этот файл
-├── common/                ← Утилиты, Resource<T>, логирование
+├── common/                ← Контейнер небольших общих модулей
 │   ├── AGENTS.md
-│   ├── build.gradle.kts
 │   ├── MODULE_STRUCTURE.md
-│   └── src/main/java/com/vasev/trainingapp/core/common/
-│       ├── Resource.kt        ← sealed class Resource<T> (Loading/Success/Error)
-│       └── logs/LogExtensions.kt ← Расширения для логирования (Timber)
+│   ├── domain/            ← Kotlin/JVM: Resource<T>
+│   ├── logging/           ← Android: расширения Timber
+│   └── ui/                ← Android: общие UI-ресурсы
 ├── database/              ← Локальная БД (Room): все Entity, DAO, TrainingDatabase, Converters, DatabaseModule (Hilt)
 │   ├── AGENTS.md
 │   ├── build.gradle.kts
@@ -38,14 +37,15 @@ core/
 ## Назначение модулей
 
 ### `core/common/`
-Утилиты, расширения Kotlin, базовые классы (`Resource<T>`), логирование (`LogExtensions`). Не зависит от feature-модулей.
+Контейнер небольших общих модулей. `core:common:domain` — чистые Kotlin-типы (`Resource<T>`), `core:common:logging` — расширения Timber, `core:common:ui` — общие UI-ресурсы. Код и ресурсы не размещаются непосредственно в контейнере.
 Подробнее: [`core/common/AGENTS.md`](common/AGENTS.md), [`core/common/MODULE_STRUCTURE.md`](common/MODULE_STRUCTURE.md)
 
 ### `core/database/`
-Локальная база данных (Room): 22 Entity, 22 DAO, единая `TrainingDatabase`, `Converters`, `DatabaseModule` (Hilt `@Provides` для `TrainingDatabase` и всех DAO). Общая Room-инфраструктура — не зависит от feature-модулей. Зависит только от `core/common`. DAO доступны feature-модулям через DI (Hilt); реализации репозиториев (адаптеры для портов из `domain` фичей) живут в `data`-подмодулях фичей.
+Локальная база данных (Room): 22 Entity, 22 DAO, единая `TrainingDatabase`, `Converters`, `DatabaseModule` (Hilt `@Provides` для `TrainingDatabase` и всех DAO). Общая Room-инфраструктура — не зависит от feature-модулей. DAO доступны feature-модулям через DI (Hilt); реализации репозиториев (адаптеры для портов из `domain` фичей) живут в `data`-подмодулях фичей.
 Подробнее: [`core/database/AGENTS.md`](database/AGENTS.md), [`core/database/MODULE_STRUCTURE.md`](database/MODULE_STRUCTURE.md)
 
 ### `core/navigation/`
+Чистый Kotlin/JVM-модуль.
 Порты навигации:
 - `Screen` — маркерный интерфейс для маршрутов экранов. Каждая фича объявляет свои экраны в своём contract-модуле как `sealed interface XxxScreen : Screen`.
 - `Navigator` — интерфейс с методами `navigate(screen)`, `back()`, `popUpTo(screen, inclusive)`. Реализация — в `app` (где доступен `NavController`), инжектируется через Hilt.

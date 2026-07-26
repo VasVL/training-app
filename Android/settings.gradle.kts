@@ -25,7 +25,9 @@ rootProject.name = "TrainingApp"
 include(":app")
 
 // Core modules / Основные модули
-include(":core:common")
+include(":core:common:domain")
+include(":core:common:logging")
+include(":core:common:ui")
 include(":core:navigation")
 include(":core:database")
 

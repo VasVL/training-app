@@ -1,34 +1,47 @@
-# Структура модуля `core/common`
+# Структура контейнера `core/common`
 
 > **Важно:** Этот файл нужно обновлять после изменений в структуре модуля (добавление/удаление папок, ключевых файлов).
 
 ## Обзор
-Модуль `core/common` — общий переиспользуемый код: утилиты, расширения Kotlin, базовые классы (`Resource<T>`), логирование, константы. Не зависит от feature-модулей.
+`core/common` — контейнер общих модулей, каждый из которых отвечает за один слой или тип переиспользуемого кода.
 
 ## Структура
 ```
 core/common/
-├── .gitkeep                   ← Файл-заглушка (папка сохранена в git)
-├── AGENTS.md                  ← Контекст модуля (назначение, архитектурные замечания)
-├── build.gradle.kts          ← Конфигурация модуля (Android Library, Kotlin, зависимости)
-├── MODULE_STRUCTURE.md       ← Этот файл
-└── src/main/
-    ├── AndroidManifest.xml   ← Манифест библиотеки (минимальный, package declaration)
-    └── java/com/vasev/trainingapp/core/common/
-        ├── Resource.kt            ← sealed class Resource<T> (Loading/Success/Error)
-        └── logs/
-            └── LogExtensions.kt   ← Расширения для логирования (поверх Timber)
+├── AGENTS.md                  ← Контекст контейнера
+├── MODULE_STRUCTURE.md        ← Этот файл
+├── domain/                    ← Чистый Kotlin/JVM-модуль с общими доменными типами
+│   ├── AGENTS.md
+│   ├── MODULE_STRUCTURE.md
+│   ├── build.gradle.kts
+│   └── src/main/java/com/vasev/trainingapp/core/common/domain/
+│       └── Resource.kt
+├── logging/                   ← Android-модуль расширений Timber
+│   ├── AGENTS.md
+│   ├── MODULE_STRUCTURE.md
+│   ├── build.gradle.kts
+│   └── src/main/java/com/vasev/trainingapp/core/common/logging/
+│       └── LogExtensions.kt
+└── ui/                        ← Android-модуль общих UI-ресурсов
+    ├── AGENTS.md
+    ├── MODULE_STRUCTURE.md
+    ├── build.gradle.kts
+    └── src/main/res/drawable/
+        └── ic_add.xml
 ```
 
 ## Назначение элементов
 
-### `Resource.kt`
-`sealed class Resource<out T>` — обёртка для состояния данных: `Loading` / `Success(data)` / `Error(message, cause)`. Используется в Repository для предсказуемой обработки ошибок: Repository возвращает `Flow<Resource<T>>`, ViewModel мапит в `UiState`.
+### `domain/`
+Чистый Kotlin/JVM-модуль. Содержит `Resource<T>` — обёртку для состояния данных: `Loading` / `Success(data)` / `Error(message, cause)`.
 
-### `logs/LogExtensions.kt`
-Расширения для логирования поверх Timber — переиспользуемые хелперы для логирования в feature-модулях и `core/*`.
+### `logging/`
+Android-библиотека с расширениями для ленивого логирования поверх Timber.
+
+### `ui/`
+Android-библиотека с общими XML-ресурсами, не принадлежащими отдельной фиче.
 
 ## Правила
-- При добавлении/удалении папки или ключевого файла — обновить этот файл.
-- Не зависеть от feature-модулей. Зависимости только от внешних библиотек и (при необходимости) других `core/*` модулей.
-- Код должен быть максимально общим, без привязки к конкретным фичам.
+- При добавлении/удалении подмодуля — обновить этот файл, `core/MODULE_STRUCTURE.md`, `PROJECT_STRUCTURE.md` и `settings.gradle.kts`.
+- Не размещать исходный код или ресурсы непосредственно в `core/common`.
+- Создавать новый подмодуль, когда код не относится к назначению существующих.

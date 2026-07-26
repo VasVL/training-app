@@ -88,8 +88,8 @@ dependencies {
 
     // Internal modules (alphabetical) / Внутренние модули (по алфавиту)
 
-    // core:common — Resource<T> and shared utilities / core:common — Resource<T> и общие утилиты
-    implementation(project(":core:common"))
+    // core:common:logging — shared Timber extensions / core:common:logging — общие расширения Timber
+    implementation(project(":core:common:logging"))
 
     // core:database — Room TrainingDatabase + DAOs + Hilt DatabaseModule /
     // core:database — Room TrainingDatabase + DAO + Hilt DatabaseModule

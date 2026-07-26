@@ -9,9 +9,9 @@
 ```
 features/
 ├── feature-anatomy/          ← Анатомический атлас
-│   ├── contract/             ← AnatomyScreen (маршруты), порты
+│   ├── contract/             ← Kotlin/JVM: AnatomyScreen (маршруты), порты
 │   ├── data/                  ← Реализации репозиториев + мапперы + Hilt-биндинги
-│   ├── domain/               ← Бизнес-логика (модели, enum-ы, интерфейсы репозиториев)
+│   ├── domain/               ← Kotlin/JVM: бизнес-логика (модели, enum-ы, интерфейсы репозиториев)
 │   └── ui/                   ← UI-слой
 ├── feature-auth/             ← Пользователи, "О себе"
 │   ├── contract/             ← AuthScreen (маршруты), порты
@@ -62,10 +62,10 @@ features/
 ## Назначение подмодулей
 
 ### `contract/`
-Публичные порты фичи — интерфейсы, модели и **Screen-маршруты** (`sealed interface XxxScreen : Screen`), которые фича отдаёт наружу. Другие фичи зависят от `contract`, а не от `domain`. Contract-модуль зависит от `core/navigation` (для `Screen`). Это реализует инверсию зависимостей (Dependency Inversion) и распределённую навигацию.
+Чистый Kotlin/JVM-модуль с публичными портами фичи — интерфейсами, моделями и **Screen-маршрутами** (`sealed interface XxxScreen : Screen`), которые фича отдаёт наружу. Другие фичи зависят от `contract`, а не от `domain`. Contract-модуль зависит от `core:navigation` (для `Screen`). Это реализует инверсию зависимостей (Dependency Inversion) и распределённую навигацию.
 
 ### `domain/`
-Бизнес-логика фичи: domain-модели (`entity/`), enum-ы (`entity/type/`), интерфейсы репозиториев (`repository/`, порты для `data`), use-case (`usecase/`, по мере появления). Не зависит от `domain` других фич и от Room. Внешние зависимости объявляет как интерфейсы (порты), реализации приходят через DI из `data`.
+Чистый Kotlin/JVM-модуль с бизнес-логикой фичи: domain-моделями (`entity/`), enum-ами (`entity/type/`), интерфейсами репозиториев (`repository/`, портами для `data`), use-case (`usecase/`, по мере появления). Не зависит от `domain` других фич, Room и Android API. Внешние зависимости объявляет как интерфейсы (порты), реализации приходят через DI из `data`.
 
 ### `data/`
 Реализации репозиториев (адаптеры для портов из `domain/repository`) + мапперы (Room Entity ↔ domain-модель) + Hilt-биндинги (`@Binds` интерфейс→реализация). Зависит от `domain` фичи и `core/database` (DAO). Инжектирует DAO из `core/database` через Hilt, маппит `Entity` ↔ domain model.

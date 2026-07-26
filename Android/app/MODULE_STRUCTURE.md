@@ -38,7 +38,7 @@ app/
 Конфигурация Gradle-модуля: плагины (Android Application, Kotlin, Hilt, KSP, Navigation Safe Args), зависимости, SDK версии, `applicationId`, `proguard` правила.
 
 Зависимости (без Room напрямую):
-- `core:common` — `Resource<T>`, логирование.
+- `core:common:logging` — общие расширения Timber.
 - `core:database` — Hilt-модуль БД (`DatabaseModule` предоставляет `TrainingDatabase` и DAO).
 - `core:navigation` — порты навигации (`Screen`, `Navigator`).
 - `feature-*/data` — Hilt-биндинги репозиториев (`@Binds` интерфейс→реализация).
@@ -70,4 +70,4 @@ Hilt-модуль (`@Module @InstallIn(...)`) с `@Binds` для `Navigator` →
 - При добавлении/удалении папки или ключевого файла — обновить этот файл.
 - Бизнес-логику в `app` не класть — только инфраструктура (Application, Activity, навигация, ресурсы, Hilt-модуль Navigator).
 - Не добавлять Room-зависимость в `app` — Hilt-модуль БД живёт в `core/database`.
-- Зависимости: `app` → `feature-*/data` + `feature-*/ui` + `core/database` + `core/navigation` + `core/common`. Feature-модули НЕ зависят от `app`.
+- Зависимости: `app` → `feature-*/data` + `feature-*/ui` + `core/database` + `core:navigation` + нужные узкие модули `core:common:*`. Feature-модули НЕ зависят от `app`.

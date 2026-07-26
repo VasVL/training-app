@@ -4,7 +4,9 @@
 
 ## Фаза 0. Фундамент
 - [x] **DI (Hilt)** — `Application` класс (`@HiltAndroidApp`), `MainActivity` (`@AndroidEntryPoint`), `DatabaseModule` в `core/database` (Hilt `@Provides` для `TrainingDatabase` + DAO). Без DI ничего не заработает.
-- [x] **core/common** — `Resource<T>` (sealed class Loading/Success/Error), `LogExtensions`. Используется везде в Repository.
+- [x] **core:common:domain** — `Resource<T>` (Loading/Success/Error).
+- [x] **core:common:logging** — `LogExtensions` поверх Timber.
+- [x] **core:common:ui** — общий UI-ресурс `ic_add`.
 - [x] **Реализация Navigator в `app`** — `NavigatorImpl` (маппинг `Screen` → `NavDirections`), `NavigationModule` (Hilt `@Binds`), nav_graph.xml. Без этого нет навигации.
 - [x] **Coil** — подключить в `app` (implementation(libs.coil)). Библиотека загрузки картинок.
 - [x] **Изоляция persistence** — `domain` фичей объявляет порты (интерфейсы репозиториев), `data`-подмодули реализуют их через DAO из `core/database`. `app` не зависит от Room напрямую.

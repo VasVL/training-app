@@ -42,10 +42,12 @@ Android/
 ├── core/                  ← Общие модули (переиспользуемый код)
 │   ├── AGENTS.md          ← Контекст папки core
 │   ├── MODULE_STRUCTURE.md ← Структура папки core
-│   ├── common/            ← Утилиты, Resource<T>, логирование
-│   │   ├── AGENTS.md      ← Контекст модуля core/common
-│   │   ├── build.gradle.kts
-│   │   └── MODULE_STRUCTURE.md ← Структура модуля core/common
+│   ├── common/            ← Контейнер небольших общих модулей
+│   │   ├── AGENTS.md      ← Контекст контейнера core/common
+│   │   ├── MODULE_STRUCTURE.md ← Структура контейнера core/common
+│   │   ├── domain/        ← Kotlin/JVM: общие доменные типы
+│   │   ├── logging/       ← Android: общие расширения Timber
+│   │   └── ui/            ← Android: общие UI-ресурсы
 │   ├── database/          ← Локальная БД (Room): все Entity, DAO, TrainingDatabase, Converters, DatabaseModule (Hilt)
 │   │   ├── AGENTS.md      ← Контекст модуля core/database
 │   │   ├── build.gradle.kts
@@ -87,22 +89,23 @@ Android/
 Подробнее: [`core/AGENTS.md`](core/AGENTS.md), [`core/MODULE_STRUCTURE.md`](core/MODULE_STRUCTURE.md)
 
 #### `core/common/`
-Утилиты, расширения Kotlin, базовые классы (например, `Resource<T>`), логирование (`LogExtensions`). Не зависит от feature-модулей.
+Контейнер небольших общих модулей. `common:domain` содержит чистые Kotlin-типы (сейчас `Resource<T>`), `common:logging` — Android-расширения Timber, `common:ui` — общие UI-ресурсы. Для нового самостоятельного назначения создаётся отдельный подмодуль; исходники и ресурсы напрямую в `common/` не помещаются.
 
 Подробнее: [`core/common/AGENTS.md`](core/common/AGENTS.md), [`core/common/MODULE_STRUCTURE.md`](core/common/MODULE_STRUCTURE.md)
 
 #### `core/database/`
-Локальная БД (Room): все Entity, DAO, `TrainingDatabase`, `Converters`, `DatabaseModule` (Hilt `@Provides` для `TrainingDatabase` и всех DAO). Общая Room-инфраструктура — не зависит от feature-модулей. Зависит только от `core/common`.
+Локальная БД (Room): все Entity, DAO, `TrainingDatabase`, `Converters`, `DatabaseModule` (Hilt `@Provides` для `TrainingDatabase` и всех DAO). Общая Room-инфраструктура — не зависит от feature-модулей.
 
 Подробнее: [`core/database/AGENTS.md`](core/database/AGENTS.md), [`core/database/MODULE_STRUCTURE.md`](core/database/MODULE_STRUCTURE.md)
 
 #### `core/navigation/`
+Чистый Kotlin/JVM-модуль.
 Порты навигации: `Screen` (маркерный интерфейс для маршрутов экранов) и `Navigator` (интерфейс с методами `navigate(screen)`/`back()`/`popUpTo(screen, inclusive)`). Feature-модули зависят только от этого модуля и не знают друг о друге. Реализация `Navigator` — в `app` (где доступен `NavController`), инжектируется через Hilt.
 
 ### `features/`
 Feature-модули. Каждая фича — отдельный Gradle-модуль с подмодулями `contract`/`domain`/`data`/`ui`:
-- `contract/` — публичные порты фичи (интерфейсы, модели, `Screen`-маршруты), доступны другим модулям
-- `domain/` — бизнес-логика (domain-модели, enum-ы, интерфейсы репозиториев, use-case)
+- `contract/` — чистый Kotlin/JVM-модуль с публичными портами фичи (интерфейсы, модели, `Screen`-маршруты), доступными другим модулям
+- `domain/` — чистый Kotlin/JVM-модуль с бизнес-логикой (domain-модели, enum-ы, интерфейсы репозиториев, use-case)
 - `data/` — реализации репозиториев + мапперы (Room Entity ↔ domain-модель) + Hilt-биндинги. Зависит от `domain` фичи и `core/database`
 - `ui/` — UI-слой (Fragment, ViewModel, ViewBinding)
 - `common/` — вспомогательный код фичи (необязательный)

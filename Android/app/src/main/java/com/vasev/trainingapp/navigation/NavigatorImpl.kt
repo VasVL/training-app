@@ -1,6 +1,6 @@
 package com.vasev.trainingapp.navigation
 
-import com.vasev.trainingapp.core.common.logs.d
+import com.vasev.trainingapp.core.common.logging.d
 import com.vasev.trainingapp.core.navigation.Navigator
 import com.vasev.trainingapp.core.navigation.Screen
 import timber.log.Timber
@@ -25,9 +25,9 @@ class NavigatorImpl @Inject constructor() : Navigator {
      * Logs the target screen. Will be replaced with NavController.navigate(...) later.
      * Логирует целевой экран. Будет заменён на NavController.navigate(...) позже.
      *
-     * `Timber.d { ... }` — lazy extension from core:common: the lambda is only invoked when
+     * `Timber.d { ... }` — lazy extension from core:common:logging: the lambda is only invoked when
      * a tree is planted, so the string is not built in builds without logging.
-     * `Timber.d { ... }` — ленивый extension из core:common: лямбда вызывается только
+     * `Timber.d { ... }` — ленивый extension из core:common:logging: лямбда вызывается только
      * когда посажено дерево, поэтому строка не строится в сборках без логов.
      */
     override fun navigate(screen: Screen) {

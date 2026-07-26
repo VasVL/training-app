@@ -10,8 +10,8 @@
 
 ## Назначение
 Каждая фича — отдельный Gradle-модуль в `features/<name>/`. Feature-модуль может содержать подмодули:
-- `contract/` — контракты/интерфейсы фичи (доступны другим модулям)
-- `domain/` — бизнес-логика (domain-модели, enum-ы, интерфейсы репозиториев, use-case)
+- `contract/` — чистый Kotlin/JVM-модуль с контрактами/интерфейсами фичи (доступны другим модулям)
+- `domain/` — чистый Kotlin/JVM-модуль с бизнес-логикой (domain-модели, enum-ы, интерфейсы репозиториев, use-case)
 - `data/` — реализации репозиториев + мапперы (Room Entity ↔ domain-модель) + Hilt-биндинги. Зависит от `domain` фичи и `core/database`.
 - `ui/` — UI-слой (Fragment, ViewModel, ViewBinding)
 - `common/` — вспомогательный код фичи
@@ -32,9 +32,9 @@
 - Паттерн: MVVM + Clean Architecture. Единый `UiState` на экран через `StateFlow`.
 
 ### Зависимости
-- `domain` фичи — чистый, без Room. Зависит только от `core/common` (для `Resource<T>`) и, при необходимости, `core/navigation` (для `Screen` в contract).
+- `domain` фичи — чистый Kotlin/JVM, без Room и Android API. Зависит только от JVM-библиотек и, при необходимости, `core:common:domain`.
 - `data` фичи зависит от `domain` фичи (интерфейсы репозиториев, domain-модели) и `core/database` (DAO). Содержит Hilt-биндинги (`@Binds` интерфейс→реализация).
 - `ui` фичи зависит от `domain` фичи (интерфейсы репозиториев, модели) и `core/navigation` (через contract).
-- `contract` фичи зависит от `core/navigation` (для `Screen`).
+- `contract` фичи — чистый Kotlin/JVM и зависит от `core:navigation` (для `Screen`).
 - Feature-модули не знают друг о друге напрямую. Зависимости между фичами — только через `contract`-модули (публичные порты).
-- `app` зависит от `feature-*/data` (для Hilt-биндингов репозиториев) + `feature-*/ui` (экраны) + `core/database` (для Hilt-модуля БД) + `core/navigation` + `core/common`.
+- `app` зависит от `feature-*/data` (для Hilt-биндингов репозиториев) + `feature-*/ui` (экраны) + `core/database` (для Hilt-модуля БД) + `core/navigation` и нужных узких модулей `core:common:*`.
