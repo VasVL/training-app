@@ -20,6 +20,7 @@ Android/
 ├── AGENTS.md              ← Контекст Android-приложения (архитектурные/стилистические замечания)
 ├── APP_DESIGN.md          ← Дизайн приложения (договорённости по экранам и данным)
 ├── ROADMAP.md             ← Порядок реализации функционала
+├── VISUAL_STYLE.md        ← Общие визуальные правила приложения
 ├── .gitignore             ← Android-специфичный .gitignore
 ├── settings.gradle.kts    ← Конфигурация Gradle: include модулей
 ├── build.gradle.kts       ← Корневой build-файл (плагины apply false)
@@ -108,7 +109,7 @@ Feature-модули. Каждая фича — отдельный Gradle-мод
 
 Текущие фичи:
 - `feature-anatomy` — анатомический атлас (contract, domain, data, ui)
-- `feature-auth` — пользователи, "О себе" (contract, domain, data, ui)
+- `feature-auth` — пользователи, "О себе" (contract, domain, data, ui); утверждённый интерфейс — `feature-auth/UI_DESIGN.md`, макеты — `feature-auth/UI_MOCKUPS.html`
 - `feature-calendar` — календарь (contract, domain, ui)
 - `feature-exercises` — список упражнений, поиск (contract, domain, data, ui)
 - `feature-help` — справка (СРЦ, о приложении) (contract, domain, ui)

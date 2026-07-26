@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Макеты feature-auth</title>
+    <style>
+        :root { color-scheme: dark; font-family: Arial, sans-serif; }
+        * { box-sizing: border-box; }
+        body { background: #171717; color: #f2f2f2; margin: 0; padding: 24px; }
+        h1 { margin: 0 0 8px; }
+        .description { color: #c4c4c4; line-height: 1.45; margin: 0 0 20px; max-width: 760px; }
+        .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .tab { background: #303030; border: 1px solid #626262; border-radius: 20px; color: #f2f2f2; cursor: pointer; font-size: 14px; padding: 10px 14px; }
+        .tab[aria-selected="true"] { background: #e2e2e2; color: #252525; font-weight: 700; }
+        .screen { display: none; }
+        .screen.visible { display: block; }
+        .phone { background: #252525; border-radius: 28px; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32); margin: 0 auto; max-width: 420px; min-height: 570px; overflow: hidden; position: relative; }
+        .toolbar { align-items: center; display: flex; font-size: 20px; font-weight: 700; gap: 14px; min-height: 72px; padding: 20px 18px 15px; }
+        .back { color: #e2e2e2; font-size: 28px; font-weight: 400; line-height: 16px; }
+        .empty-content { align-items: center; display: flex; flex-direction: column; justify-content: center; min-height: 485px; padding: 31px; text-align: center; }
+        .empty-icon { align-items: center; background: #373737; border-radius: 50%; display: flex; font-size: 38px; height: 80px; justify-content: center; width: 80px; }
+        .empty-content h2 { font-size: 21px; margin: 20px 0 9px; }
+        .empty-content p { color: #c4c4c4; font-size: 15px; line-height: 1.45; margin: 0 0 17px; }
+        .local-only { background: #303030; border-radius: 12px; color: #dedede; font-size: 13px; line-height: 1.4; margin: 0 0 24px; padding: 13px; text-align: left; width: 100%; }
+        .local-only strong { color: #f2f2f2; }
+        .primary-button { background: #e2e2e2; border-radius: 13px; color: #252525; font-weight: 800; padding: 15px 20px; text-align: center; width: 100%; }
+        .list-content { padding: 0 16px 98px; }
+        .user-item { align-items: center; background: #303030; border: 1px solid transparent; border-radius: 16px; display: flex; gap: 12px; margin: 10px 0; padding: 14px; }
+        .user-item.active { background: #363636; border-color: #d9d9d9; }
+        .avatar { align-items: center; background: #464646; border-radius: 50%; display: flex; flex: 0 0 auto; font-weight: 700; height: 44px; justify-content: center; width: 44px; }
+        .user-details { flex: 1; min-width: 0; }
+        .user-name { align-items: center; display: flex; font-weight: 700; gap: 7px; }
+        .user-role { color: #c6c6c6; font-size: 13px; margin-top: 3px; }
+        .owner-badge { border: 1px solid #6b6b6b; border-radius: 999px; color: #eeeeee; font-size: 11px; font-weight: 700; padding: 3px 7px; }
+        .check { align-items: center; background: #e5e5e5; border-radius: 50%; color: #242424; display: flex; font-weight: 900; height: 24px; justify-content: center; width: 24px; }
+        .extended-fab { align-items: center; background: #e2e2e2; border-radius: 18px; bottom: 22px; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35); color: #242424; display: flex; font-weight: 800; gap: 10px; padding: 15px 19px; position: absolute; right: 18px; }
+        .form-content { min-height: 498px; padding: 0 18px 88px; }
+        .form-hint { color: #bdbdbd; font-size: 14px; line-height: 1.4; margin: 0 0 18px; }
+        .section-title { color: #cecece; font-size: 13px; font-weight: 800; letter-spacing: 0.6px; margin: 20px 0 10px; text-transform: uppercase; }
+        .field { margin: 13px 0; position: relative; }
+        .field-label { background: #252525; color: #dddddd; font-size: 12px; left: 9px; padding: 0 4px; position: absolute; top: -7px; z-index: 1; }
+        .input { align-items: center; border: 1px solid #858585; border-radius: 5px; display: flex; font-size: 16px; justify-content: space-between; min-height: 52px; padding: 0 13px; }
+        .suffix { color: #cfcfcf; font-size: 14px; font-weight: 700; }
+        .fixed-role { background: #303030; border-radius: 12px; color: #ececec; display: flex; gap: 9px; margin: 11px 0; padding: 13px; }
+        .save-button { background: #e2e2e2; border-radius: 13px; bottom: 16px; color: #252525; font-weight: 800; left: 18px; padding: 15px; position: absolute; right: 18px; text-align: center; }
+        .save-button.disabled { background: #454545; color: #a4a4a4; }
+        .dialog { background: #3a3a3a; border: 1px solid #737373; border-radius: 17px; box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4); margin: 28px 18px; padding: 18px; }
+        .dialog h2 { font-size: 18px; margin: 0 0 10px; }
+        .dialog p { color: #d0d0d0; font-size: 14px; line-height: 1.4; margin: 0 0 16px; }
+        .dialog-actions { display: flex; font-weight: 800; gap: 16px; justify-content: flex-end; }
+    </style>
+</head>
+<body>
+    <h1>Утверждённые макеты feature-auth</h1>
+    <p class="description">Макеты соответствуют <code>UI_DESIGN.md</code>. Это визуальная документация; приложение не использует этот HTML в сборке.</p>
+    <div class="tabs" role="tablist">
+        <button aria-controls="empty-screen" aria-selected="true" class="tab" id="empty-tab" role="tab" type="button">Первый запуск</button>
+        <button aria-controls="list-screen" aria-selected="false" class="tab" id="list-tab" role="tab" type="button">Список пользователей</button>
+        <button aria-controls="form-screen" aria-selected="false" class="tab" id="form-tab" role="tab" type="button">О себе</button>
+        <button aria-controls="dialog-screen" aria-selected="false" class="tab" id="dialog-tab" role="tab" type="button">Несохранённые изменения</button>
+    </div>
+    <section aria-labelledby="empty-tab" class="screen visible" id="empty-screen" role="tabpanel">
+        <div class="phone"><div class="toolbar">Выбор пользователя</div><div class="empty-content"><div aria-hidden="true" class="empty-icon">♛</div><h2>Начнём с вашего профиля</h2><p>Он нужен, чтобы хранить ваши тренировки и измерения на этом устройстве.</p><div class="local-only"><strong>Без регистрации</strong><br>Не нужен аккаунт, номер телефона или электронная почта. Данные сохраняются только на устройстве.</div><div class="primary-button">Создать профиль</div></div></div>
+    </section>
+    <section aria-labelledby="list-tab" class="screen" id="list-screen" role="tabpanel">
+        <div class="phone"><div class="toolbar">Выбор пользователя</div><div class="list-content"><div class="user-item active"><div class="avatar">А</div><div class="user-details"><div class="user-name">Алексей <span class="owner-badge">♛ Владелец</span></div><div class="user-role">Активен сейчас</div></div><div aria-label="Активный пользователь" class="check">✓</div></div><div class="user-item"><div class="avatar">М</div><div class="user-details"><div class="user-name">Мария</div><div class="user-role">Подопечная</div></div></div></div><div class="extended-fab">＋ Добавить</div></div>
+    </section>
+    <section aria-labelledby="form-tab" class="screen" id="form-screen" role="tabpanel">
+        <div class="phone"><div class="toolbar"><span aria-hidden="true" class="back">‹</span>О себе</div><div class="form-content"><p class="form-hint">Вес и рост принимают до двух десятичных знаков: например, 82,50 кг.</p><div class="section-title">Профиль</div><div class="field"><span class="field-label">Имя</span><div class="input">Алексей</div></div><div class="fixed-role">♛<span><strong>Владелец</strong><br><small>Роль первого пользователя</small></span></div><div class="section-title">Параметры</div><div class="field"><span class="field-label">Вес</span><div class="input">82,50 <span class="suffix">кг</span></div></div><div class="field"><span class="field-label">Рост</span><div class="input">180 <span class="suffix">см</span></div></div><div class="field"><span class="field-label">Возраст</span><div class="input">29</div></div><div class="field"><span class="field-label">Пол</span><div class="input">Мужской <span class="suffix">⌄</span></div></div></div><div class="save-button">Сохранить</div></div>
+    </section>
+    <section aria-labelledby="dialog-tab" class="screen" id="dialog-screen" role="tabpanel">
+        <div class="phone"><div class="toolbar"><span aria-hidden="true" class="back">‹</span>О себе</div><div class="form-content"><div class="field"><span class="field-label">Вес</span><div class="input">82,50 <span class="suffix">кг</span></div></div><div class="field"><span class="field-label">Рост</span><div class="input">180 <span class="suffix">см</span></div></div><div class="dialog"><h2>Не сохранять изменения?</h2><p>Изменённые данные профиля будут потеряны.</p><div class="dialog-actions"><span>Остаться</span><span>Не сохранять</span></div></div></div><div class="save-button disabled">Сохранить</div></div>
+    </section>
+    <script>
+        const tabs = document.querySelectorAll(".tab");
+        const screens = document.querySelectorAll(".screen");
+        tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                const screenId = tab.getAttribute("aria-controls");
+                tabs.forEach((currentTab) => { currentTab.setAttribute("aria-selected", "false"); });
+                screens.forEach((screen) => { screen.classList.remove("visible"); });
+                tab.setAttribute("aria-selected", "true");
+                document.getElementById(screenId).classList.add("visible");
+            });
+        });
+    </script>
+</body>
+</html>
