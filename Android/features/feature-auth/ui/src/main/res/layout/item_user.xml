@@ -47,7 +47,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/color_graphite_on_surface"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/userActionsButton"
             app:layout_constraintStart_toEndOf="@id/userAvatarCard"
             app:layout_constraintTop_toTopOf="@id/userAvatarCard" />
 
@@ -60,7 +60,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/color_graphite_secondary"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/userActionsButton"
             app:layout_constraintStart_toStartOf="@id/userNameTextView"
             app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
 
@@ -90,5 +90,22 @@
             app:chipMinHeight="28dp"
             app:layout_constraintStart_toEndOf="@id/ownerChip"
             app:layout_constraintTop_toBottomOf="@id/userRoleTextView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/userActionsButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/auth_content_description_user_actions"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            app:icon="@drawable/ic_more_vert"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="?attr/colorOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

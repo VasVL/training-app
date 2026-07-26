@@ -1,6 +1,7 @@
 package com.vasev.trainingapp.feature.auth.ui.userselect.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
@@ -17,6 +18,7 @@ import com.vasev.trainingapp.feature.auth.ui.userselect.entity.UserSelectUiState
  * Адаптер для выбора активного пользователя из списка локальных профилей.
  */
 internal class UserSelectAdapter(
+    private val onUserActionsClicked: (UserSelectUiState.Ready.UserItem, View) -> Unit,
     private val onUserClicked: (Long) -> Unit,
 ) : ListAdapter<UserSelectUiState.Ready.UserItem, UserSelectAdapter.UserViewHolder>(
     UserDiffCallback(),
@@ -34,18 +36,22 @@ internal class UserSelectAdapter(
         )
         return UserViewHolder(
             binding = binding,
+            onUserActionsClicked = onUserActionsClicked,
             onUserClicked = onUserClicked,
         )
     }
 
     internal class UserViewHolder(
         private val binding: ItemUserBinding,
+        private val onUserActionsClicked: (UserSelectUiState.Ready.UserItem, View) -> Unit,
         private val onUserClicked: (Long) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(user: UserSelectUiState.Ready.UserItem) {
             binding.activeUserChip.isVisible = user.isActive
             binding.ownerChip.isVisible = user.role == UserSelectUiState.Ready.UserItem.Role.OWNER
+            binding.userActionsButton.isVisible = !user.isActive &&
+                user.role == UserSelectUiState.Ready.UserItem.Role.TRAINEE
             binding.userAvatarTextView.text = user.name.firstOrNull()?.uppercase().orEmpty()
             binding.userCard.strokeColor = MaterialColors.getColor(
                 binding.root,
@@ -65,6 +71,9 @@ internal class UserSelectAdapter(
             )
             binding.root.setOnClickListener {
                 onUserClicked(user.id)
+            }
+            binding.userActionsButton.setOnClickListener {
+                onUserActionsClicked(user, binding.userActionsButton)
             }
         }
     }

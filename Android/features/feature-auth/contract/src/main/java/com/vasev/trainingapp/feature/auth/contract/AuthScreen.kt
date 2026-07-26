@@ -18,13 +18,25 @@ sealed interface AuthScreen : Screen {
     data object Select : AuthScreen
 
     /**
-     * Create / edit user screen ("about me"). One screen in two modes.
-     * Экран создания / редактирования пользователя ("о себе"). Один экран в двух режимах.
-     *
-     * @param userId id of the user to edit; `null` for create mode.
-     *   id пользователя для редактирования; `null` для режима создания.
+     * Create the first user profile on the first app start.
+     * Создать первый профиль пользователя при первом запуске приложения.
      */
-    data class Create(
-        val userId: Long? = null,
+    data object CreateFirstUser : AuthScreen
+
+    /**
+     * Create an additional user profile from the user list.
+     * Создать дополнительный профиль пользователя из списка пользователей.
+     */
+    data object CreateNewUser : AuthScreen
+
+    /**
+     * Edit an existing user profile.
+     * Редактировать существующий профиль пользователя.
+     *
+     * @param userId id of the user to edit.
+     *   id пользователя для редактирования.
+     */
+    data class EditUser(
+        val userId: Long,
     ) : AuthScreen
 }

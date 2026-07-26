@@ -114,6 +114,7 @@ dependencies {
 
     // feature-auth — users / feature-auth — пользователи
     implementation(project(":features:feature-auth:data"))
+    implementation(project(":features:feature-auth:domain"))
     implementation(project(":features:feature-auth:ui"))
 
     // feature-calendar — calendar / feature-calendar — календарь

@@ -27,6 +27,7 @@ data class UserEntity(
     @ColumnInfo(name = "height") val height: Double,
     @ColumnInfo(name = "heightUnit") val heightUnit: HeightUnit,
     @ColumnInfo(name = "isDefault") val isDefault: Boolean,
+    @ColumnInfo(name = "isPendingDeletion") val isPendingDeletion: Boolean = false,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "remoteId") val remoteId: String?,
     @ColumnInfo(name = "role") val role: UserRole,

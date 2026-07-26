@@ -26,9 +26,15 @@ interface UserRepository {
 
     suspend fun insert(user: User): Long
 
-    suspend fun setActive(id: Long)
+    suspend fun setActive(id: Long): Boolean
 
     suspend fun update(user: User)
 
-    suspend fun delete(user: User)
+    suspend fun requestDeletion(id: Long): Boolean
+
+    suspend fun cancelDeletion(id: Long): Boolean
+
+    suspend fun finalizeDeletion(id: Long): Boolean
+
+    suspend fun finalizePendingDeletions(): Int
 }

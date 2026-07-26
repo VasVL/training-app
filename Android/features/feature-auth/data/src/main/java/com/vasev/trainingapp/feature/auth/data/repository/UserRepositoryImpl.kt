@@ -51,15 +51,27 @@ internal class UserRepositoryImpl @Inject constructor(
         return userDao.insert(mapper.map(user))
     }
 
-    override suspend fun setActive(id: Long) {
-        return userDao.setActive(id)
+    override suspend fun setActive(id: Long): Boolean {
+        return userDao.setActive(id) > 0
     }
 
     override suspend fun update(user: User) {
         return userDao.update(mapper.map(user))
     }
 
-    override suspend fun delete(user: User) {
-        return userDao.delete(mapper.map(user))
+    override suspend fun requestDeletion(id: Long): Boolean {
+        return userDao.markPendingDeletion(id) > 0
+    }
+
+    override suspend fun cancelDeletion(id: Long): Boolean {
+        return userDao.restorePendingDeletion(id) > 0
+    }
+
+    override suspend fun finalizeDeletion(id: Long): Boolean {
+        return userDao.deletePendingUser(id) > 0
+    }
+
+    override suspend fun finalizePendingDeletions(): Int {
+        return userDao.deleteAllPendingUsers()
     }
 }

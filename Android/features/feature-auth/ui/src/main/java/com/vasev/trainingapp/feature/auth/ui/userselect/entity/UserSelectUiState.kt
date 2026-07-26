@@ -17,9 +17,18 @@ internal sealed interface UserSelectUiState {
      * Состояние, когда загрузка или выбор пользователя завершились ошибкой.
      */
     data class Error(
-        val message: String,
+        val reason: Reason,
         val users: List<Ready.UserItem>,
-    ) : UserSelectUiState
+    ) : UserSelectUiState {
+
+        /**
+         * Reasons why the user selection screen cannot complete an operation.
+         * Причины, по которым экран выбора пользователя не может выполнить операцию.
+         */
+        enum class Reason {
+            LOAD_USERS_FAILED,
+        }
+    }
 
     /**
      * State with data ready for rendering the user list.

@@ -2,14 +2,29 @@
 <resources>
     <!-- Actions / Действия -->
     <string name="auth_action_add_user">Добавить</string>
+    <string name="auth_user_deletion_action_cancel">Отмена</string>
     <string name="auth_action_create_profile">Создать профиль</string>
+    <string name="auth_action_delete">Удалить</string>
+    <string name="auth_action_edit">Редактировать</string>
+    <string name="auth_user_deletion_message_undo">Отменить удаление</string>
+    <string name="auth_user_deletion_action_undo">ОТМЕНИТЬ</string>
+    <string name="auth_content_description_user_actions">Действия с профилем</string>
 
     <!-- Errors / Ошибки -->
+    <string name="auth_error_active_user_not_found">Этот профиль уже удалён.</string>
+    <string name="auth_error_cancel_deletion_write_failed">Восстановить профиль не удалось.</string>
+    <string name="auth_error_database_write_failed">Не удалось сохранить выбранный профиль. Попробуйте ещё раз.</string>
+    <string name="auth_error_delete_user_not_available">Профиль уже недоступен.</string>
     <string name="auth_error_generic">Не удалось выполнить действие. Попробуйте ещё раз.</string>
+    <string name="auth_error_load_users_failed">Не удалось загрузить пользователей. Попробуйте ещё раз.</string>
+    <string name="auth_error_request_deletion_write_failed">Удаление профиля пока недоступно. Попробуйте ещё раз.</string>
 
     <!-- Hints / Подсказки -->
     <string name="auth_hint_local_storage">Не нужен аккаунт, номер телефона или электронная почта. Данные сохраняются только на устройстве.</string>
     <string name="auth_hint_profile">Он нужен, чтобы хранить ваши тренировки и измерения на этом устройстве.</string>
+
+    <!-- Messages / Сообщения -->
+    <string name="auth_message_delete_user_confirmation">Вместе с профилем будут удалены все записи тренировок и измерения.</string>
 
     <!-- User labels / Подписи пользователя -->
     <string name="auth_label_active_now">Активен сейчас</string>
@@ -21,5 +36,6 @@
 
     <!-- Titles / Заголовки -->
     <string name="auth_title_empty_users">Начнём с вашего профиля</string>
+    <string name="auth_title_delete_user">Удалить профиль «%1$s»?</string>
     <string name="auth_title_user_select">Выбор пользователя</string>
 </resources>

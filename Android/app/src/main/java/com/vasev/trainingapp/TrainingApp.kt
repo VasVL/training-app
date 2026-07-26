@@ -1,8 +1,13 @@
 package com.vasev.trainingapp
 
 import android.app.Application
+import com.vasev.trainingapp.feature.auth.domain.repository.UserRepository
 import com.vasev.trainingapp.logs.ReleaseErrorTree
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 /**
@@ -22,6 +27,15 @@ import timber.log.Timber
  */
 @HiltAndroidApp
 class TrainingApp : Application() {
+
+    /**
+     * `@Inject` — Hilt provides the user repository implementation for app-start cleanup.
+     * `@Inject` — Hilt предоставляет реализацию репозитория пользователей для очистки при старте.
+     */
+    @Inject
+    lateinit var userRepository: UserRepository
+
+    private val applicationScope = CoroutineScope(Dispatchers.Default)
 
     /**
      * Called when the application is starting, before any activity/service.
@@ -49,6 +63,17 @@ class TrainingApp : Application() {
             Timber.plant(Timber.DebugTree())
         } else {
             Timber.plant(ReleaseErrorTree())
+        }
+
+        applicationScope.launch(Dispatchers.IO) {
+            try {
+                val deletedProfilesCount = userRepository.finalizePendingDeletions()
+                Timber.i(
+                    "Application startup: finalized pending user deletions, count=$deletedProfilesCount",
+                )
+            } catch (throwable: Throwable) {
+                Timber.e(throwable, "Application startup: failed to finalize pending user deletions")
+            }
         }
     }
 }
