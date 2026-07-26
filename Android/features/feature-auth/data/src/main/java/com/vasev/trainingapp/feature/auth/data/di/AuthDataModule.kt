@@ -32,5 +32,5 @@ abstract class AuthDataModule {
     abstract fun bindUserMaxRepository(impl: UserMaxRepositoryImpl): UserMaxRepository
 
     @Binds
-    abstract fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
+    internal abstract fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 }

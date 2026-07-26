@@ -2,7 +2,9 @@ package com.vasev.trainingapp.feature.auth.data.repository
 
 import com.vasev.trainingapp.core.database.dao.UserDao
 import com.vasev.trainingapp.feature.auth.data.mapper.AuthMapper
+import com.vasev.trainingapp.feature.auth.data.mapper.UserListItemMapper
 import com.vasev.trainingapp.feature.auth.domain.entity.User
+import com.vasev.trainingapp.feature.auth.domain.entity.UserListItem
 import com.vasev.trainingapp.feature.auth.domain.repository.UserRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -12,16 +14,21 @@ import kotlinx.coroutines.flow.map
  * Implementation of [UserRepository] backed by the Room [UserDao]. /
  * Реализация [UserRepository] на основе Room [UserDao].
  *
- * `@Inject` — Hilt creates this class and injects [userDao] and [mapper] /
- * `@Inject` — Hilt создаёт этот класс и внедряет [userDao] и [mapper]
+ * `@Inject` — Hilt creates this class and injects its dependencies /
+ * `@Inject` — Hilt создаёт этот класс и внедряет его зависимости
  */
-class UserRepositoryImpl @Inject constructor(
+internal class UserRepositoryImpl @Inject constructor(
     private val mapper: AuthMapper,
     private val userDao: UserDao,
+    private val userListItemMapper: UserListItemMapper,
 ) : UserRepository {
 
     override fun observeAll(): Flow<List<User>> {
         return userDao.observeAll().map { list -> list.map { mapper.map(it) } }
+    }
+
+    override fun observeForSelection(): Flow<List<UserListItem>> {
+        return userDao.observeForSelection().map { list -> list.map { userListItemMapper.map(it) } }
     }
 
     override fun observeById(id: Long): Flow<User?> {
@@ -42,6 +49,10 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun insert(user: User): Long {
         return userDao.insert(mapper.map(user))
+    }
+
+    override suspend fun setActive(id: Long) {
+        return userDao.setActive(id)
     }
 
     override suspend fun update(user: User) {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Actions / Действия -->
+    <string name="auth_action_add_user">Добавить</string>
+    <string name="auth_action_create_profile">Создать профиль</string>
+
+    <!-- Errors / Ошибки -->
+    <string name="auth_error_generic">Не удалось выполнить действие. Попробуйте ещё раз.</string>
+
+    <!-- Hints / Подсказки -->
+    <string name="auth_hint_local_storage">Не нужен аккаунт, номер телефона или электронная почта. Данные сохраняются только на устройстве.</string>
+    <string name="auth_hint_profile">Он нужен, чтобы хранить ваши тренировки и измерения на этом устройстве.</string>
+
+    <!-- User labels / Подписи пользователя -->
+    <string name="auth_label_active_now">Активен сейчас</string>
+    <string name="auth_label_owner">Владелец</string>
+
+    <!-- Roles / Роли -->
+    <string name="auth_role_owner">Владелец</string>
+    <string name="auth_role_trainee">Подопечный</string>
+
+    <!-- Titles / Заголовки -->
+    <string name="auth_title_empty_users">Начнём с вашего профиля</string>
+    <string name="auth_title_user_select">Выбор пользователя</string>
+</resources>

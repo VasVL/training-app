@@ -1,6 +1,7 @@
 package com.vasev.trainingapp.feature.auth.domain.repository
 
 import com.vasev.trainingapp.feature.auth.domain.entity.User
+import com.vasev.trainingapp.feature.auth.domain.entity.UserListItem
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -13,6 +14,8 @@ interface UserRepository {
 
     fun observeAll(): Flow<List<User>>
 
+    fun observeForSelection(): Flow<List<UserListItem>>
+
     fun observeById(id: Long): Flow<User?>
 
     suspend fun getById(id: Long): User?
@@ -22,6 +25,8 @@ interface UserRepository {
     suspend fun getDefault(): User?
 
     suspend fun insert(user: User): Long
+
+    suspend fun setActive(id: Long)
 
     suspend fun update(user: User)
 
