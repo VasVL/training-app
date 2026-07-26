@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default Material 2 graphite theme / Графитовая тема Material 2 по умолчанию -->
+    <style name="Theme.TrainingApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:colorBackground">@color/color_graphite_background</item>
+        <item name="android:navigationBarColor">@color/color_graphite_background</item>
+        <item name="android:statusBarColor">@color/color_graphite_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="colorError">@color/color_graphite_error</item>
+        <item name="colorOnError">@color/color_graphite_on_error</item>
+        <item name="colorOnPrimary">@color/color_graphite_on_primary</item>
+        <item name="colorOnSecondary">@color/color_graphite_on_primary</item>
+        <item name="colorOnSurface">@color/color_graphite_on_surface</item>
+        <item name="colorPrimary">@color/color_graphite_primary</item>
+        <item name="colorPrimaryVariant">@color/color_graphite_surface</item>
+        <item name="colorSecondary">@color/color_graphite_secondary</item>
+        <item name="colorSurface">@color/color_graphite_surface</item>
+    </style>
+</resources>

@@ -18,20 +18,16 @@ import dagger.hilt.android.AndroidEntryPoint
  * с `@Inject lateinit var` заполнялись после `super.onCreate(...)`.
  * Это также значит, что activity может получать Hilt-ViewModel через `@HiltViewModel`.
  *
- * For now this is a stub — a real NavController and nav_host setup will be added
- * in the next phase when Fragments and nav_graph are ready.
- * Пока это заглушка — реальный NavController и nav_host будут добавлены
- * в следующей фазе, когда будут готовы Fragment'ы и nav_graph.
+ * The navigation host is declared in activity_main.xml. FragmentContainerView creates the
+ * NavHostFragment and loads the start destination from nav_graph.xml automatically.
+ * Хост навигации объявлен в activity_main.xml. FragmentContainerView сам создаёт
+ * NavHostFragment и загружает стартовую точку из nav_graph.xml.
  */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    /**
-     * Stub onCreate — no layout yet. Will host NavHostFragment in the next phase.
-     * Заглушка onCreate — layout'а пока нет. Будет хостить NavHostFragment в следующей фазе.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO Phase 1: setContentView + NavController setup / TODO Фаза 1: setContentView + настройка NavController
+        setContentView(R.layout.activity_main)
     }
 }

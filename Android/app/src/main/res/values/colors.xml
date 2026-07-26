@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default graphite theme colors / Цвета графитовой темы по умолчанию -->
+    <color name="color_graphite_background">#1B1B1B</color>
+    <color name="color_graphite_error">#FFB4AB</color>
+    <color name="color_graphite_on_background">#E5E1E6</color>
+    <color name="color_graphite_on_error">#690005</color>
+    <color name="color_graphite_on_primary">#1C1B1F</color>
+    <color name="color_graphite_on_surface">#E5E1E6</color>
+    <color name="color_graphite_outline">#938F99</color>
+    <color name="color_graphite_primary">#E2E2E2</color>
+    <color name="color_graphite_secondary">#C9C6CA</color>
+    <color name="color_graphite_surface">#252525</color>
+</resources>
