@@ -3,50 +3,72 @@ package com.vasev.trainingapp.navigation
 import com.vasev.trainingapp.core.common.logging.d
 import com.vasev.trainingapp.core.navigation.Navigator
 import com.vasev.trainingapp.core.navigation.Screen
-import timber.log.Timber
+import com.vasev.trainingapp.navigation.entity.NavigationCommand
 import javax.inject.Inject
+import javax.inject.Singleton
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import timber.log.Timber
 
 /**
- * Temporary implementation — logs navigation. Real mapping (Screen → NavDirections)
- * will be added when Fragments and nav_graph are ready /
- * Временная реализация — логирует навигацию. Реальный маппинг (Screen → NavDirections)
- * будет добавлен, когда будут готовы Fragment'ы и nav_graph.
+ * Emits one-time navigation commands for the activity that owns NavController.
+ * Отправляет одноразовые команды навигации для Activity-владельца NavController.
  *
- * `@Inject constructor()` — tells Hilt to create instances of this class when needed
- * (no parameters to inject here, but Hilt still needs this annotation to know it
- * can build this type). The class is provided to consumers via [NavigationModule].
- * `@Inject constructor()` — говорит Hilt создавать экземпляры этого класса по необходимости
- * (здесь нет параметров для инъекции, но Hilt всё равно нужна эта аннотация, чтобы знать,
- * что он может собрать этот тип). Класс предоставляется потребителям через [NavigationModule].
+ * `@Inject constructor()` — Hilt can create this class and provide it through [NavigationModule].
+ * `@Inject constructor()` — Hilt может создать этот класс и предоставить его через [NavigationModule].
+ *
+ * `@Singleton` — Hilt creates one navigator for the whole application.
+ * `@Singleton` — Hilt создаёт один навигатор для всего приложения.
  */
-class NavigatorImpl @Inject constructor() : Navigator {
+@Singleton
+internal class NavigatorImpl @Inject constructor() : Navigator {
+
+    private val navigationCommands = MutableSharedFlow<NavigationCommand>(
+        extraBufferCapacity = NAVIGATION_COMMAND_BUFFER_CAPACITY,
+    )
+
+    val commands = navigationCommands.asSharedFlow()
 
     /**
-     * Logs the target screen. Will be replaced with NavController.navigate(...) later.
-     * Логирует целевой экран. Будет заменён на NavController.navigate(...) позже.
-     *
-     * `Timber.d { ... }` — lazy extension from core:common:logging: the lambda is only invoked when
-     * a tree is planted, so the string is not built in builds without logging.
-     * `Timber.d { ... }` — ленивый extension из core:common:logging: лямбда вызывается только
-     * когда посажено дерево, поэтому строка не строится в сборках без логов.
+     * Enqueues navigation to the target screen.
+     * Добавляет переход к целевому экрану в очередь.
      */
     override fun navigate(screen: Screen) {
         Timber.d { "navigate: $screen" }
+        sendCommand(NavigationCommand.Navigate(screen))
     }
 
     /**
-     * Logs a back request. Will be replaced with NavController.popBackStack() later.
-     * Логирует запрос назад. Будет заменён на NavController.popBackStack() позже.
+     * Enqueues navigation to the previous screen.
+     * Добавляет переход к предыдущему экрану в очередь.
      */
     override fun back() {
         Timber.d { "back" }
+        sendCommand(NavigationCommand.Back)
     }
 
     /**
-     * Logs a popUpTo request. Will be replaced with NavController.popBackStack(route, inclusive) later.
-     * Логирует запрос popUpTo. Будет заменён на NavController.popBackStack(route, inclusive) позже.
+     * Enqueues a back-stack cleanup request.
+     * Добавляет запрос очистки стека навигации в очередь.
      */
     override fun popUpTo(screen: Screen, inclusive: Boolean) {
         Timber.d { "popUpTo: $screen, inclusive=$inclusive" }
+        sendCommand(
+            NavigationCommand.PopUpTo(
+                inclusive = inclusive,
+                screen = screen,
+            ),
+        )
+    }
+
+    private fun sendCommand(command: NavigationCommand) {
+        if (!navigationCommands.tryEmit(command)) {
+            Timber.e("Navigation command could not be emitted: $command")
+        }
+    }
+
+    private companion object {
+
+        private const val NAVIGATION_COMMAND_BUFFER_CAPACITY = 1
     }
 }

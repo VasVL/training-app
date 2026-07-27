@@ -113,6 +113,7 @@ dependencies {
     implementation(project(":features:feature-anatomy:ui"))
 
     // feature-auth — users / feature-auth — пользователи
+    implementation(project(":features:feature-auth:contract"))
     implementation(project(":features:feature-auth:data"))
     implementation(project(":features:feature-auth:domain"))
     implementation(project(":features:feature-auth:ui"))

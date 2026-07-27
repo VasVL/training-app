@@ -45,5 +45,7 @@ object NavigationModule {
      */
     @Provides
     @Singleton
-    fun provideNavigator(impl: NavigatorImpl): Navigator = impl
+    internal fun provideNavigator(impl: NavigatorImpl): Navigator {
+        return impl
+    }
 }
