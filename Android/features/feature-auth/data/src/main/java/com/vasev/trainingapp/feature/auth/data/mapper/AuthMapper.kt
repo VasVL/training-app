@@ -1,5 +1,6 @@
 package com.vasev.trainingapp.feature.auth.data.mapper
 
+import java.time.LocalDate
 import com.vasev.trainingapp.core.database.entity.UserEntity
 import com.vasev.trainingapp.core.database.entity.UserMaxEntity
 import com.vasev.trainingapp.core.database.entity.types.Gender as EntityGender
@@ -33,7 +34,7 @@ class AuthMapper @Inject constructor() {
 
     fun map(entity: UserEntity): User {
         return User(
-            age = entity.age,
+            birthDate = entity.birthDateEpochDay?.let(LocalDate::ofEpochDay),
             createdAt = entity.createdAt,
             gender = mapGender(entity.gender),
             height = entity.height,
@@ -50,7 +51,7 @@ class AuthMapper @Inject constructor() {
 
     fun map(domain: User): UserEntity {
         return UserEntity(
-            age = domain.age,
+            birthDateEpochDay = domain.birthDate?.toEpochDay(),
             createdAt = domain.createdAt,
             gender = mapGender(domain.gender),
             height = domain.height,

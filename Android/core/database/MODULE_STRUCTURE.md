@@ -108,7 +108,7 @@ Hilt-модуль (`@Module @InstallIn(SingletonComponent)`): `@Provides @Single
 ### `entity/` — таблицы по доменам (22 Entity)
 
 **Пользователи:**
-- `UserEntity` (`users`) — пользователь: role, name, weight, height, gender, age, weightUnit, heightUnit, isDefault, createdAt, remoteId.
+- `UserEntity` (`users`) — пользователь: role, name, weight, height, gender, birthDateEpochDay, weightUnit, heightUnit, isDefault, createdAt, remoteId.
 - `UserMaxEntity` (`user_maxes`) — разовый максимум: userId (CASCADE), exerciseId (RESTRICT), maxValue, unit, measuredAt.
 
 **Справочники:**

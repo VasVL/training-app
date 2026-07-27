@@ -186,7 +186,7 @@ Android-приложение для занятий силовыми видами
 ### Структура БД (одна Room-база, таблицы по доменам)
 
 **Пользователи:**
-- `users` (id, remoteId, role, name, weight, height, gender, age, weightUnit, heightUnit, isDefault, createdAt)
+- `users` (id, remoteId, role, name, weight, height, gender, birthDateEpochDay, weightUnit, heightUnit, isDefault, createdAt)
 - `user_maxes` (id, userId, exerciseId, maxValue, unit, measuredAt) — единица: KG/LBS/REPS/SECONDS/METERS/...
 
 **Справочники:**

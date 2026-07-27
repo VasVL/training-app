@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Actions / Действия -->
+    <string name="auth_user_edit_action_cancel">Отмена</string>
+    <string name="auth_action_discard">Отменить изменения</string>
+    <string name="auth_action_add_maximum">Добавить максимум</string>
+    <string name="auth_action_save">Сохранить</string>
+    <string name="auth_action_stay">Продолжить редактирование</string>
+
+    <!-- Content descriptions / Описания для доступности -->
+    <string name="auth_content_description_active_user">Активный пользователь</string>
+    <string name="auth_content_description_back">Назад</string>
+
+    <!-- Errors / Ошибки -->
+    <string name="auth_error_birth_date_future">Укажите дату, которая уже наступила.</string>
+    <string name="auth_error_birth_date_required">Выберите дату рождения.</string>
+    <string name="auth_error_name_required">Введите имя.</string>
+
+    <!-- Form fields / Поля формы -->
+    <string name="auth_field_birth_date">Дата рождения</string>
+    <string name="auth_field_gender">Пол</string>
+    <string name="auth_field_height">Рост</string>
+    <string name="auth_field_name">Имя</string>
+    <string name="auth_field_role">Роль</string>
+    <string name="auth_field_weight">Вес</string>
+
+    <!-- Gender values / Значения пола -->
+    <string name="auth_gender_female">Женский</string>
+    <string name="auth_gender_male">Мужской</string>
+
+    <!-- Hints / Подсказки -->
+    <string name="auth_hint_birth_date">Выберите дату</string>
+    <string name="auth_hint_name_required">Имя — единственное обязательное поле.</string>
+    <string name="auth_hint_save_profile_for_maxes">Сохраните профиль — затем можно добавить максимум.</string>
+
+    <!-- User labels / Подписи пользователя -->
+    <string name="auth_label_local_only">Без регистрации</string>
+    <string name="auth_label_owner_first_user">Роль первого пользователя</string>
+
+    <!-- Form sections / Разделы формы -->
+    <string name="auth_section_parameters">Параметры</string>
+    <string name="auth_section_profile">Профиль</string>
+
+    <!-- Titles / Заголовки -->
+    <string name="auth_title_discard_changes">Отменить изменения?</string>
+    <string name="auth_title_user_edit">О себе</string>
+    <string name="auth_title_user_maxes_empty">Пока нет максимумов</string>
+
+    <!-- Tabs / Вкладки -->
+    <string name="auth_user_edit_tab_maxes">Максимумы</string>
+    <string name="auth_user_edit_tab_profile">Профиль</string>
+
+    <!-- Units / Единицы измерения -->
+    <string name="auth_unit_centimeters">см</string>
+    <string name="auth_unit_inches">дюймы</string>
+    <string name="auth_unit_kilograms">кг</string>
+    <string name="auth_unit_pounds">фунты</string>
+
+    <!-- Age format / Формат возраста -->
+    <plurals name="auth_age_years">
+        <item quantity="one">%1$d год</item>
+        <item quantity="few">%1$d года</item>
+        <item quantity="many">%1$d лет</item>
+        <item quantity="other">%1$d лет</item>
+    </plurals>
+
+    <!-- Warnings / Предупреждения -->
+    <string name="auth_warning_discard_changes">Все внесённые изменения будут потеряны.</string>
+</resources>

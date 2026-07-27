@@ -1,57 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/userCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    android:foreground="?attr/selectableItemBackground"
+    android:background="@drawable/background_user"
     android:clickable="true"
-    android:focusable="true"
-    app:cardBackgroundColor="@color/color_graphite_surface"
-    app:cardCornerRadius="16dp"
-    app:strokeColor="@color/color_graphite_outline"
-    app:strokeWidth="1dp">
+    android:focusable="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/userAvatarTextView"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/background_user_avatar"
+        android:gravity="center"
+        android:textColor="@color/color_graphite_on_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userNameTextView"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="72dp"
-        android:padding="12dp">
+        android:layout_marginStart="12dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color_graphite_on_surface"
+        app:layout_constraintEnd_toStartOf="@id/userActionsButton"
+        app:layout_constraintStart_toEndOf="@id/userAvatarTextView"
+        app:layout_constraintTop_toTopOf="@id/userAvatarTextView" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/userAvatarCard"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:cardBackgroundColor="@color/color_graphite_primary"
-            app:cardCornerRadius="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/userAvatarTextView"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="@color/color_graphite_on_primary" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:id="@+id/userNameTextView"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/color_graphite_on_surface"
-            app:layout_constraintEnd_toStartOf="@id/userActionsButton"
-            app:layout_constraintStart_toEndOf="@id/userAvatarCard"
-            app:layout_constraintTop_toTopOf="@id/userAvatarCard" />
-
-        <TextView
+    <TextView
             android:id="@+id/userRoleTextView"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="0dp"
@@ -64,7 +47,7 @@
             app:layout_constraintStart_toStartOf="@id/userNameTextView"
             app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
 
-        <com.google.android.material.chip.Chip
+    <com.google.android.material.chip.Chip
             android:id="@+id/ownerChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,7 +59,7 @@
             app:layout_constraintStart_toStartOf="@id/userNameTextView"
             app:layout_constraintTop_toBottomOf="@id/userRoleTextView" />
 
-        <com.google.android.material.chip.Chip
+    <com.google.android.material.chip.Chip
             android:id="@+id/activeUserChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,7 +74,7 @@
             app:layout_constraintStart_toEndOf="@id/ownerChip"
             app:layout_constraintTop_toBottomOf="@id/userRoleTextView" />
 
-        <com.google.android.material.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/userActionsButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -106,6 +89,5 @@
             app:iconTint="?attr/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

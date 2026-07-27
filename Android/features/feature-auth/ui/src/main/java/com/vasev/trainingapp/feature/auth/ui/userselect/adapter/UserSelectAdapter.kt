@@ -7,8 +7,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.R as MaterialR
-import com.google.android.material.color.MaterialColors
 import com.vasev.trainingapp.feature.auth.ui.R
 import com.vasev.trainingapp.feature.auth.ui.databinding.ItemUserBinding
 import com.vasev.trainingapp.feature.auth.ui.userselect.entity.UserSelectUiState
@@ -53,14 +51,7 @@ internal class UserSelectAdapter(
             binding.userActionsButton.isVisible = !user.isActive &&
                 user.role == UserSelectUiState.Ready.UserItem.Role.TRAINEE
             binding.userAvatarTextView.text = user.name.firstOrNull()?.uppercase().orEmpty()
-            binding.userCard.strokeColor = MaterialColors.getColor(
-                binding.root,
-                if (user.isActive) {
-                    MaterialR.attr.colorPrimary
-                } else {
-                    MaterialR.attr.colorOutline
-                },
-            )
+            binding.userCard.isActivated = user.isActive
             binding.userNameTextView.text = user.name
             binding.userRoleTextView.setText(
                 if (user.role == UserSelectUiState.Ready.UserItem.Role.OWNER) {

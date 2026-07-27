@@ -21,7 +21,7 @@ import com.vasev.trainingapp.core.database.entity.types.WeightUnit
     ],
 )
 data class UserEntity(
-    @ColumnInfo(name = "age") val age: Int,
+    @ColumnInfo(name = "birthDateEpochDay") val birthDateEpochDay: Long?,
     @ColumnInfo(name = "createdAt") val createdAt: Long,
     @ColumnInfo(name = "gender") val gender: Gender,
     @ColumnInfo(name = "height") val height: Double,

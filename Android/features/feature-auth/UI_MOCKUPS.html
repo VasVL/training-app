@@ -34,8 +34,13 @@
         .user-role { color: #c6c6c6; font-size: 13px; margin-top: 3px; }
         .owner-badge { border: 1px solid #6b6b6b; border-radius: 999px; color: #eeeeee; font-size: 11px; font-weight: 700; padding: 3px 7px; }
         .check { align-items: center; background: #e5e5e5; border-radius: 50%; color: #242424; display: flex; font-weight: 900; height: 24px; justify-content: center; width: 24px; }
+        .more { color: #d8d8d8; font-size: 24px; letter-spacing: 1px; padding: 0 2px 8px; }
         .extended-fab { align-items: center; background: #e2e2e2; border-radius: 18px; bottom: 22px; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35); color: #242424; display: flex; font-weight: 800; gap: 10px; padding: 15px 19px; position: absolute; right: 18px; }
         .form-content { min-height: 498px; padding: 0 18px 88px; }
+        .profile-tabs { border-bottom: 1px solid #505050; display: flex; margin: 0 18px; }
+        .profile-tab { color: #bebebe; flex: 1; font-size: 14px; font-weight: 700; padding: 14px 6px 11px; text-align: center; }
+        .profile-tab.active { border-bottom: 2px solid #e2e2e2; color: #f2f2f2; }
+        .maxes-empty { color: #c4c4c4; line-height: 1.45; margin: 42px 20px; text-align: center; }
         .form-hint { color: #bdbdbd; font-size: 14px; line-height: 1.4; margin: 0 0 18px; }
         .section-title { color: #cecece; font-size: 13px; font-weight: 800; letter-spacing: 0.6px; margin: 20px 0 10px; text-transform: uppercase; }
         .field { margin: 13px 0; position: relative; }
@@ -49,6 +54,8 @@
         .dialog h2 { font-size: 18px; margin: 0 0 10px; }
         .dialog p { color: #d0d0d0; font-size: 14px; line-height: 1.4; margin: 0 0 16px; }
         .dialog-actions { display: flex; font-weight: 800; gap: 16px; justify-content: flex-end; }
+        .snackbar { align-items: center; background: #e2e2e2; border-radius: 12px; bottom: 26px; color: #242424; display: flex; font-size: 14px; font-weight: 700; gap: 14px; left: 16px; padding: 14px; position: absolute; right: 16px; }
+        .snackbar strong { color: #554f00; margin-left: auto; }
     </style>
 </head>
 <body>
@@ -59,18 +66,22 @@
         <button aria-controls="list-screen" aria-selected="false" class="tab" id="list-tab" role="tab" type="button">Список пользователей</button>
         <button aria-controls="form-screen" aria-selected="false" class="tab" id="form-tab" role="tab" type="button">О себе</button>
         <button aria-controls="dialog-screen" aria-selected="false" class="tab" id="dialog-tab" role="tab" type="button">Отмена изменений</button>
+        <button aria-controls="delete-screen" aria-selected="false" class="tab" id="delete-tab" role="tab" type="button">Удаление профиля</button>
     </div>
     <section aria-labelledby="empty-tab" class="screen visible" id="empty-screen" role="tabpanel">
-        <div class="phone"><div class="toolbar">Выбор пользователя</div><div class="empty-content"><div aria-hidden="true" class="empty-icon">♛</div><h2>Начнём с вашего профиля</h2><p>Он нужен, чтобы хранить ваши тренировки и измерения на этом устройстве.</p><div class="local-only"><strong>Без регистрации</strong><br>Не нужен аккаунт, номер телефона или электронная почта. Данные сохраняются только на устройстве.</div><div class="primary-button">Создать профиль</div></div></div>
+        <div class="phone"><div class="toolbar">О себе</div><div class="profile-tabs"><div class="profile-tab active">Профиль</div><div class="profile-tab">Максимумы</div></div><div class="form-content"><div class="local-only"><strong>Без регистрации</strong><br>Не нужен аккаунт, номер телефона или электронная почта. Данные сохраняются только на устройстве.</div><p class="form-hint">Имя — единственное обязательное поле. Максимум 40 символов.</p><div class="section-title">Профиль</div><div class="field"><span class="field-label">Имя</span><div class="input">Введите имя</div></div><div class="section-title">Параметры</div><div class="field"><span class="field-label">Вес</span><div class="input"><span class="suffix">кг</span></div></div><div class="field"><span class="field-label">Рост</span><div class="input"><span class="suffix">см</span></div></div><div class="field"><span class="field-label">Дата рождения</span><div class="input">Выберите дату</div></div><div class="field"><span class="field-label">Пол</span><div class="input"><span class="suffix">⌄</span></div></div></div><div class="save-button disabled">Сохранить</div></div>
     </section>
     <section aria-labelledby="list-tab" class="screen" id="list-screen" role="tabpanel">
-        <div class="phone"><div class="toolbar">Выбор пользователя</div><div class="list-content"><div class="user-item active"><div class="avatar">А</div><div class="user-details"><div class="user-name">Алексей <span class="owner-badge">♛ Владелец</span></div><div class="user-role">Активен сейчас</div></div><div aria-label="Активный пользователь" class="check">✓</div></div><div class="user-item"><div class="avatar">М</div><div class="user-details"><div class="user-name">Мария</div><div class="user-role">Подопечная</div></div></div></div><div class="extended-fab">＋ Добавить</div></div>
+        <div class="phone"><div class="toolbar">Выбор пользователя</div><div class="list-content"><div class="user-item active"><div class="avatar">А</div><div class="user-details"><div class="user-name">Алексей <span class="owner-badge">♛ Владелец</span></div><div class="user-role">Активен сейчас</div></div><div aria-label="Активный пользователь" class="check">✓</div></div><div class="user-item"><div class="avatar">М</div><div class="user-details"><div class="user-name">Мария</div><div class="user-role">Подопечная</div></div><div aria-label="Действия профиля" class="more">⋮</div></div></div><div class="extended-fab">＋ Добавить</div></div>
     </section>
     <section aria-labelledby="form-tab" class="screen" id="form-screen" role="tabpanel">
-        <div class="phone"><div class="toolbar"><span aria-hidden="true" class="back">‹</span>О себе</div><div class="form-content"><p class="form-hint">Вес и рост принимают до двух десятичных знаков: например, 82,50 кг.</p><div class="section-title">Профиль</div><div class="field"><span class="field-label">Имя</span><div class="input">Алексей</div></div><div class="fixed-role">♛<span><strong>Владелец</strong><br><small>Роль первого пользователя</small></span></div><div class="section-title">Параметры</div><div class="field"><span class="field-label">Вес</span><div class="input">82,50 <span class="suffix">кг</span></div></div><div class="field"><span class="field-label">Рост</span><div class="input">180 <span class="suffix">см</span></div></div><div class="field"><span class="field-label">Возраст</span><div class="input">29</div></div><div class="field"><span class="field-label">Пол</span><div class="input">Мужской <span class="suffix">⌄</span></div></div></div><div class="save-button">Сохранить</div></div>
+        <div class="phone"><div class="toolbar"><span aria-hidden="true" class="back">‹</span>О себе</div><div class="profile-tabs"><div class="profile-tab active">Профиль</div><div class="profile-tab">Максимумы</div></div><div class="form-content"><div class="section-title">Профиль</div><div class="field"><span class="field-label">Имя</span><div class="input">Алексей</div></div><p class="form-hint">Максимум 40 символов.</p><div class="section-title">Параметры</div><div class="field"><span class="field-label">Вес</span><div class="input">82,50 <span class="suffix">кг</span></div></div><div class="field"><span class="field-label">Рост</span><div class="input">180 <span class="suffix">см</span></div></div><div class="field"><span class="field-label">Дата рождения</span><div class="input">14.08.1990 <span class="suffix">35 лет</span></div></div><div class="field"><span class="field-label">Пол</span><div class="input">Мужской <span class="suffix">⌄</span></div></div></div><div class="save-button">Сохранить</div></div>
     </section>
     <section aria-labelledby="dialog-tab" class="screen" id="dialog-screen" role="tabpanel">
         <div class="phone"><div class="toolbar"><span aria-hidden="true" class="back">‹</span>О себе</div><div class="form-content"><div class="field"><span class="field-label">Вес</span><div class="input">82,50 <span class="suffix">кг</span></div></div><div class="field"><span class="field-label">Рост</span><div class="input">180 <span class="suffix">см</span></div></div><div class="dialog"><h2>Отменить изменения?</h2><p>Все внесённые изменения будут потеряны.</p><div class="dialog-actions"><span>Продолжить редактирование</span><span>Отменить изменения</span></div></div></div><div class="save-button disabled">Сохранить</div></div>
+    </section>
+    <section aria-labelledby="delete-tab" class="screen" id="delete-screen" role="tabpanel">
+        <div class="phone"><div class="toolbar">Выбор пользователя</div><div class="list-content"><div class="user-item active"><div class="avatar">А</div><div class="user-details"><div class="user-name">Алексей <span class="owner-badge">♛ Владелец</span></div><div class="user-role">Активен сейчас</div></div><div class="check">✓</div></div></div><div class="dialog"><h2>Удалить профиль «Мария»?</h2><p>Вместе с профилем будут удалены все записи тренировок и измерения.</p><div class="dialog-actions"><span>Отмена</span><span>Удалить</span></div></div><div class="snackbar">Отменить удаление <strong>ОТМЕНИТЬ</strong></div></div>
     </section>
     <script>
         const tabs = document.querySelectorAll(".tab");

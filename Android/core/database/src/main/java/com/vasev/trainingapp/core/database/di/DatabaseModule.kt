@@ -55,10 +55,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-
-    // Database file name used by Room / Имя файла базы данных, используемое Room
-    private const val DATABASE_NAME = "training.db"
-
     /**
      * Provides the single Room database instance for the whole app.
      * Предоставляет единственный экземпляр Room-базы для всего приложения.
@@ -78,7 +74,7 @@ object DatabaseModule {
         Room.databaseBuilder(
             context,
             TrainingDatabase::class.java,
-            DATABASE_NAME,
+            TrainingDatabase.DATABASE_NAME,
         ).fallbackToDestructiveMigration().build()
 
     /**

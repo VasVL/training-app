@@ -1,5 +1,6 @@
 package com.vasev.trainingapp.feature.auth.domain.entity
 
+import java.time.LocalDate
 import com.vasev.trainingapp.feature.auth.domain.entity.type.Gender
 import com.vasev.trainingapp.feature.auth.domain.entity.type.HeightUnit
 import com.vasev.trainingapp.feature.auth.domain.entity.type.UserRole
@@ -14,7 +15,7 @@ import com.vasev.trainingapp.feature.auth.domain.entity.type.WeightUnit
  * модуль `data` отвечает за создание и сохранение экземпляров этого класса.
  */
 data class User(
-    val age: Int,
+    val birthDate: LocalDate?,
     val createdAt: Long,
     val gender: Gender,
     val height: Double,

@@ -2,4 +2,7 @@
 <resources>
     <!-- Medium corner radius for shared UI elements / Среднее скругление общих UI-элементов -->
     <dimen name="common_corner_radius_medium">12dp</dimen>
+
+    <!-- Large corner radius for shared UI elements / Большое скругление общих UI-элементов -->
+    <dimen name="common_corner_radius_large">16dp</dimen>
 </resources>

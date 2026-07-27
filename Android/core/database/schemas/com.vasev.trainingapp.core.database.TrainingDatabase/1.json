@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "117a1d9bcbb30ae7b593276ea02b056e",
+    "identityHash": "dc6277ab799b9514baf89e5428795ec2",
     "entities": [
       {
         "tableName": "exercises",
@@ -1267,13 +1267,13 @@
       },
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`age` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `gender` TEXT NOT NULL, `height` REAL NOT NULL, `heightUnit` TEXT NOT NULL, `isDefault` INTEGER NOT NULL, `name` TEXT NOT NULL, `remoteId` TEXT, `role` TEXT NOT NULL, `weight` REAL NOT NULL, `weightUnit` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`birthDateEpochDay` INTEGER, `createdAt` INTEGER NOT NULL, `gender` TEXT NOT NULL, `height` REAL NOT NULL, `heightUnit` TEXT NOT NULL, `isDefault` INTEGER NOT NULL, `isPendingDeletion` INTEGER NOT NULL, `name` TEXT NOT NULL, `remoteId` TEXT, `role` TEXT NOT NULL, `weight` REAL NOT NULL, `weightUnit` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
-            "fieldPath": "age",
-            "columnName": "age",
+            "fieldPath": "birthDateEpochDay",
+            "columnName": "birthDateEpochDay",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "createdAt",
@@ -1302,6 +1302,12 @@
           {
             "fieldPath": "isDefault",
             "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isPendingDeletion",
+            "columnName": "isPendingDeletion",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -1939,7 +1945,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '117a1d9bcbb30ae7b593276ea02b056e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dc6277ab799b9514baf89e5428795ec2')"
     ]
   }
 }

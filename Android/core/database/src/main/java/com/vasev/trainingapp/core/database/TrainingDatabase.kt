@@ -134,4 +134,8 @@ abstract class TrainingDatabase : RoomDatabase() {
     abstract fun workoutLogSetDao(): WorkoutLogSetDao
 
     abstract fun workoutTemplateDao(): WorkoutTemplateDao
+
+    companion object {
+        const val DATABASE_NAME = "training.db"
+    }
 }
