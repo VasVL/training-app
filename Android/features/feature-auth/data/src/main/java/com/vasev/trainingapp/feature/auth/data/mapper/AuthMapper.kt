@@ -3,6 +3,7 @@ package com.vasev.trainingapp.feature.auth.data.mapper
 import java.time.LocalDate
 import com.vasev.trainingapp.core.database.entity.UserEntity
 import com.vasev.trainingapp.core.database.entity.UserMaxEntity
+import com.vasev.trainingapp.core.database.entity.projection.UserMaxWithExerciseProjection
 import com.vasev.trainingapp.core.database.entity.types.Gender as EntityGender
 import com.vasev.trainingapp.core.database.entity.types.HeightUnit as EntityHeightUnit
 import com.vasev.trainingapp.core.database.entity.types.MeasurementUnit as EntityMeasurementUnit
@@ -10,6 +11,7 @@ import com.vasev.trainingapp.core.database.entity.types.UserRole as EntityUserRo
 import com.vasev.trainingapp.core.database.entity.types.WeightUnit as EntityWeightUnit
 import com.vasev.trainingapp.feature.auth.domain.entity.User
 import com.vasev.trainingapp.feature.auth.domain.entity.UserMax
+import com.vasev.trainingapp.feature.auth.domain.entity.UserMaxWithExercise
 import com.vasev.trainingapp.feature.auth.domain.entity.type.Gender
 import com.vasev.trainingapp.feature.auth.domain.entity.type.HeightUnit
 import com.vasev.trainingapp.feature.auth.domain.entity.type.MeasurementUnit
@@ -77,6 +79,17 @@ class AuthMapper @Inject constructor() {
         )
     }
 
+    fun map(projection: UserMaxWithExerciseProjection): UserMaxWithExercise {
+        return UserMaxWithExercise(
+            exerciseId = projection.exerciseId,
+            exerciseName = projection.exerciseName,
+            id = projection.id,
+            maxValue = projection.maxValue,
+            measuredAt = projection.measuredAt,
+            unit = mapMeasurementUnit(projection.unit),
+        )
+    }
+
     fun map(domain: UserMax): UserMaxEntity {
         return UserMaxEntity(
             exerciseId = domain.exerciseId,
@@ -92,6 +105,7 @@ class AuthMapper @Inject constructor() {
         return when (entity) {
             EntityGender.FEMALE -> Gender.FEMALE
             EntityGender.MALE -> Gender.MALE
+            EntityGender.UNKNOWN -> Gender.UNKNOWN
         }
     }
 
@@ -99,6 +113,7 @@ class AuthMapper @Inject constructor() {
         return when (domain) {
             Gender.FEMALE -> EntityGender.FEMALE
             Gender.MALE -> EntityGender.MALE
+            Gender.UNKNOWN -> EntityGender.UNKNOWN
         }
     }
 

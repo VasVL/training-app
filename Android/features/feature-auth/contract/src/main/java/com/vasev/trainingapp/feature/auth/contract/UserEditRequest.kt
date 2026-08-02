@@ -30,4 +30,13 @@ sealed interface UserEditRequest : Serializable {
     data class EditUser(
         val userId: Long,
     ) : UserEditRequest
+
+    companion object {
+
+        /**
+         * Name of the Navigation Component argument carrying this request.
+         * Имя аргумента Navigation Component, передающего этот запрос.
+         */
+        const val NAVIGATION_ARGUMENT_KEY = "request"
+    }
 }

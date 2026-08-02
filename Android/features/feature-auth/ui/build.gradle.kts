@@ -71,13 +71,17 @@ dependencies {
 
     // Internal modules (alphabetical) / Внутренние модули (по алфавиту)
 
-    // core:navigation — common navigation contracts /
-    // core:navigation — общие контракты навигации
-    implementation(project(":core:navigation"))
+    // core:common:domain — shared Kotlin domain utilities /
+    // core:common:domain — общие Kotlin-утилиты domain-слоя
+    implementation(project(":core:common:domain"))
 
     // core:common:ui — shared UI resources /
     // core:common:ui — общие UI-ресурсы
     implementation(project(":core:common:ui"))
+
+    // core:navigation — common navigation contracts /
+    // core:navigation — общие контракты навигации
+    implementation(project(":core:navigation"))
 
     // feature-auth:contract — auth screen routes /
     // feature-auth:contract — маршруты экранов auth

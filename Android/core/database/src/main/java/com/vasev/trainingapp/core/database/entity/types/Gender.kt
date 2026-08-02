@@ -6,4 +6,5 @@ package com.vasev.trainingapp.core.database.entity.types
 enum class Gender {
     FEMALE,
     MALE,
+    UNKNOWN,
 }

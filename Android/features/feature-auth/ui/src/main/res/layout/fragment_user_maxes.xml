@@ -24,6 +24,64 @@
         tools:listitem="@layout/item_user_maximum"
         tools:visibility="visible" />
 
+    <!-- Loading state / Состояние загрузки -->
+    <LinearLayout
+        android:id="@+id/pendingMaximumsContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <com.vasev.trainingapp.core.common.ui.view.PendingView
+            android:layout_width="112dp"
+            android:layout_height="20dp" />
+
+        <com.vasev.trainingapp.core.common.ui.view.PendingView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp" />
+
+        <com.vasev.trainingapp.core.common.ui.view.PendingView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp" />
+    </LinearLayout>
+
+    <!-- Error state / Состояние ошибки -->
+    <LinearLayout
+        android:id="@+id/maximumsErrorContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/maximumsErrorTextView"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/color_graphite_error" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/retryMaximumsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="@string/auth_action_retry" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/emptyMaximumsTextView"
         style="@style/TextAppearance.MaterialComponents.Subtitle1"
@@ -32,10 +90,12 @@
         android:gravity="center"
         android:text="@string/auth_title_user_maxes_empty"
         android:textColor="@color/color_graphite_on_background"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addUserMaximumButton"

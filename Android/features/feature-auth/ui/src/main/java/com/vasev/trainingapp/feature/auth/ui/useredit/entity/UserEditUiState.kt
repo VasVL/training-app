@@ -39,12 +39,16 @@ internal sealed interface UserEditUiState {
     data class Ready(
         val birthDate: LocalDate? = null,
         val gender: Gender = Gender.UNKNOWN,
+        val hasChanges: Boolean = false,
         val heightInput: String = "",
-        val heightUnit: HeightUnit = HeightUnit.UNKNOWN,
+        val heightUnit: HeightUnit = HeightUnit.CENTIMETERS,
+        val isSaved: Boolean = false,
+        val mode: Mode,
         val nameInput: String = "",
         val role: Role = Role.UNKNOWN,
+        val validationErrors: Set<ValidationError> = emptySet(),
         val weightInput: String = "",
-        val weightUnit: WeightUnit = WeightUnit.UNKNOWN,
+        val weightUnit: WeightUnit = WeightUnit.KILOGRAMS,
     ) : UserEditUiState {
 
         /**
@@ -64,7 +68,33 @@ internal sealed interface UserEditUiState {
         enum class HeightUnit {
             CENTIMETERS,
             INCHES,
-            UNKNOWN,
+        }
+
+        /**
+         * Scenarios supported by the profile screen.
+         * Сценарии, поддерживаемые экраном профиля.
+         */
+        sealed interface Mode {
+
+            /**
+             * The first user and the profile owner are being created.
+             * Создаётся первый пользователь и владелец профиля.
+             */
+            data object CreateFirstUser : Mode
+
+            /**
+             * An additional trainee profile is being created.
+             * Создаётся дополнительный профиль занимающегося.
+             */
+            data object CreateNewUser : Mode
+
+            /**
+             * An existing profile is being edited.
+             * Редактируется существующий профиль.
+             */
+            data class EditUser(
+                val userId: Long,
+            ) : Mode
         }
 
         /**
@@ -78,13 +108,23 @@ internal sealed interface UserEditUiState {
         }
 
         /**
+         * Validation errors currently present in the profile form.
+         * Ошибки валидации, которые сейчас есть в форме профиля.
+         */
+        enum class ValidationError {
+            BIRTH_DATE_FUTURE,
+            HEIGHT_INVALID,
+            NAME_REQUIRED,
+            WEIGHT_INVALID,
+        }
+
+        /**
          * Weight units available in the profile form.
          * Единицы веса, доступные в форме профиля.
          */
         enum class WeightUnit {
             KILOGRAMS,
             POUNDS,
-            UNKNOWN,
         }
     }
 }

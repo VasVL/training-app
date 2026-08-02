@@ -15,6 +15,7 @@ core/common/
 │   ├── MODULE_STRUCTURE.md
 │   ├── build.gradle.kts
 │   └── src/main/java/com/vasev/trainingapp/core/common/domain/
+│       ├── MeasurementConversion.kt
 │       └── Resource.kt
 ├── logging/                   ← Android-модуль расширений Timber
 │   ├── AGENTS.md
@@ -33,7 +34,7 @@ core/common/
 ## Назначение элементов
 
 ### `domain/`
-Чистый Kotlin/JVM-модуль. Содержит `Resource<T>` — обёртку для состояния данных: `Loading` / `Success(data)` / `Error(message, cause)`.
+Чистый Kotlin/JVM-модуль. Содержит `Resource<T>` — обёртку для состояния данных: `Loading` / `Success(data)` / `Error(message, cause)`, а также `MeasurementConversion` с коэффициентами единиц измерения.
 
 ### `logging/`
 Android-библиотека с расширениями для ленивого логирования поверх Timber.

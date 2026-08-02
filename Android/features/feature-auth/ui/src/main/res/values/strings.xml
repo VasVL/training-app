@@ -4,7 +4,12 @@
     <string name="auth_user_edit_action_cancel">Отмена</string>
     <string name="auth_action_discard">Отменить изменения</string>
     <string name="auth_action_add_maximum">Добавить максимум</string>
+    <string name="auth_action_clear">Очистить</string>
+    <string name="auth_action_continue">Продолжить</string>
+    <string name="auth_action_exit_without_saving">Выйти без сохранения</string>
+    <string name="auth_action_retry">Попробовать снова</string>
     <string name="auth_action_save">Сохранить</string>
+    <string name="auth_action_save_and_exit">Сохранить и выйти</string>
     <string name="auth_action_stay">Продолжить редактирование</string>
 
     <!-- Content descriptions / Описания для доступности -->
@@ -14,7 +19,13 @@
     <!-- Errors / Ошибки -->
     <string name="auth_error_birth_date_future">Укажите дату, которая уже наступила.</string>
     <string name="auth_error_birth_date_required">Выберите дату рождения.</string>
+    <string name="auth_error_height_invalid">Введите рост больше нуля.</string>
+    <string name="auth_error_load_maximums">Личные результаты сейчас не загружаются. Попробуйте снова.</string>
+    <string name="auth_error_load_user">Профиль сейчас не открывается. Попробуйте снова.</string>
     <string name="auth_error_name_required">Введите имя.</string>
+    <string name="auth_error_save_profile">Профиль не удалось сохранить.</string>
+    <string name="auth_error_user_not_found">Профиль не найден.</string>
+    <string name="auth_error_weight_invalid">Введите вес больше нуля.</string>
 
     <!-- Form fields / Поля формы -->
     <string name="auth_field_birth_date">Дата рождения</string>
@@ -33,6 +44,10 @@
     <string name="auth_hint_name_required">Имя — единственное обязательное поле.</string>
     <string name="auth_hint_save_profile_for_maxes">Сохраните профиль — затем можно добавить максимум.</string>
 
+    <!-- Dialog messages / Сообщения диалогов -->
+    <string name="auth_message_exit_invalid_form">Исправьте поля с ошибками перед сохранением.</string>
+    <string name="auth_message_exit_with_changes">Изменения можно сохранить перед выходом.</string>
+
     <!-- User labels / Подписи пользователя -->
     <string name="auth_label_local_only">Без регистрации</string>
     <string name="auth_label_owner_first_user">Роль первого пользователя</string>
@@ -43,6 +58,7 @@
 
     <!-- Titles / Заголовки -->
     <string name="auth_title_discard_changes">Отменить изменения?</string>
+    <string name="auth_title_exit_with_changes">Сохранить изменения?</string>
     <string name="auth_title_user_edit">О себе</string>
     <string name="auth_title_user_maxes_empty">Пока нет максимумов</string>
 
@@ -54,7 +70,9 @@
     <string name="auth_unit_centimeters">см</string>
     <string name="auth_unit_inches">дюймы</string>
     <string name="auth_unit_kilograms">кг</string>
+    <string name="auth_unit_meters">м</string>
     <string name="auth_unit_pounds">фунты</string>
+    <string name="auth_unit_repetitions">повт.</string>
 
     <!-- Age format / Формат возраста -->
     <plurals name="auth_age_years">

@@ -141,6 +141,17 @@ Hilt-модуль (`@Module @InstallIn(SingletonComponent)`): `@Provides @Single
 - `FoodItemEntity` (`food_items`) — продукт: name, category, calories, protein, fat, carbs, imageUrl, remoteId.
 - `FoodLogEntity` (`food_logs`) — запись дневника питания: userId (CASCADE), foodId (RESTRICT), amount, loggedAt.
 
+### Планируемое расширение метрик
+
+Текущая схема ещё содержит `UserMaxEntity` и фиксированные поля подходов. Для универсальных схем упражнений запланирована замена на набор связанных метрик:
+
+- `ExerciseMetricDefinitionEntity` — схема результата упражнения: metricType, fixedValue (nullable), unit, isPrimary, comparisonDirection. Для пользовательского упражнения схема неизменяема; при другой схеме создаётся копия упражнения без истории.
+- `UserRecordEntity` и `UserRecordMetricEntity` — личный результат и его метрики. Расчётные результаты дополнительно хранят исходные значения и формулу.
+- `SetTemplateMetricEntity` — целевая метрика планового подхода.
+- `WorkoutLogSetMetricEntity` — плановая и фактическая метрика выполненного подхода, включая снимок веса тела.
+- Метрики включают дополнительный вес, собственный вес, собственный вес вместе с дополнительным весом, повторы, длительность и дистанцию. Процентная нагрузка хранит ссылку на метрику-источник результата.
+- Дропсеты поддерживают формульное снижение от начального веса, ручные значения каждого подхода и режим «по ощущениям».
+
 ### `dao/`
 22 `@Dao`-интерфейса, по одному на Entity. Методы: `suspend` для разовых операций (insert/update/delete), `Flow<...>` для реактивных запросов. Имена соответствуют Entity (например, `ExerciseDao` для `ExerciseEntity`).
 

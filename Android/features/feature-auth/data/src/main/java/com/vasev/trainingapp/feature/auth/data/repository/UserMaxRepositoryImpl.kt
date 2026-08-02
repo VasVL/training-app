@@ -3,6 +3,7 @@ package com.vasev.trainingapp.feature.auth.data.repository
 import com.vasev.trainingapp.core.database.dao.UserMaxDao
 import com.vasev.trainingapp.feature.auth.data.mapper.AuthMapper
 import com.vasev.trainingapp.feature.auth.domain.entity.UserMax
+import com.vasev.trainingapp.feature.auth.domain.entity.UserMaxWithExercise
 import com.vasev.trainingapp.feature.auth.domain.repository.UserMaxRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +23,12 @@ class UserMaxRepositoryImpl @Inject constructor(
 
     override fun observeByUser(userId: Long): Flow<List<UserMax>> {
         return userMaxDao.observeByUser(userId).map { list -> list.map { mapper.map(it) } }
+    }
+
+    override fun observeForUserProfile(userId: Long): Flow<List<UserMaxWithExercise>> {
+        return userMaxDao.observeForUserProfile(userId).map { list ->
+            list.map { projection -> mapper.map(projection) }
+        }
     }
 
     override suspend fun getById(id: Long): UserMax? {

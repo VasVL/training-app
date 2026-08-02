@@ -1,6 +1,7 @@
 package com.vasev.trainingapp.feature.auth.domain.repository
 
 import com.vasev.trainingapp.feature.auth.domain.entity.UserMax
+import com.vasev.trainingapp.feature.auth.domain.entity.UserMaxWithExercise
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -13,6 +14,8 @@ import kotlinx.coroutines.flow.Flow
 interface UserMaxRepository {
 
     fun observeByUser(userId: Long): Flow<List<UserMax>>
+
+    fun observeForUserProfile(userId: Long): Flow<List<UserMaxWithExercise>>
 
     suspend fun getById(id: Long): UserMax?
 
