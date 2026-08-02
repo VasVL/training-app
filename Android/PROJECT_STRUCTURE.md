@@ -35,6 +35,7 @@ Android/
 ├── app/                   ← Модуль приложения (точка сборки, без бизнес-логики)
 │   ├── AGENTS.md          ← Контекст модуля app
 │   ├── MODULE_STRUCTURE.md ← Структура модуля app
+│   ├── UI_DESIGN.md       ← Утверждённый дизайн главной оболочки
 │   ├── build.gradle.kts
 │   └── src/main/
 │       ├── AndroidManifest.xml

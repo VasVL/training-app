@@ -10,6 +10,7 @@
 app/
 ├── AGENTS.md                  ← Контекст модуля app
 ├── MODULE_STRUCTURE.md        ← Этот файл
+├── UI_DESIGN.md               ← Утверждённый дизайн главной оболочки
 ├── build.gradle.kts          ← Конфигурация модуля (плагины, зависимости, SDK)
 └── src/
     └── main/
@@ -44,6 +45,9 @@ app/
 - `feature-*/data` — Hilt-биндинги репозиториев (`@Binds` интерфейс→реализация).
 - `feature-*/ui` — экраны (Fragment, ViewModel).
 - Внешние: AppCompat, Coil, ConstraintLayout, core-ktx, Hilt, Material, Navigation, Timber.
+
+### `UI_DESIGN.md`
+Утверждённые визуальные и навигационные решения главной оболочки: верхняя панель, шторка, пять вкладок нижней навигации и правила их поведения.
 
 ### `src/main/AndroidManifest.xml`
 Манифест приложения. Объявляет `Application` класс, `MainActivity`, разрешения, темы.
