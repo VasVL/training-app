@@ -37,6 +37,11 @@ include(":features:feature-auth:data")
 include(":features:feature-auth:domain")
 include(":features:feature-auth:ui")
 
+// Feature: main / Главная оболочка / Feature: main / Main application shell
+include(":features:feature-main:contract")
+include(":features:feature-main:domain")
+include(":features:feature-main:ui")
+
 // Feature: programs / Программы / Feature: programs / Программы
 include(":features:feature-programs:contract")
 include(":features:feature-programs:data")
