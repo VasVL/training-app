@@ -73,6 +73,9 @@ dependencies {
     // AndroidX core-ktx / AndroidX core-ktx
     implementation(libs.core.ktx)
 
+    // AndroidX SplashScreen — system-compatible launch screen / AndroidX SplashScreen — системный совместимый экран запуска
+    implementation(libs.core.splashscreen)
+
     // Hilt — dependency injection / Hilt — внедрение зависимостей
     implementation(libs.hilt.android)
 

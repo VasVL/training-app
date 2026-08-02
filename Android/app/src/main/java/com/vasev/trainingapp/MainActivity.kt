@@ -2,15 +2,18 @@ package com.vasev.trainingapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navOptions
 import com.vasev.trainingapp.core.navigation.MainScreen
 import com.vasev.trainingapp.core.navigation.Screen
 import com.vasev.trainingapp.feature.auth.contract.AuthScreen
 import com.vasev.trainingapp.feature.auth.contract.UserEditRequest
+import com.vasev.trainingapp.feature.auth.domain.repository.UserRepository
 import com.vasev.trainingapp.navigation.NavigatorImpl
 import com.vasev.trainingapp.navigation.entity.NavigationCommand
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +43,8 @@ import timber.log.Timber
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private var isInitialDestinationLoading = true
+
     /**
      * `@Inject` — Hilt provides the app-scoped navigator that emits navigation commands.
      * `@Inject` — Hilt предоставляет навигатор уровня приложения, отправляющий команды навигации.
@@ -47,7 +52,17 @@ class MainActivity : AppCompatActivity() {
     @Inject
     internal lateinit var navigator: NavigatorImpl
 
+    /**
+     * `@Inject` — Hilt provides the repository used to choose the initial destination.
+     * `@Inject` — Hilt предоставляет репозиторий для выбора начальной точки назначения.
+     */
+    @Inject
+    internal lateinit var userRepository: UserRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen().setKeepOnScreenCondition {
+            isInitialDestinationLoading
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         lifecycleScope.launch {
@@ -57,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        openInitialScreen(savedInstanceState = savedInstanceState)
     }
 
     private fun handleNavigationCommand(command: NavigationCommand) {
@@ -103,6 +119,41 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
             as NavHostFragment
         return navHostFragment.navController
+    }
+
+    private fun openInitialScreen(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            Timber.d("openInitialScreen: result=SKIPPED_RECREATED_ACTIVITY")
+            isInitialDestinationLoading = false
+            return
+        }
+
+        lifecycleScope.launch {
+            try {
+                val activeUser = userRepository.getDefault()
+                if (activeUser != null) {
+                    Timber.d("openInitialScreen: result=OPEN_MAIN")
+                    return@launch
+                }
+
+                Timber.d("openInitialScreen: result=CREATE_FIRST_USER")
+                getNavController().navigate(
+                    NavGraphDirections.actionGlobalUserEditFragment(
+                        UserEditRequest.CreateFirstUser,
+                    ),
+                    navOptions {
+                        popUpTo(R.id.mainFragment) {
+                            inclusive = true
+                        }
+                    },
+                )
+            } catch (throwable: Throwable) {
+                Timber.e(throwable, "openInitialScreen: result=CHECK_ACTIVE_USER_FAILED")
+            } finally {
+                isInitialDestinationLoading = false
+                Timber.d("openInitialScreen: result=SPLASH_RELEASED")
+            }
+        }
     }
 
     private fun navigate(navController: NavController, screen: Screen) {

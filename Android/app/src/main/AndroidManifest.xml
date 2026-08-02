@@ -6,6 +6,7 @@
 
     <application
         android:name=".TrainingApp"
+        android:icon="@mipmap/ic_training_app"
         android:label="@string/app_name"
         android:theme="@style/Theme.TrainingApp">
 
@@ -13,7 +14,8 @@
              Стартовая activity — единственная activity-хост для Navigation Component -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.TrainingApp.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
