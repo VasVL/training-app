@@ -22,6 +22,7 @@ import com.vasev.trainingapp.feature.auth.ui.useredit.formatter.UserEditUiFormat
 import com.vasev.trainingapp.feature.auth.ui.useredit.viewmodel.UserEditViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
+import java.time.Period
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -210,6 +211,9 @@ internal class UserProfileFragment : Fragment() {
                 text = formatBirthDate(uiState.birthDate),
                 target = binding.birthDateEditText,
             )
+            val ageText = getAgeText(birthDate = uiState.birthDate)
+            binding.birthDateAgeTextView.isVisible = ageText != null
+            binding.birthDateAgeTextView.text = ageText
             setTextIfChanged(
                 text = getGenderText(uiState.gender),
                 target = binding.genderEditText,
@@ -283,6 +287,19 @@ internal class UserProfileFragment : Fragment() {
 
     private fun formatBirthDate(birthDate: LocalDate?): String {
         return birthDate?.format(formatterProvider.provide().dateFormatter).orEmpty()
+    }
+
+    private fun getAgeText(birthDate: LocalDate?): String? {
+        if (birthDate == null || birthDate.isAfter(LocalDate.now())) {
+            return null
+        }
+
+        val age = Period.between(birthDate, LocalDate.now()).years
+        return resources.getQuantityString(
+            /* id = */ R.plurals.auth_age_years,
+            /* quantity = */ age,
+            /* formatArgs = */ age,
+        )
     }
 
     private fun getErrorMessageResId(reason: UserEditUiState.Error.Reason): Int {
