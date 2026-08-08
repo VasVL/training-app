@@ -1,5 +1,7 @@
 package com.vasev.trainingapp.feature.auth.data.di
 
+import com.vasev.trainingapp.feature.auth.contract.ActiveUserProvider
+import com.vasev.trainingapp.feature.auth.data.provider.ActiveUserProviderImpl
 import com.vasev.trainingapp.feature.auth.data.repository.UserMaxRepositoryImpl
 import com.vasev.trainingapp.feature.auth.data.repository.UserRepositoryImpl
 import com.vasev.trainingapp.feature.auth.domain.repository.UserMaxRepository
@@ -27,6 +29,9 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class AuthDataModule {
+
+    @Binds
+    internal abstract fun bindActiveUserProvider(impl: ActiveUserProviderImpl): ActiveUserProvider
 
     @Binds
     abstract fun bindUserMaxRepository(impl: UserMaxRepositoryImpl): UserMaxRepository

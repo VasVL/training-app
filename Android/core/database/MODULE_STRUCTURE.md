@@ -19,6 +19,9 @@ core/database/
             ├── Converters.kt       ← TypeConverters для всех enum-ов (internal object)
             ├── TrainingDatabase.kt ← Единая Room-база (@Database, @TypeConverters, internal)
             ├── dao/                 ← 22 @Dao-интерфейса
+            ├── entity/projection/   ← проекции запросов для отдельных сценариев
+            │   ├── ActiveUserProjection.kt  ← id и name активного профиля
+            │   └── UserListItemProjection.kt ← поля для списка пользователей
             ├── di/
             │   └── DatabaseModule.kt ← Hilt-модуль: @Provides TrainingDatabase + все 22 DAO
             │   ├── ExerciseDao.kt
@@ -107,6 +110,10 @@ Hilt-модуль (`@Module @InstallIn(SingletonComponent)`): `@Provides @Single
 
 ### `entity/` — таблицы по доменам (22 Entity)
 
+### `entity/projection/` — сценарные проекции
+
+Минимальные data class-ы, которые Room заполняет только нужными конкретному запросу колонками. `ActiveUserProjection` используется для шторки главного экрана и содержит `id` и `name`; `UserListItemProjection` используется экраном выбора пользователя.
+
 **Пользователи:**
 - `UserEntity` (`users`) — пользователь: role, name, weight, height, gender, birthDateEpochDay, weightUnit, heightUnit, isDefault, createdAt, remoteId.
 - `UserMaxEntity` (`user_maxes`) — разовый максимум: userId (CASCADE), exerciseId (RESTRICT), maxValue, unit, measuredAt.
@@ -157,6 +164,7 @@ Hilt-модуль (`@Module @InstallIn(SingletonComponent)`): `@Provides @Single
 
 ## Правила
 - При добавлении/удалении Entity или DAO — обновить этот файл, `TrainingDatabase.kt` (списки `entities` и `abstract fun`-DAO) и `Converters.kt` (если добавлен новый enum).
+- При добавлении или изменении проекции обновлять этот файл и проверять, что DAO запрашивает только нужные сценарию поля.
 - При добавлении нового enum — создать файл в `entity/types/`, добавить `@TypeConverter`-пары в `Converters.kt`.
 - При изменении схемы — увеличить `version` в `TrainingDatabase` и добавить миграцию; новая JSON-схема экспортируется автоматически.
 - `TrainingDatabase` и `Converters` — `internal`, доступ только через DAO и порты.

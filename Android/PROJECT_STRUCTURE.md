@@ -49,7 +49,7 @@ Android/
 │   │   ├── domain/        ← Kotlin/JVM: общие доменные типы
 │   │   ├── logging/       ← Android: общие расширения Timber
 │   │   └── ui/            ← Android: общие UI-ресурсы
-│   ├── database/          ← Локальная БД (Room): все Entity, DAO, TrainingDatabase, Converters, DatabaseModule (Hilt)
+│   ├── database/          ← Локальная БД (Room): Entity, сценарные проекции, DAO, TrainingDatabase, Converters, DatabaseModule (Hilt)
 │   │   ├── AGENTS.md      ← Контекст модуля core/database
 │   │   ├── build.gradle.kts
 │   │   └── MODULE_STRUCTURE.md ← Структура модуля core/database

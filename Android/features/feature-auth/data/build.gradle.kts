@@ -16,6 +16,9 @@ android {
     }
 
     compileOptions {
+        // Core library desugaring — Java 8 time API on minSdk < 26 /
+        // Core library desugaring — Java 8 time API на minSdk < 26
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -34,11 +37,22 @@ dependencies {
     // Hilt — внедрение зависимостей (биндит репозитории к реализациям)
     implementation(libs.hilt.android)
 
+    // Timber — diagnostic logging / Timber — диагностическое логирование
+    implementation(libs.timber)
+
+    // Core library desugaring — Java 8 time API on minSdk < 26 /
+    // Core library desugaring — Java 8 time API на minSdk < 26
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+
     // Internal modules (alphabetical) / Внутренние модули (по алфавиту)
 
     // core:database — provides UserDao, UserMaxDao via Hilt / core:database — предоставляет
     // UserDao, UserMaxDao через Hilt
     implementation(project(":core:database"))
+
+    // feature-auth:contract — active-user public contract /
+    // feature-auth:contract — публичный контракт активного пользователя
+    implementation(project(":features:feature-auth:contract"))
 
     // feature-auth:domain — repository interfaces and domain models /
     // feature-auth:domain — интерфейсы репозиториев и domain-модели

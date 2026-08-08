@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.vasev.trainingapp.core.database.entity.UserEntity
+import com.vasev.trainingapp.core.database.entity.projection.ActiveUserProjection
 import com.vasev.trainingapp.core.database.entity.projection.UserListItemProjection
 import kotlinx.coroutines.flow.Flow
 
@@ -39,6 +40,9 @@ interface UserDao {
             "WHERE isPendingDeletion = 0 ORDER BY isDefault DESC, name ASC",
     )
     fun observeForSelection(): Flow<List<UserListItemProjection>>
+
+    @Query("SELECT id, name FROM users WHERE isDefault = 1 AND isPendingDeletion = 0 LIMIT 1")
+    fun observeActiveUser(): Flow<ActiveUserProjection?>
 
     @Query("SELECT * FROM users WHERE id = :id AND isPendingDeletion = 0")
     fun observeById(id: Long): Flow<UserEntity?>
