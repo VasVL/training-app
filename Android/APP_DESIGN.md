@@ -165,7 +165,7 @@ Android-приложение для занятий силовыми видами
 **Core (общие, отдельные Gradle-модули):**
 - `core:common:domain` — `Resource<T>` и другие чистые общие Kotlin-типы
 - `core:common:logging` — логирование и расширения Timber
-- `core:common:ui` — общие UI-ресурсы и `PendingView` с едиными цветом и анимацией
+- `core:common:ui` — общие UI-ресурсы, палитры тем и `PendingView` с едиными цветом и анимацией
 - `core/navigation` — Screen, Navigator (порты навигации)
 - `core/database` — Room-база, Entity, DAO, Converters, DatabaseModule (Hilt @Provides для TrainingDatabase и DAO). Общая Room-инфраструктура.
 - `core/network` — Retrofit, OkHttp (вторая фаза)

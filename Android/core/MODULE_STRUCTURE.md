@@ -15,7 +15,7 @@ core/
 │   ├── MODULE_STRUCTURE.md
 │   ├── domain/            ← Kotlin/JVM: Resource<T>
 │   ├── logging/           ← Android: расширения Timber
-│   └── ui/                ← Android: общие UI-ресурсы
+│   └── ui/                ← Android: общие UI-ресурсы и палитры тем
 ├── database/              ← Локальная БД (Room): все Entity, DAO, TrainingDatabase, Converters, DatabaseModule (Hilt)
 │   ├── AGENTS.md
 │   ├── build.gradle.kts
@@ -37,7 +37,7 @@ core/
 ## Назначение модулей
 
 ### `core/common/`
-Контейнер небольших общих модулей. `core:common:domain` — чистые Kotlin-типы (`Resource<T>`), `core:common:logging` — расширения Timber, `core:common:ui` — общие UI-ресурсы. Код и ресурсы не размещаются непосредственно в контейнере.
+Контейнер небольших общих модулей. `core:common:domain` — чистые Kotlin-типы (`Resource<T>`), `core:common:logging` — расширения Timber, `core:common:ui` — общие UI-ресурсы и палитры тем. Код и ресурсы не размещаются непосредственно в контейнере.
 Подробнее: [`core/common/AGENTS.md`](common/AGENTS.md), [`core/common/MODULE_STRUCTURE.md`](common/MODULE_STRUCTURE.md)
 
 ### `core/database/`

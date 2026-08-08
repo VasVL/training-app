@@ -6,7 +6,7 @@
 - [x] **DI (Hilt)** — `Application` класс (`@HiltAndroidApp`), `MainActivity` (`@AndroidEntryPoint`), `DatabaseModule` в `core/database` (Hilt `@Provides` для `TrainingDatabase` + DAO). Без DI ничего не заработает.
 - [x] **core:common:domain** — `Resource<T>` (Loading/Success/Error).
 - [x] **core:common:logging** — `LogExtensions` поверх Timber.
-- [x] **core:common:ui** — общие UI-ресурсы `ic_add`, `PendingView`, единые цвет и анимация pending-состояний с настраиваемой drawable-формой.
+- [x] **core:common:ui** — общие палитры тем, UI-ресурсы `ic_add`, `PendingView`, единые цвет и анимация pending-состояний с настраиваемой drawable-формой.
 - [x] **Реализация Navigator в `app`** — `NavigatorImpl` (маппинг `Screen` → `NavDirections`), `NavigationModule` (Hilt `@Binds`), nav_graph.xml. Без этого нет навигации.
 - [x] **Каркас `feature-main`** — публичный маршрут `MainScreen.Main`, постоянная оболочка, шторка с состояниями активного профиля, пять нижних вкладок и дочерний граф заглушек.
 - [x] **Coil** — подключить в `app` (implementation(libs.coil)). Библиотека загрузки картинок.

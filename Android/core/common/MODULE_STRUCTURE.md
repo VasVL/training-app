@@ -23,12 +23,14 @@ core/common/
 │   ├── build.gradle.kts
 │   └── src/main/java/com/vasev/trainingapp/core/common/logging/
 │       └── LogExtensions.kt
-└── ui/                        ← Android-модуль общих UI-ресурсов
+└── ui/                        ← Android-модуль общих UI-ресурсов и палитр тем
     ├── AGENTS.md
     ├── MODULE_STRUCTURE.md
     ├── build.gradle.kts
-    └── src/main/res/drawable/
-        └── ic_add.xml
+    └── src/main/
+        ├── java/com/vasev/trainingapp/core/common/ui/view/
+        │   └── PendingView.kt
+        └── res/               ← палитры тем, общие размеры, иконки и pending-ресурсы
 ```
 
 ## Назначение элементов
@@ -40,7 +42,7 @@ core/common/
 Android-библиотека с расширениями для ленивого логирования поверх Timber.
 
 ### `ui/`
-Android-библиотека с общими XML-ресурсами, не принадлежащими отдельной фиче.
+Android-библиотека с общими XML-ресурсами и View, не принадлежащими отдельной фиче. В том числе предоставляет цветовые палитры, необходимые feature-модулям для независимой сборки.
 
 ## Правила
 - При добавлении/удалении подмодуля — обновить этот файл, `core/MODULE_STRUCTURE.md`, `PROJECT_STRUCTURE.md` и `settings.gradle.kts`.

@@ -48,7 +48,7 @@ Android/
 │   │   ├── MODULE_STRUCTURE.md ← Структура контейнера core/common
 │   │   ├── domain/        ← Kotlin/JVM: общие доменные типы
 │   │   ├── logging/       ← Android: общие расширения Timber
-│   │   └── ui/            ← Android: общие UI-ресурсы и PendingView
+│   │   └── ui/            ← Android: общие UI-ресурсы, палитры тем и PendingView
 │   ├── database/          ← Локальная БД (Room): Entity, сценарные проекции, DAO, TrainingDatabase, Converters, DatabaseModule (Hilt)
 │   │   ├── AGENTS.md      ← Контекст модуля core/database
 │   │   ├── build.gradle.kts
@@ -97,7 +97,7 @@ Android/
 Подробнее: [`core/AGENTS.md`](core/AGENTS.md), [`core/MODULE_STRUCTURE.md`](core/MODULE_STRUCTURE.md)
 
 #### `core/common/`
-Контейнер небольших общих модулей. `common:domain` содержит чистые Kotlin-типы (сейчас `Resource<T>`), `common:logging` — Android-расширения Timber, `common:ui` — общие UI-ресурсы и `PendingView` с едиными цветом/анимацией и настраиваемой drawable-формой. Для нового самостоятельного назначения создаётся отдельный подмодуль; исходники и ресурсы напрямую в `common/` не помещаются.
+Контейнер небольших общих модулей. `common:domain` содержит чистые Kotlin-типы (сейчас `Resource<T>`), `common:logging` — Android-расширения Timber, `common:ui` — общие UI-ресурсы, палитры тем и `PendingView` с едиными цветом/анимацией и настраиваемой drawable-формой. Для нового самостоятельного назначения создаётся отдельный подмодуль; исходники и ресурсы напрямую в `common/` не помещаются.
 
 Подробнее: [`core/common/AGENTS.md`](core/common/AGENTS.md), [`core/common/MODULE_STRUCTURE.md`](core/common/MODULE_STRUCTURE.md)
 

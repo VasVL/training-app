@@ -18,7 +18,7 @@
 - Реализация `Navigator` (`NavigatorImpl`) — маппинг `Screen` → `NavDirections`/`NavController` вызовы. Инжектируется через Hilt по интерфейсу из `core/navigation`.
 - `NavigationModule` (Hilt) — `@Binds` `Navigator` → `NavigatorImpl`.
 - `ReleaseErrorTree` — дерево Timber для production-логирования (отправка ошибок в краш-репорт).
-- Ресурсы приложения (строки, темы, иконки) — в `src/main/res/`.
+- Ресурсы уровня приложения (строки, стили темы, splash screen, иконка) — в `src/main/res/`. Общие цветовые палитры находятся в `core:common:ui`.
 
 ## Архитектурные замечания
 - **Бизнес-логику сюда не класть.** Вся бизнес-логика — в feature-модулях (`features/<name>/domain/`) и `core/`.

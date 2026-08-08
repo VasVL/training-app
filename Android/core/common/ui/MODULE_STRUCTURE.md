@@ -4,7 +4,7 @@
 ui/
 ├── AGENTS.md
 ├── MODULE_STRUCTURE.md
-├── build.gradle.kts
+├── build.gradle.kts                    ← Android Library, core-ktx и Material-атрибуты
 └── src/main/
     ├── AndroidManifest.xml
     ├── java/com/vasev/trainingapp/core/common/ui/view/
@@ -19,10 +19,15 @@ ui/
         │   ├── ic_add.xml                 ← общая иконка добавления
         │   └── ic_check.xml               ← общая иконка подтверждения
         └── values/
+            ├── colors_graphite.xml        ← графитовая палитра по умолчанию
             └── dimens.xml                 ← общие радиусы UI-элементов
 ```
 
 ## Назначение элементов
+
+### `build.gradle.kts`
+
+Подключает AndroidX Core и Material Components. Прямая зависимость на Material нужна самому модулю, потому что общие drawable- и color-ресурсы используют атрибуты темы `colorSurface` и `colorOnSurface`; модуль не полагается на транзитивные зависимости потребителей.
 
 ### `PendingView`
 
@@ -31,3 +36,7 @@ ui/
 ### Pending-ресурсы
 
 `common_pending_background` строится на основе текущего `colorOnSurface`, поэтому заглушки сохраняют одинаковый контраст в разных темах и на разных поверхностях. `bg_pending_oval` подходит для круглого или вытянутого овального placeholder: итоговые пропорции определяются размерами самой View.
+
+### Палитры тем
+
+`colors_graphite.xml` содержит значения графитовой палитры по умолчанию. Общие палитры находятся в этом модуле, чтобы `app` мог выбирать их в своих стилях темы, а feature-модули — разрешать цветовые ресурсы при самостоятельной сборке без зависимости от `app`.

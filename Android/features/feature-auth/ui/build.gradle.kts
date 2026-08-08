@@ -20,6 +20,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // Core library desugaring — java.time on minSdk below 26 /
+        // Core library desugaring — java.time при minSdk ниже 26
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -94,6 +97,11 @@ dependencies {
     // feature-main:contract — route to the persistent application shell /
     // feature-main:contract — маршрут постоянной оболочки приложения
     implementation(project(":features:feature-main:contract"))
+
+    // coreLibraryDesugaring / coreLibraryDesugaring
+
+    // Java 8 time API on minSdk below 26 / Java 8 time API при minSdk ниже 26
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     // ksp / ksp
 

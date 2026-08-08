@@ -22,5 +22,11 @@ android {
 }
 
 dependencies {
+    // AndroidX core-ktx — Android Kotlin extensions /
+    // AndroidX core-ktx — Kotlin-расширения Android
     implementation(libs.core.ktx)
+
+    // Material Components — theme attributes used by shared resources /
+    // Material Components — атрибуты темы, используемые общими ресурсами
+    implementation(libs.material)
 }
