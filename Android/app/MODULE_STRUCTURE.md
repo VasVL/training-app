@@ -3,14 +3,13 @@
 > **Важно:** Этот файл нужно обновлять после изменений в структуре модуля (добавление/удаление папок, ключевых файлов).
 
 ## Обзор
-Модуль `app` — точка сборки приложения TrainingApp. Не содержит бизнес-логику. Хостит `Application`, `MainActivity`, граф навигации, реализацию `Navigator` и `NavigationModule` (Hilt). Не зависит от Room напрямую — Hilt-модуль БД живёт в `core/database`.
+Модуль `app` — точка сборки приложения TrainingApp. Не содержит бизнес-логику или Fragment-разметки фич. Хостит `Application`, `MainActivity`, корневой граф навигации, реализацию `Navigator` и `NavigationModule` (Hilt). Не зависит от Room API напрямую — Hilt-модуль БД живёт в `core/database`.
 
 ## Структура
 ```
 app/
 ├── AGENTS.md                  ← Контекст модуля app
 ├── MODULE_STRUCTURE.md        ← Этот файл
-├── UI_DESIGN.md               ← Утверждённый дизайн главной оболочки
 ├── build.gradle.kts          ← Конфигурация модуля (плагины, зависимости, SDK)
 └── src/
     └── main/
@@ -23,14 +22,20 @@ app/
         │   ├── logs/
         │   │   └── ReleaseErrorTree.kt ← Дерево Timber для production-логирования
         │   └── navigation/
-        │       └── NavigatorImpl.kt  ← Реализация Navigator (маппинг Screen → NavDirections)
+        │       ├── NavigatorImpl.kt  ← Реализация Navigator (Screen → NavDirections)
+        │       └── entity/
+        │           └── NavigationCommand.kt ← одноразовая команда навигации
         └── res/
-            ├── values/
-            │   └── strings.xml   ← Строковые ресурсы
-            ├── drawable/         ← Иконки, векторные изображения
-            ├── layout/           ← XML-разметки (Activity, Fragment)
-            └── navigation/
-                └── nav_graph.xml ← Граф навигации (Jetpack Navigation)
+            ├── layout/
+            │   └── activity_main.xml       ← корневой NavHost приложения
+            ├── mipmap-nodpi/
+            │   └── ic_training_app.png     ← иконка приложения и splash screen
+            ├── navigation/
+            │   └── nav_graph.xml           ← корневой граф Navigation Component
+            └── values/
+                ├── colors.xml              ← цвета тем приложения
+                ├── strings.xml             ← название приложения
+                └── themes.xml              ← тема и системный splash screen
 ```
 
 ## Назначение элементов
@@ -44,10 +49,11 @@ app/
 - `core:navigation` — порты навигации (`Screen`, `Navigator`).
 - `feature-*/data` — Hilt-биндинги репозиториев (`@Binds` интерфейс→реализация).
 - `feature-*/ui` — экраны (Fragment, ViewModel).
+- `feature-main:contract` — публичный маршрут `MainScreen.Main`, который `NavigatorImpl` сопоставляет корневому destination.
+- `feature-main:ui` — постоянная оболочка с тулбаром, шторкой и нижней навигацией.
 - Внешние: AppCompat, Coil, ConstraintLayout, core-ktx, Hilt, Material, Navigation, Timber.
 
-### `UI_DESIGN.md`
-Утверждённые визуальные и навигационные решения главной оболочки: верхняя панель, шторка, пять вкладок нижней навигации и правила их поведения.
+Утверждённые визуальные и навигационные решения оболочки находятся в [`feature-main/UI_DESIGN.md`](../features/feature-main/UI_DESIGN.md), а технический макет — в [`feature-main/UI_MOCKUPS.html`](../features/feature-main/UI_MOCKUPS.html).
 
 ### `src/main/AndroidManifest.xml`
 Манифест приложения. Объявляет `Application` класс, `MainActivity`, разрешения, темы.
@@ -68,7 +74,7 @@ Hilt-модуль (`@Module @InstallIn(...)`) с `@Binds` для `Navigator` →
 Реализация `Navigator` (интерфейс из `core/navigation`). Маппинг `Screen` → `NavDirections`/вызовы `NavController`. Граф навигации — в `res/navigation/nav_graph.xml`.
 
 ### `src/main/res/`
-Ресурсы приложения: строки, темы, цвета, иконки, разметки, граф навигации.
+Только ресурсы уровня приложения: тема, цвета темы, название и иконка приложения, системный splash screen, разметка Activity и корневой граф навигации. Ресурсы конкретных экранов находятся в соответствующих feature-модулях.
 
 ## Правила
 - При добавлении/удалении папки или ключевого файла — обновить этот файл.

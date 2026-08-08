@@ -13,10 +13,10 @@ import com.vasev.trainingapp.core.common.ui.R
  * Reusable skeleton placeholder that slowly pulses while content is loading.
  * Переиспользуемый skeleton-плейсхолдер, который медленно мерцает во время загрузки контента.
  *
- * The default background is [R.drawable.bg_pending]; callers define only the size and position
- * in XML, so one pending style is reused across feature modules.
- * Фон по умолчанию — [R.drawable.bg_pending]; вызывающий код задаёт в XML только размер и позицию,
- * поэтому один стиль pending переиспользуется между feature-модулями.
+ * The default shape is [R.drawable.bg_pending]. Callers may provide another shape through
+ * `android:background`; this view still enforces the shared color and pulse animation.
+ * Форма по умолчанию — [R.drawable.bg_pending]. Вызывающий код может передать другую форму через
+ * `android:background`; общий цвет и анимация мерцания всё равно задаются этой view.
  */
 class PendingView @JvmOverloads constructor(
     context: Context,
@@ -27,9 +27,13 @@ class PendingView @JvmOverloads constructor(
     private var pulseAnimator: ObjectAnimator? = null
 
     init {
-        background = ContextCompat.getDrawable(
+        background = background ?: ContextCompat.getDrawable(
             context,
             R.drawable.bg_pending,
+        )
+        backgroundTintList = ContextCompat.getColorStateList(
+            context,
+            R.color.common_pending_background,
         )
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO
     }

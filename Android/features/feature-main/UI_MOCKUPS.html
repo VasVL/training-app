@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { background:#141414; color:#e7e3e8; font-family:system-ui,sans-serif; }
+        .intro { max-width:1100px; margin:0 auto 24px; }
+        .phones { display:flex; flex-wrap:wrap; justify-content:center; gap:24px; }
+        .phone { width:300px; height:620px; background:#1b1b1b; border:9px solid #080808; border-radius:34px; box-shadow:0 10px 30px #000; overflow:hidden; position:relative; }
+        .status { height:25px; padding:6px 16px 0; font-size:11px; color:#c9c6ca; display:flex; justify-content:space-between; }
+        .toolbar { height:50px; display:flex; align-items:center; gap:17px; padding:0 16px; background:#252525; font-size:14px; font-weight:650; }
+        .screen { padding:26px 22px; }
+        .screen h3 { margin:0 0 7px; font-size:20px; }
+        .screen p { margin:0; color:#aaa6ad; font-size:13px; }
+        .bottom { position:absolute; left:0; right:0; bottom:0; height:76px; background:#252525; border-top:1px solid #3b3b3b; display:flex; justify-content:space-around; align-items:center; }
+        .tab { width:53px; text-align:center; color:#aaa6ad; font-size:9px; }
+        .tab .glyph { display:block; font-size:20px; margin-bottom:4px; }
+        .tab.active { color:#fff; font-weight:700; }
+        .scrim { position:absolute; top:25px; bottom:0; left:0; right:0; background:rgba(0,0,0,.54); }
+        .drawer { position:absolute; top:25px; left:0; bottom:0; width:250px; background:#252525; box-shadow:6px 0 22px #000; }
+        .header { min-height:126px; padding:22px 20px 18px; border-bottom:1px solid #3d3d3d; box-sizing:border-box; }
+        .profile-row { display:flex; align-items:center; gap:13px; }
+        .avatar { width:46px; height:46px; flex:0 0 46px; border-radius:50%; display:grid; place-items:center; background:#3d3d3d; font-size:23px; }
+        .profile-name { font-weight:750; font-size:16px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:145px; }
+        .profile-note { color:#aaa6ad; font-size:12px; margin-top:3px; }
+        .drawer-item { display:flex; gap:16px; padding:16px 20px; align-items:center; font-size:14px; }
+        .drawer-item:first-of-type { margin-top:4px; }
+        .caption { text-align:center; color:#c9c6ca; margin-top:10px; font-size:13px; }
+        .skeleton { position:relative; overflow:hidden; background:#3a3a3a; border-radius:10px; }
+        .skeleton:after { content:""; position:absolute; inset:0; transform:translateX(-100%); background:linear-gradient(90deg,transparent,#ffffff17,transparent); animation:shimmer 1.8s infinite; }
+        .sk-avatar { width:46px; height:46px; border-radius:50%; }
+        .sk-line { height:13px; width:132px; margin-bottom:9px; }
+        .sk-line.short { width:88px; height:10px; margin-bottom:0; }
+        @keyframes shimmer { 100% { transform:translateX(100%); } }
+        .error-title { font-weight:750; font-size:15px; }
+        .error-text { color:#aaa6ad; font-size:12px; line-height:1.35; margin-top:4px; }
+        .actions { display:flex; align-items:center; gap:9px; margin-top:14px; }
+        .button { border:0; border-radius:8px; min-height:34px; padding:0 11px; font-size:10px; font-weight:750; letter-spacing:.35px; }
+        .button.primary { background:#e3e0e4; color:#202020; }
+        .button.text { background:transparent; color:#e3e0e4; padding:0 4px; }
+    </style>
+</head>
+<body>
+    <div class="intro">
+        <h2>Шапка навигационной шторки</h2>
+        <p>Три состояния одной и той же области: загруженный профиль, загрузка и ошибка. Список навигации остаётся на месте.</p>
+    </div>
+    <div class="phones">
+        <div>
+            <div class="phone">
+                <div class="status"><span>9:41</span><span>● ● ▰</span></div>
+                <div class="toolbar"><span style="font-size:21px">☰</span><span>Boss of This Gym</span></div>
+                <div class="screen"><h3>Планы</h3><p>Здесь появятся тренировочные планы.</p></div>
+                <div class="bottom"><div class="tab active"><span class="glyph">▤</span>Планы</div><div class="tab"><span class="glyph">＋</span>Создать</div><div class="tab"><span class="glyph">◉</span>Тренировка</div><div class="tab"><span class="glyph">▦</span>Календарь</div><div class="tab"><span class="glyph">⌁</span>Вес</div></div>
+                <div class="scrim"></div>
+                <div class="drawer">
+                    <div class="header"><div class="profile-row"><div class="avatar">♟</div><div><div class="profile-name">Владимир</div><div class="profile-note">Активный профиль</div></div></div></div>
+                    <div class="drawer-item">◉ <span>О себе</span></div><div class="drawer-item">♙ <span>Пользователи</span></div><div class="drawer-item">⚙ <span>Настройки</span></div><div class="drawer-item">? <span>Справка</span></div>
+                </div>
+            </div>
+            <div class="caption">Профиль загружен</div>
+        </div>
+        <div>
+            <div class="phone">
+                <div class="status"><span>9:41</span><span>● ● ▰</span></div><div class="toolbar"><span style="font-size:21px">☰</span><span>Boss of This Gym</span></div><div class="screen"><h3>Планы</h3><p>Здесь появятся тренировочные планы.</p></div>
+                <div class="bottom"><div class="tab active"><span class="glyph">▤</span>Планы</div><div class="tab"><span class="glyph">＋</span>Создать</div><div class="tab"><span class="glyph">◉</span>Тренировка</div><div class="tab"><span class="glyph">▦</span>Календарь</div><div class="tab"><span class="glyph">⌁</span>Вес</div></div>
+                <div class="scrim"></div>
+                <div class="drawer">
+                    <div class="header"><div class="profile-row"><div class="skeleton sk-avatar"></div><div><div class="skeleton sk-line"></div><div class="skeleton sk-line short"></div></div></div></div>
+                    <div class="drawer-item">◉ <span>О себе</span></div><div class="drawer-item">♙ <span>Пользователи</span></div><div class="drawer-item">⚙ <span>Настройки</span></div><div class="drawer-item">? <span>Справка</span></div>
+                </div>
+            </div>
+            <div class="caption">Загрузка</div>
+        </div>
+        <div>
+            <div class="phone">
+                <div class="status"><span>9:41</span><span>● ● ▰</span></div><div class="toolbar"><span style="font-size:21px">☰</span><span>Boss of This Gym</span></div><div class="screen"><h3>Планы</h3><p>Здесь появятся тренировочные планы.</p></div>
+                <div class="bottom"><div class="tab active"><span class="glyph">▤</span>Планы</div><div class="tab"><span class="glyph">＋</span>Создать</div><div class="tab"><span class="glyph">◉</span>Тренировка</div><div class="tab"><span class="glyph">▦</span>Календарь</div><div class="tab"><span class="glyph">⌁</span>Вес</div></div>
+                <div class="scrim"></div>
+                <div class="drawer">
+                    <div class="header"><div class="error-title">Профиль недоступен</div><div class="error-text">Попробуйте загрузить данные снова или выберите профиль.</div><div class="actions"><button class="button primary">ПОВТОРИТЬ</button><button class="button text">ВЫБРАТЬ ПРОФИЛЬ</button></div></div>
+                    <div class="drawer-item">◉ <span>О себе</span></div><div class="drawer-item">♙ <span>Пользователи</span></div><div class="drawer-item">⚙ <span>Настройки</span></div><div class="drawer-item">? <span>Справка</span></div>
+                </div>
+            </div>
+            <div class="caption">Ошибка загрузки</div>
+        </div>
+    </div>
+</body>
+</html>

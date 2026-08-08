@@ -7,6 +7,9 @@ plugins {
     // KSP — Kotlin Symbol Processing для генерируемого кода Hilt
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)
+    // Safe Args — generates type-safe access to Navigation arguments /
+    // Safe Args — генерирует типобезопасный доступ к аргументам Navigation
+    alias(libs.plugins.navigation.safeargs)
 }
 
 android {

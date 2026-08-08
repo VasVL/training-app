@@ -91,6 +91,10 @@ dependencies {
     // feature-auth:domain — модели пользователей и интерфейсы репозиториев
     implementation(project(":features:feature-auth:domain"))
 
+    // feature-main:contract — route to the persistent application shell /
+    // feature-main:contract — маршрут постоянной оболочки приложения
+    implementation(project(":features:feature-main:contract"))
+
     // ksp / ksp
 
     // Hilt compiler — generates dependency-injection code /

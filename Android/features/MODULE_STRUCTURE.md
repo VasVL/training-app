@@ -31,6 +31,12 @@ features/
 │   ├── contract/             ← HelpScreen (маршруты), порты
 │   ├── domain/
 │   └── ui/
+├── feature-main/             ← Постоянная главная оболочка
+│   ├── UI_DESIGN.md          ← Утверждённый дизайн оболочки
+│   ├── UI_MOCKUPS.html       ← Технический HTML-макет
+│   ├── contract/             ← MainScreen (публичный маршрут)
+│   ├── domain/
+│   └── ui/                   ← Тулбар, шторка, нижняя навигация и заглушки
 ├── feature-nutrition/        ← Дневник питания
 │   ├── contract/             ← NutritionScreen (маршруты), порты
 │   ├── data/
@@ -57,7 +63,7 @@ features/
     └── ui/
 ```
 
-У каждой фичи есть подмодули `contract`, `domain`, `ui`. Подмодуль `data` есть у фичей с persistence (anatomy, auth, exercises, nutrition, programs, weight, workout). У `feature-calendar`, `feature-help`, `feature-settings` `data`-модуля нет (нет своих репозиториев). Подмодуль `common` — необязательный (пока ни у одной фичи его нет).
+У каждой фичи есть подмодули `contract`, `domain`, `ui`. Подмодуль `data` есть у фичей с persistence (anatomy, auth, exercises, nutrition, programs, weight, workout). У `feature-calendar`, `feature-help`, `feature-main`, `feature-settings` `data`-модуля нет (нет собственного persistence). Подмодуль `common` — необязательный (пока ни у одной фичи его нет).
 
 ## Назначение подмодулей
 

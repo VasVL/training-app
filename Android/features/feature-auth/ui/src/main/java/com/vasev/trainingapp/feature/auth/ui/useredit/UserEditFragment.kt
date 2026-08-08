@@ -14,7 +14,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.vasev.trainingapp.core.navigation.MainScreen
 import com.vasev.trainingapp.core.navigation.Navigator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +24,7 @@ import com.vasev.trainingapp.feature.auth.ui.databinding.FragmentUserEditBinding
 import com.vasev.trainingapp.feature.auth.ui.useredit.entity.UserEditUiAction
 import com.vasev.trainingapp.feature.auth.ui.useredit.entity.UserEditUiState
 import com.vasev.trainingapp.feature.auth.ui.useredit.viewmodel.UserEditViewModel
+import com.vasev.trainingapp.feature.main.contract.MainScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.launch

@@ -9,11 +9,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
-import com.vasev.trainingapp.core.navigation.MainScreen
 import com.vasev.trainingapp.core.navigation.Screen
 import com.vasev.trainingapp.feature.auth.contract.AuthScreen
 import com.vasev.trainingapp.feature.auth.contract.UserEditRequest
 import com.vasev.trainingapp.feature.auth.domain.repository.UserRepository
+import com.vasev.trainingapp.feature.main.contract.MainScreen
 import com.vasev.trainingapp.navigation.NavigatorImpl
 import com.vasev.trainingapp.navigation.entity.NavigationCommand
 import dagger.hilt.android.AndroidEntryPoint

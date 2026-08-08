@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainPlansFragment"
+        android:icon="@drawable/ic_main_plans"
+        android:title="@string/main_navigation_plans" />
+
+    <item
+        android:id="@+id/mainCreateFragment"
+        android:icon="@drawable/ic_add"
+        android:title="@string/main_navigation_create" />
+
+    <item
+        android:id="@+id/mainTrainingFragment"
+        android:icon="@drawable/ic_main_training"
+        android:title="@string/main_navigation_training" />
+
+    <item
+        android:id="@+id/mainCalendarFragment"
+        android:icon="@drawable/ic_main_calendar"
+        android:title="@string/main_navigation_calendar" />
+
+    <item
+        android:id="@+id/mainWeightFragment"
+        android:icon="@drawable/ic_main_weight"
+        android:title="@string/main_navigation_weight" />
+</menu>

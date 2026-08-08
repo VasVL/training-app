@@ -1,0 +1,25 @@
+<resources>
+    <!-- Main navigation / Главная навигация -->
+    <string name="main_drawer_help">Справка</string>
+    <string name="main_drawer_profile">О себе</string>
+    <string name="main_drawer_settings">Настройки</string>
+    <string name="main_drawer_users">Пользователи</string>
+    <string name="main_navigation_calendar">Календарь</string>
+    <string name="main_navigation_create">Создать</string>
+    <string name="main_navigation_plans">Планы</string>
+    <string name="main_navigation_training">Тренировка</string>
+    <string name="main_navigation_weight">Вес</string>
+
+    <!-- Main shell / Главная оболочка -->
+    <string name="main_content_description_active_user_avatar">Аватар активного профиля</string>
+    <string name="main_content_description_open_drawer">Открыть меню</string>
+    <string name="main_placeholder_message">Раздел появится позже.</string>
+
+    <!-- Drawer profile states / Состояния профиля в шторке -->
+    <string name="main_drawer_active_profile">Активный профиль</string>
+    <string name="main_drawer_active_profile_loading">Профиль загружается</string>
+    <string name="main_drawer_active_profile_error_title">Профиль недоступен</string>
+    <string name="main_drawer_active_profile_error_message">Попробуйте загрузить данные снова или выберите профиль.</string>
+    <string name="main_drawer_action_choose_profile">ВЫБРАТЬ ПРОФИЛЬ</string>
+    <string name="main_drawer_action_retry">ПОВТОРИТЬ</string>
+</resources>

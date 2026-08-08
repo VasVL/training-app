@@ -106,10 +106,10 @@ dependencies {
     implementation(project(":core:navigation"))
 
     // Feature modules (alphabetical) / Модули фичей (по алфавиту)
-    // Each feature contributes: `data` (Hilt @Binds for repositories) + `ui` (screens) +
-    // `contract` (screen routes, via ui transitively). /
-    // Каждая фича даёт: `data` (Hilt @Binds для репозиториев) + `ui` (экраны) +
-    // `contract` (маршруты экранов, транзитивно через ui).
+    // The app declares every feature module it uses directly; it does not rely on
+    // transitive project dependencies. /
+    // app объявляет каждый используемый feature-модуль напрямую и не полагается
+    // на транзитивные зависимости между модулями.
 
     // feature-anatomy — anatomy atlas / feature-anatomy — анатомический атлас
     implementation(project(":features:feature-anatomy:data"))
@@ -130,6 +130,10 @@ dependencies {
 
     // feature-help — help / feature-help — справка
     implementation(project(":features:feature-help:ui"))
+
+    // feature-main — persistent application shell / feature-main — постоянная оболочка приложения
+    implementation(project(":features:feature-main:contract"))
+    implementation(project(":features:feature-main:ui"))
 
     // feature-nutrition — nutrition / feature-nutrition — питание
     implementation(project(":features:feature-nutrition:data"))

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainDrawerHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    android:minHeight="@dimen/main_drawer_header_min_height">
+
+    <TextView
+        android:id="@+id/mainDrawerAvatarTextView"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="@dimen/main_drawer_avatar_size"
+        android:layout_height="@dimen/main_drawer_avatar_size"
+        android:layout_marginStart="@dimen/main_drawer_header_horizontal_spacing"
+        android:layout_marginTop="@dimen/main_drawer_header_top_spacing"
+        android:background="@drawable/background_main_drawer_avatar"
+        android:contentDescription="@string/main_content_description_active_user_avatar"
+        android:gravity="center"
+        android:textColor="?attr/colorOnPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="В" />
+
+    <TextView
+        android:id="@+id/mainDrawerActiveUserNameTextView"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_drawer_content_spacing"
+        android:layout_marginEnd="@dimen/main_drawer_header_horizontal_spacing"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/mainDrawerActiveProfileLabelTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mainDrawerAvatarTextView"
+        app:layout_constraintTop_toTopOf="@id/mainDrawerAvatarTextView"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Владимир" />
+
+    <TextView
+        android:id="@+id/mainDrawerActiveProfileLabelTextView"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_drawer_label_spacing"
+        android:text="@string/main_drawer_active_profile"
+        android:textColor="?attr/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="@id/mainDrawerAvatarTextView"
+        app:layout_constraintEnd_toEndOf="@id/mainDrawerActiveUserNameTextView"
+        app:layout_constraintStart_toStartOf="@id/mainDrawerActiveUserNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/mainDrawerActiveUserNameTextView" />
+
+    <com.vasev.trainingapp.core.common.ui.view.PendingView
+        android:id="@+id/mainDrawerPendingAvatarView"
+        android:layout_width="@dimen/main_drawer_avatar_size"
+        android:layout_height="@dimen/main_drawer_avatar_size"
+        android:layout_marginStart="@dimen/main_drawer_header_horizontal_spacing"
+        android:layout_marginTop="@dimen/main_drawer_header_top_spacing"
+        android:background="@drawable/bg_pending_oval"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vasev.trainingapp.core.common.ui.view.PendingView
+        android:id="@+id/mainDrawerPendingNameView"
+        android:layout_width="@dimen/main_drawer_pending_name_width"
+        android:layout_height="@dimen/main_drawer_pending_name_height"
+        android:layout_marginStart="@dimen/main_drawer_content_spacing"
+        android:layout_marginTop="@dimen/main_drawer_small_spacing"
+        app:layout_constraintStart_toEndOf="@id/mainDrawerPendingAvatarView"
+        app:layout_constraintTop_toTopOf="@id/mainDrawerPendingAvatarView" />
+
+    <com.vasev.trainingapp.core.common.ui.view.PendingView
+        android:id="@+id/mainDrawerPendingLabelView"
+        android:layout_width="@dimen/main_drawer_pending_label_width"
+        android:layout_height="@dimen/main_drawer_pending_label_height"
+        android:layout_marginTop="@dimen/main_drawer_pending_label_spacing"
+        app:layout_constraintStart_toStartOf="@id/mainDrawerPendingNameView"
+        app:layout_constraintTop_toBottomOf="@id/mainDrawerPendingNameView" />
+
+    <TextView
+        android:id="@+id/mainDrawerErrorTitleTextView"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_drawer_header_horizontal_spacing"
+        android:layout_marginTop="@dimen/main_drawer_header_top_spacing"
+        android:layout_marginEnd="@dimen/main_drawer_header_horizontal_spacing"
+        android:text="@string/main_drawer_active_profile_error_title"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mainDrawerErrorMessageTextView"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_drawer_small_spacing"
+        android:text="@string/main_drawer_active_profile_error_message"
+        android:textColor="?attr/colorSecondary"
+        app:layout_constraintEnd_toEndOf="@id/mainDrawerErrorTitleTextView"
+        app:layout_constraintStart_toStartOf="@id/mainDrawerErrorTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/mainDrawerErrorTitleTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mainDrawerRetryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/main_drawer_action_retry" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mainDrawerChooseProfileButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/main_drawer_action_choose_profile" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/mainDrawerErrorActionsFlow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_drawer_header_horizontal_spacing"
+        android:layout_marginTop="@dimen/main_drawer_content_spacing"
+        android:layout_marginEnd="@dimen/main_drawer_header_horizontal_spacing"
+        android:layout_marginBottom="@dimen/main_drawer_header_bottom_spacing"
+        app:constraint_referenced_ids="mainDrawerRetryButton,mainDrawerChooseProfileButton"
+        app:flow_horizontalBias="0"
+        app:flow_horizontalGap="@dimen/main_drawer_small_spacing"
+        app:flow_horizontalStyle="packed"
+        app:flow_verticalGap="@dimen/main_drawer_small_spacing"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toTopOf="@id/mainDrawerDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainDrawerErrorMessageTextView" />
+
+    <View
+        android:id="@+id/mainDrawerDivider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/main_drawer_divider_height"
+        android:background="?attr/colorControlHighlight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/mainDrawerReadyGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="mainDrawerAvatarTextView,mainDrawerActiveUserNameTextView,mainDrawerActiveProfileLabelTextView" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/mainDrawerLoadingGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="mainDrawerPendingAvatarView,mainDrawerPendingNameView,mainDrawerPendingLabelView" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/mainDrawerErrorGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="mainDrawerErrorTitleTextView,mainDrawerErrorMessageTextView,mainDrawerRetryButton,mainDrawerChooseProfileButton,mainDrawerErrorActionsFlow" />
+</androidx.constraintlayout.widget.ConstraintLayout>

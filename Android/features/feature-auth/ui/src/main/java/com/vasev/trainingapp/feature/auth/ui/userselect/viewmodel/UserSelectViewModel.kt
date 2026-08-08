@@ -2,13 +2,13 @@ package com.vasev.trainingapp.feature.auth.ui.userselect.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vasev.trainingapp.core.navigation.MainScreen
 import com.vasev.trainingapp.core.navigation.Navigator
 import com.vasev.trainingapp.feature.auth.contract.AuthScreen
 import com.vasev.trainingapp.feature.auth.domain.repository.UserRepository
 import com.vasev.trainingapp.feature.auth.ui.userselect.entity.UserSelectUiAction
 import com.vasev.trainingapp.feature.auth.ui.userselect.entity.UserSelectUiState
 import com.vasev.trainingapp.feature.auth.ui.userselect.mapper.UserSelectUiMapper
+import com.vasev.trainingapp.feature.main.contract.MainScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow

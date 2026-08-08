@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainDrawerProfile"
+        android:title="@string/main_drawer_profile" />
+
+    <item
+        android:id="@+id/mainDrawerUsers"
+        android:title="@string/main_drawer_users" />
+
+    <item
+        android:id="@+id/mainDrawerSettings"
+        android:title="@string/main_drawer_settings" />
+
+    <item
+        android:id="@+id/mainDrawerHelp"
+        android:title="@string/main_drawer_help" />
+</menu>

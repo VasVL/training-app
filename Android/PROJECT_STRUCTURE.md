@@ -35,11 +35,11 @@ Android/
 ├── app/                   ← Модуль приложения (точка сборки, без бизнес-логики)
 │   ├── AGENTS.md          ← Контекст модуля app
 │   ├── MODULE_STRUCTURE.md ← Структура модуля app
-│   ├── UI_DESIGN.md       ← Утверждённый дизайн главной оболочки
 │   ├── build.gradle.kts
 │   └── src/main/
 │       ├── AndroidManifest.xml
-│       └── res/values/strings.xml
+│       ├── java/           ← Application, Activity, Navigator и Hilt-инфраструктура
+│       └── res/            ← Activity, тема, иконка приложения и корневой nav_graph
 ├── core/                  ← Общие модули (переиспользуемый код)
 │   ├── AGENTS.md          ← Контекст папки core
 │   ├── MODULE_STRUCTURE.md ← Структура папки core
@@ -48,7 +48,7 @@ Android/
 │   │   ├── MODULE_STRUCTURE.md ← Структура контейнера core/common
 │   │   ├── domain/        ← Kotlin/JVM: общие доменные типы
 │   │   ├── logging/       ← Android: общие расширения Timber
-│   │   └── ui/            ← Android: общие UI-ресурсы
+│   │   └── ui/            ← Android: общие UI-ресурсы и PendingView
 │   ├── database/          ← Локальная БД (Room): Entity, сценарные проекции, DAO, TrainingDatabase, Converters, DatabaseModule (Hilt)
 │   │   ├── AGENTS.md      ← Контекст модуля core/database
 │   │   ├── build.gradle.kts
@@ -63,7 +63,12 @@ Android/
     ├── feature-calendar/     ← Календарь (contract, domain, ui)
     ├── feature-exercises/    ← Упражнения (contract, domain, data, ui)
     ├── feature-help/         ← Справка: СРЦ, о приложении (contract, domain, ui)
-    ├── feature-main/         ← Главная оболочка приложения (contract, domain, ui)
+    ├── feature-main/         ← Главная оболочка приложения
+    │   ├── UI_DESIGN.md      ← Утверждённый дизайн оболочки
+    │   ├── UI_MOCKUPS.html   ← Технический макет оболочки
+    │   ├── contract/         ← MainScreen и публичные контракты
+    │   ├── domain/           ← Бизнес-правила главной фичи по мере появления
+    │   └── ui/               ← MainFragment, MainViewModel и ресурсы оболочки
     ├── feature-nutrition/    ← Дневник питания (contract, domain, data, ui)
     ├── feature-programs/     ← Программы (contract, domain, data, ui)
     ├── feature-settings/     ← Настройки (contract, domain, ui)
@@ -76,10 +81,11 @@ Android/
 ### `app/`
 Модуль приложения — точка сборки. Содержит:
 - `Application` класс (инициализация Hilt, Timber)
-- Граф навигации (Jetpack Navigation)
+- Корневой граф навигации (Jetpack Navigation)
 - Реализацию `Navigator` (маппинг `Screen` → `NavDirections`)
 - `MainActivity` (хост для Fragment'ов)
 - `NavigationModule` (Hilt-биндинг `Navigator`)
+- Прямые зависимости на `feature-main:contract` и `feature-main:ui`: публичный маршрут и реализацию постоянной оболочки
 - НЕ содержит бизнес-логику
 - НЕ зависит от Room напрямую (Hilt-модуль БД живёт в `core/database`)
 
@@ -91,7 +97,7 @@ Android/
 Подробнее: [`core/AGENTS.md`](core/AGENTS.md), [`core/MODULE_STRUCTURE.md`](core/MODULE_STRUCTURE.md)
 
 #### `core/common/`
-Контейнер небольших общих модулей. `common:domain` содержит чистые Kotlin-типы (сейчас `Resource<T>`), `common:logging` — Android-расширения Timber, `common:ui` — общие UI-ресурсы. Для нового самостоятельного назначения создаётся отдельный подмодуль; исходники и ресурсы напрямую в `common/` не помещаются.
+Контейнер небольших общих модулей. `common:domain` содержит чистые Kotlin-типы (сейчас `Resource<T>`), `common:logging` — Android-расширения Timber, `common:ui` — общие UI-ресурсы и `PendingView` с едиными цветом/анимацией и настраиваемой drawable-формой. Для нового самостоятельного назначения создаётся отдельный подмодуль; исходники и ресурсы напрямую в `common/` не помещаются.
 
 Подробнее: [`core/common/AGENTS.md`](core/common/AGENTS.md), [`core/common/MODULE_STRUCTURE.md`](core/common/MODULE_STRUCTURE.md)
 
@@ -118,7 +124,7 @@ Feature-модули. Каждая фича — отдельный Gradle-мод
 - `feature-calendar` — календарь (contract, domain, ui)
 - `feature-exercises` — список упражнений, поиск (contract, domain, data, ui)
 - `feature-help` — справка (СРЦ, о приложении) (contract, domain, ui)
-- `feature-main` — главная оболочка: шторка и нижняя навигация (contract, domain, ui)
+- `feature-main` — постоянная оболочка: тулбар, шторка с состояниями активного профиля, пять нижних вкладок и дочерний граф заглушек (contract, domain, ui); утверждённый интерфейс — `feature-main/UI_DESIGN.md`, макет — `feature-main/UI_MOCKUPS.html`
 - `feature-nutrition` — дневник питания (contract, domain, data, ui)
 - `feature-programs` — программы, микроциклы, дни (contract, domain, data, ui)
 - `feature-settings` — настройки (contract, domain, ui)

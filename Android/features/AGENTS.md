@@ -16,7 +16,7 @@
 - `ui/` — UI-слой (Fragment, ViewModel, ViewBinding)
 - `common/` — вспомогательный код фичи
 
-Могут быть не все подмодули, но других быть не должно. Текущие фичи: `feature-anatomy`, `feature-auth`, `feature-calendar`, `feature-exercises`, `feature-help`, `feature-nutrition`, `feature-programs`, `feature-settings`, `feature-weight`, `feature-workout`.
+Могут быть не все подмодули, но других быть не должно. Текущие фичи: `feature-anatomy`, `feature-auth`, `feature-calendar`, `feature-exercises`, `feature-help`, `feature-main`, `feature-nutrition`, `feature-programs`, `feature-settings`, `feature-weight`, `feature-workout`.
 
 ## Архитектурные замечания
 

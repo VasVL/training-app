@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main drawer spacing / Отступы главной шторки -->
+    <dimen name="main_drawer_content_spacing">12dp</dimen>
+    <dimen name="main_drawer_header_bottom_spacing">18dp</dimen>
+    <dimen name="main_drawer_header_horizontal_spacing">20dp</dimen>
+    <dimen name="main_drawer_header_top_spacing">22dp</dimen>
+    <dimen name="main_drawer_label_spacing">2dp</dimen>
+    <dimen name="main_drawer_pending_label_spacing">9dp</dimen>
+    <dimen name="main_drawer_small_spacing">4dp</dimen>
+
+    <!-- Main drawer sizes / Размеры главной шторки -->
+    <dimen name="main_drawer_avatar_size">46dp</dimen>
+    <dimen name="main_drawer_divider_height">1dp</dimen>
+    <dimen name="main_drawer_header_min_height">128dp</dimen>
+    <dimen name="main_drawer_max_width">320dp</dimen>
+    <dimen name="main_drawer_pending_label_height">10dp</dimen>
+    <dimen name="main_drawer_pending_label_width">88dp</dimen>
+    <dimen name="main_drawer_pending_name_height">14dp</dimen>
+    <dimen name="main_drawer_pending_name_width">132dp</dimen>
+
+    <!-- Main placeholder / Заглушка главного раздела -->
+    <dimen name="main_placeholder_content_spacing">8dp</dimen>
+    <dimen name="main_placeholder_horizontal_spacing">24dp</dimen>
+
+    <!-- Main toolbar / Главный тулбар -->
+    <dimen name="main_toolbar_min_height">64dp</dimen>
+</resources>

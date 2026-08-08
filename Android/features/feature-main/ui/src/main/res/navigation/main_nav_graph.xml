@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/mainPlansFragment">
+
+    <fragment
+        android:id="@+id/mainPlansFragment"
+        android:name="com.vasev.trainingapp.feature.main.ui.placeholder.MainPlaceholderFragment"
+        android:label="@string/main_navigation_plans">
+
+        <argument
+            android:name="titleResId"
+            android:defaultValue="@string/main_navigation_plans"
+            app:argType="reference" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainCreateFragment"
+        android:name="com.vasev.trainingapp.feature.main.ui.placeholder.MainPlaceholderFragment"
+        android:label="@string/main_navigation_create">
+
+        <argument
+            android:name="titleResId"
+            android:defaultValue="@string/main_navigation_create"
+            app:argType="reference" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainTrainingFragment"
+        android:name="com.vasev.trainingapp.feature.main.ui.placeholder.MainPlaceholderFragment"
+        android:label="@string/main_navigation_training">
+
+        <argument
+            android:name="titleResId"
+            android:defaultValue="@string/main_navigation_training"
+            app:argType="reference" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainCalendarFragment"
+        android:name="com.vasev.trainingapp.feature.main.ui.placeholder.MainPlaceholderFragment"
+        android:label="@string/main_navigation_calendar">
+
+        <argument
+            android:name="titleResId"
+            android:defaultValue="@string/main_navigation_calendar"
+            app:argType="reference" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainWeightFragment"
+        android:name="com.vasev.trainingapp.feature.main.ui.placeholder.MainPlaceholderFragment"
+        android:label="@string/main_navigation_weight">
+
+        <argument
+            android:name="titleResId"
+            android:defaultValue="@string/main_navigation_weight"
+            app:argType="reference" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainSettingsFragment"
+        android:name="com.vasev.trainingapp.feature.main.ui.placeholder.MainPlaceholderFragment"
+        android:label="@string/main_drawer_settings">
+
+        <argument
+            android:name="titleResId"
+            android:defaultValue="@string/main_drawer_settings"
+            app:argType="reference" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainHelpFragment"
+        android:name="com.vasev.trainingapp.feature.main.ui.placeholder.MainPlaceholderFragment"
+        android:label="@string/main_drawer_help">
+
+        <argument
+            android:name="titleResId"
+            android:defaultValue="@string/main_drawer_help"
+            app:argType="reference" />
+    </fragment>
+</navigation>

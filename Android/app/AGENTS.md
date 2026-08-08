@@ -6,7 +6,7 @@
 Модуль `app` — точка сборки приложения TrainingApp. Содержит `Application` класс, `MainActivity`, граф навигации, реализацию `Navigator` и `NavigationModule` (Hilt-биндинг `Navigator`). **Не содержит бизнес-логику.** **Не зависит от Room напрямую** — Hilt-модуль БД (`DatabaseModule`) живёт в `core/database`, а репозитории биндятся в `data`-подмодулях фичей.
 
 Полное и актуальное описание внутренней структуры модуля находится в файле **[`MODULE_STRUCTURE.md`](MODULE_STRUCTURE.md)**.
-Утверждённый визуальный дизайн главной оболочки находится в файле **[`UI_DESIGN.md`](UI_DESIGN.md)**.
+Утверждённый визуальный дизайн главной оболочки находится внутри фичи-владельца: **[`feature-main/UI_DESIGN.md`](../features/feature-main/UI_DESIGN.md)**, технический макет — **[`feature-main/UI_MOCKUPS.html`](../features/feature-main/UI_MOCKUPS.html)**.
 
 - **[`MODULE_STRUCTURE.md`](MODULE_STRUCTURE.md) нужно обновлять после любых изменений в структуре модуля** — добавление/удаление папок, ключевых файлов.
 - Общие архитектурные/стилистические замечания для всего Android-проекта — в [`Android/AGENTS.md`](../AGENTS.md).
