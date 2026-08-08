@@ -36,9 +36,6 @@ android {
 dependencies {
     // implementation (alphabetical) / implementation (по алфавиту)
 
-    // AndroidX AppCompat / AndroidX AppCompat
-    implementation(libs.appcompat)
-
     // AndroidX ConstraintLayout / AndroidX ConstraintLayout
     implementation(libs.constraintlayout)
 
@@ -48,6 +45,10 @@ dependencies {
     // Coroutines Android — viewModelScope and Flow collection on Android /
     // Coroutines Android — viewModelScope и сбор Flow на Android
     implementation(libs.coroutines.android)
+
+    // AndroidX DrawerLayout — navigation drawer container /
+    // AndroidX DrawerLayout — контейнер навигационной шторки
+    implementation(libs.drawerlayout)
 
     // AndroidX Fragment KTX / AndroidX Fragment KTX
     implementation(libs.fragment.ktx)
@@ -84,14 +85,6 @@ dependencies {
     // feature-auth:contract — auth screen routes and active-user contract /
     // feature-auth:contract — маршруты auth и контракт активного пользователя
     implementation(project(":features:feature-auth:contract"))
-
-    // feature-main:contract — main screen route /
-    // feature-main:contract — маршрут главного экрана
-    implementation(project(":features:feature-main:contract"))
-
-    // feature-main:domain — main-shell domain scenarios /
-    // feature-main:domain — domain-сценарии главной оболочки
-    implementation(project(":features:feature-main:domain"))
 
     // ksp / ksp
 
